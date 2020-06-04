@@ -1,0 +1,23 @@
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS title;
+SET FOREIGN_KEY_CHECKS = 1;
+
+CREATE TABLE `title` (
+	`titleId` INT NOT NULL AUTO_INCREMENT,
+	`title` VARCHAR(100),
+	PRIMARY KEY(`titleId`)
+)
+
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+SET @currDate = CURDATE();
+
+INSERT INTO title VALUES(1,'Dr');
+INSERT INTO title VALUES(2,'Miss');
+INSERT INTO title VALUES(3,'Mr');
+INSERT INTO title VALUES(4,'Mrs');
+INSERT INTO title VALUES(5,'Ms');
+INSERT INTO title VALUES(6,'Mx');
+INSERT INTO title VALUES(7,'Prof');
+INSERT INTO title VALUES(8,'Rev');

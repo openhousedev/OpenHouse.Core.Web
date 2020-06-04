@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "rrkFfQ+0kawUI/qv4P7nY/LzFjqsZpUuWn6wtYjeydQDDrR8CdukoKWPPiXYg9LtL6hl45NQ6UL0ygeQOSm2Pg==",
+  "success": true,
+  "projectFilePath": "C:\\UNIAPPS\\OpenHouseWeb\\OpenHouse.Core.Web\\OpenHouse.Core.Web\\OpenHouse.Core.Web.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ross.ballantine\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+  ],
+  "logs": []
+}
