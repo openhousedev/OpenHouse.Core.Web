@@ -1,0 +1,120 @@
+﻿@model OpenHouse.Model.Core.Model.person
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>person</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <dl>
+                <dt class="col-sm-2">
+                    Title
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.title.title1)
+                </dd>
+                <dt class="col-sm-2">
+                    First name
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.firstName)
+                </dd>
+                <dt class="col-sm-2">
+                    Middle name
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.middleName)
+                </dd>
+                <dt class="col-sm-2">
+                    Surname
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.surname)
+                </dd>
+                <dt class="col-sm-2">
+                    Date of Birth
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.dateOfBirth)
+                </dd>
+                <dt class="col-sm-2">
+                    Nationality
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.nationality.nationality1)
+                </dd>
+
+
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <dl>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.telephone)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.telephone)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.email)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.email)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.nextOfKinFrstName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.nextOfKinFrstName)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.nextOfKinSurname)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.nextOfKinSurname)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.nextOfKinTelephone)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.nextOfKinTelephone)
+                </dd>
+            </dl>
+        </div>
+        <dl>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.updatedByUserID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.updatedByUserID)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.updatedDT)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.updatedDT)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.createdByUserID)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.createdByUserID)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.createdDT)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.createdDT)
+            </dd>
+        </dl>
+    </div>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.personId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

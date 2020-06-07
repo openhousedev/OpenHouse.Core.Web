@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<OpenHouse.Model.Core.Model.vwaction>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -74,7 +76,7 @@
             <a class="nav-link active" id="search-tab" data-toggle="tab" href="#search" role="tab" aria-controls="search" aria-selected="true">Search</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="actions-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="actions" aria-selected="false">My Actions</a>
+            <a class="nav-link" id="actions-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="actions" aria-selected="false">My Actions <span class="badge badge-pill badge-danger">@ViewBag.OutstandingActionsCount</span></a>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -109,12 +111,45 @@
             </div>
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <div class="card w-100">
-                <div class="card-header">
-                    <i class="fa fa-inbox"></i>&nbsp;My Actions
-                </div>
-                <div class="card-body">
-
+            <div class="row">
+                <div class="card w-100">
+                    <div class="card-header">
+                        <i class="fa fa-inbox"></i>&nbsp;My Actions
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th>Tenancy Id</th>
+                                        <th>Address</th>
+                                        <th>Type</th>
+                                        <th>Due Date</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var action in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.ActionLink(action.tenancyId.ToString(), "Details", "Tenancies", new { @id = action.tenancyId }, new { @class = "btn btn-link", @target = "_blank" })
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink(action.contactAddress.ToString(), "Details", "Properties", new { @id = action.propertyId }, new { @class = "btn btn-link", @target = "_blank" })
+                                            </td>
+                                            <td>
+                                                @action.actionType
+                                            </td>
+                                            <td>
+                                                @action.actionDueDate.ToString("dd/MM/yyyy")
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -6,6 +6,7 @@ SELECT
 	action.actionTypeId, 
 	actiontype.actionType, 
 	action.tenancyId, 
+	vwtenancy.propertyId,
 	vwtenancy.contactAddress, 
 	action.actionDueDate, 
 	action.actionCompletedDate, 

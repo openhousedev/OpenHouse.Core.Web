@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenHouse.Core.Web.Services
+namespace OpenHouse.Core.Services
 {
     public class ActionService : IActionService
     {
@@ -16,29 +16,31 @@ namespace OpenHouse.Core.Web.Services
             _context = context;
         }
 
-        public Task<int> CreateActionAsyc(action action)
+        public async Task<int> CreateActionAsyc(action action)
+        {
+            _context.action.Add(action);
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<action> GetActionAsync(int actionId)
+        {
+            //var action 
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<vwaction>> GetActionsForTenancy(int tenancyId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<action> GetActionAsync(int actionId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<vwaction>> GetActionsForTenancy(int tenancyId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<vwaction>> GetOpenActionsForUserAsync(int userId)
+        public async Task<List<vwaction>> GetOpenActionsForUserAsync(int userId)
         {
             var actions = await _context.vwaction.Where(a => a.assignedUserId == userId && a.actionCompletedDate == null).ToListAsync();
 
             return actions;
         }
 
-        public Task<int> UpdateActionAsync(action action)
+        public async Task<int> UpdateActionAsync(action action)
         {
             throw new NotImplementedException();
         }

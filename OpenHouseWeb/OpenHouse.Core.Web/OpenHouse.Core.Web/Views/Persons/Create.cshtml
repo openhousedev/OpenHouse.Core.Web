@@ -1,0 +1,101 @@
+﻿@model OpenHouse.Model.Core.Model.person
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>person</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="firstName" class="control-label"></label>
+                <input asp-for="firstName" class="form-control" />
+                <span asp-validation-for="firstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="middleName" class="control-label"></label>
+                <input asp-for="middleName" class="form-control" />
+                <span asp-validation-for="middleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="surname" class="control-label"></label>
+                <input asp-for="surname" class="form-control" />
+                <span asp-validation-for="surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="titleId" class="control-label"></label>
+                <select asp-for="titleId" class ="form-control" asp-items="ViewBag.titleId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="dateOfBirth" class="control-label"></label>
+                <input asp-for="dateOfBirth" class="form-control" />
+                <span asp-validation-for="dateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="telephone" class="control-label"></label>
+                <input asp-for="telephone" class="form-control" />
+                <span asp-validation-for="telephone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="nationalityId" class="control-label"></label>
+                <select asp-for="nationalityId" class ="form-control" asp-items="ViewBag.nationalityId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="nextOfKinFrstName" class="control-label"></label>
+                <input asp-for="nextOfKinFrstName" class="form-control" />
+                <span asp-validation-for="nextOfKinFrstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="nextOfKinSurname" class="control-label"></label>
+                <input asp-for="nextOfKinSurname" class="form-control" />
+                <span asp-validation-for="nextOfKinSurname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="nextOfKinTelephone" class="control-label"></label>
+                <input asp-for="nextOfKinTelephone" class="form-control" />
+                <span asp-validation-for="nextOfKinTelephone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="updatedByUserID" class="control-label"></label>
+                <input asp-for="updatedByUserID" class="form-control" />
+                <span asp-validation-for="updatedByUserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="updatedDT" class="control-label"></label>
+                <input asp-for="updatedDT" class="form-control" />
+                <span asp-validation-for="updatedDT" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="createdByUserID" class="control-label"></label>
+                <input asp-for="createdByUserID" class="form-control" />
+                <span asp-validation-for="createdByUserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="createdDT" class="control-label"></label>
+                <input asp-for="createdDT" class="form-control" />
+                <span asp-validation-for="createdDT" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

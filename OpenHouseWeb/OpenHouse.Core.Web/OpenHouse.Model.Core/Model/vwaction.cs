@@ -16,6 +16,8 @@ namespace OpenHouse.Model.Core.Model
         public string actionType { get; set; }
         [Column(TypeName = "int(11)")]
         public int tenancyId { get; set; }
+        [Column(TypeName = "int(11)")]
+        public int? propertyId { get; set; }
         [Column(TypeName = "text")]
         public string contactAddress { get; set; }
         [Column(TypeName = "datetime")]

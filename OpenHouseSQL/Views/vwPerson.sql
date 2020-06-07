@@ -6,6 +6,7 @@ SELECT
 	person.firstName, 
 	person.middleName, 
 	person.surname, 
+	CONCAT(person.firstName,' ', person.surname) AS fullName,
 	person.titleId, 
 	title.title, 
 	person.dateOfBirth, 

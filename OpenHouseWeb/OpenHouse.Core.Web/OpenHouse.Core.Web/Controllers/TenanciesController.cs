@@ -5,24 +5,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using OpenHouse.Core.Services.Interfaces;
 using OpenHouse.Model.Core.Model;
 
 namespace OpenHouse.Core.Web.Controllers
 {
     public class TenanciesController : Controller
     {
+        private readonly ITenancyService _tenancySvc;
         private readonly OpenhouseContext _context;
-
-        public TenanciesController(OpenhouseContext context)
+        public TenanciesController(ITenancyService tenancySvc, OpenhouseContext context)
         {
+            _tenancySvc = tenancySvc;
             _context = context;
-        }
-
-        // GET: Tenancies
-        public async Task<IActionResult> Index()
-        {
-            var openhouseContext = _context.tenancy.Include(t => t.jointTenantPerson).Include(t => t.leadTenantPerson).Include(t => t.tenureType);
-            return View(await openhouseContext.ToListAsync());
         }
 
         // GET: Tenancies/Details/5
@@ -33,11 +28,8 @@ namespace OpenHouse.Core.Web.Controllers
                 return NotFound();
             }
 
-            var tenancy = await _context.tenancy
-                .Include(t => t.jointTenantPerson)
-                .Include(t => t.leadTenantPerson)
-                .Include(t => t.tenureType)
-                .FirstOrDefaultAsync(m => m.tenancyId == id);
+            var tenancy = await _tenancySvc.GetTenancyAsync(id.Value);
+
             if (tenancy == null)
             {
                 return NotFound();
@@ -47,11 +39,11 @@ namespace OpenHouse.Core.Web.Controllers
         }
 
         // GET: Tenancies/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["jointTenantPersonId"] = new SelectList(_context.person, "personId", "personId");
-            ViewData["leadTenantPersonId"] = new SelectList(_context.person, "personId", "personId");
-            ViewData["tenureTypeId"] = new SelectList(_context.tenuretype, "tenureTypeId", "tenureTypeId");
+            ViewData["jointTenantPersonId"] = new SelectList(_context.vwperson, "personId", "fullName");
+            ViewData["leadTenantPersonId"] = new SelectList(_context.vwperson, "personId", "fullName");
+            ViewData["tenureTypeId"] = new SelectList(await _tenancySvc.GetTenuretypesAsync(), "tenureTypeId", "tenureType1");
             return View();
         }
 
@@ -64,13 +56,12 @@ namespace OpenHouse.Core.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tenancy);
-                await _context.SaveChangesAsync();
+                await _tenancySvc.AddTenancyAsync(tenancy);
                 return RedirectToAction(nameof(Index));
             }
             ViewData["jointTenantPersonId"] = new SelectList(_context.person, "personId", "personId", tenancy.jointTenantPersonId);
             ViewData["leadTenantPersonId"] = new SelectList(_context.person, "personId", "personId", tenancy.leadTenantPersonId);
-            ViewData["tenureTypeId"] = new SelectList(_context.tenuretype, "tenureTypeId", "tenureTypeId", tenancy.tenureTypeId);
+            ViewData["tenureTypeId"] = new SelectList(await _tenancySvc.GetTenuretypesAsync(), "tenureTypeId", "tenureTypeId", tenancy.tenureTypeId);
             return View(tenancy);
         }
 
@@ -82,14 +73,14 @@ namespace OpenHouse.Core.Web.Controllers
                 return NotFound();
             }
 
-            var tenancy = await _context.tenancy.FindAsync(id);
+            var tenancy = await _tenancySvc.GetTenancyAsync(id.Value);
             if (tenancy == null)
             {
                 return NotFound();
             }
             ViewData["jointTenantPersonId"] = new SelectList(_context.person, "personId", "personId", tenancy.jointTenantPersonId);
             ViewData["leadTenantPersonId"] = new SelectList(_context.person, "personId", "personId", tenancy.leadTenantPersonId);
-            ViewData["tenureTypeId"] = new SelectList(_context.tenuretype, "tenureTypeId", "tenureTypeId", tenancy.tenureTypeId);
+            ViewData["tenureTypeId"] = new SelectList(await _tenancySvc.GetTenuretypesAsync(), "tenureTypeId", "tenureTypeId", tenancy.tenureTypeId);
             return View(tenancy);
         }
 
@@ -109,8 +100,7 @@ namespace OpenHouse.Core.Web.Controllers
             {
                 try
                 {
-                    _context.Update(tenancy);
-                    await _context.SaveChangesAsync();
+                    await _tenancySvc.UpdateTenancyAsync(tenancy);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -127,7 +117,7 @@ namespace OpenHouse.Core.Web.Controllers
             }
             ViewData["jointTenantPersonId"] = new SelectList(_context.person, "personId", "personId", tenancy.jointTenantPersonId);
             ViewData["leadTenantPersonId"] = new SelectList(_context.person, "personId", "personId", tenancy.leadTenantPersonId);
-            ViewData["tenureTypeId"] = new SelectList(_context.tenuretype, "tenureTypeId", "tenureTypeId", tenancy.tenureTypeId);
+            ViewData["tenureTypeId"] = new SelectList(await _tenancySvc.GetTenuretypesAsync(), "tenureTypeId", "tenureTypeId", tenancy.tenureTypeId);
             return View(tenancy);
         }
 
@@ -139,11 +129,8 @@ namespace OpenHouse.Core.Web.Controllers
                 return NotFound();
             }
 
-            var tenancy = await _context.tenancy
-                .Include(t => t.jointTenantPerson)
-                .Include(t => t.leadTenantPerson)
-                .Include(t => t.tenureType)
-                .FirstOrDefaultAsync(m => m.tenancyId == id);
+            var tenancy = await _tenancySvc.GetTenancyAsync(id.Value);
+
             if (tenancy == null)
             {
                 return NotFound();

@@ -17,9 +17,10 @@ namespace OpenHouse.Core.Services
             _context = context;
         }
 
-        public async Task<int> AddTenancyAsync(tenancy property)
+        public async Task<int> AddTenancyAsync(tenancy tenancy)
         {
-            throw new NotImplementedException();
+            _context.tenancy.Add(tenancy);
+            return await _context.SaveChangesAsync();
         }
 
         public async Task<List<vwtenancy>> GetTenanciesAsync(string searchString)
@@ -33,14 +34,27 @@ namespace OpenHouse.Core.Services
             return tenancies;
         }
 
-        public async Task<tenancy> GetTenancyAsync(int propertyId)
+        public async Task<tenancy> GetTenancyAsync(int tenancyId)
         {
-            throw new NotImplementedException();
+            var tenancy = await _context.tenancy
+                        .Include(t => t.jointTenantPerson)
+                        .Include(t => t.leadTenantPerson)
+                        .Include(t => t.tenureType)
+                        .FirstOrDefaultAsync(m => m.tenancyId == tenancyId);
+
+            return tenancy;
         }
 
-        public async Task<tenancy> UpdateTenancyAsync(tenancy property)
+        public async Task<List<tenuretype>> GetTenuretypesAsync()
         {
-            throw new NotImplementedException();
+            var tenureTypes = await _context.tenuretype.ToListAsync();
+            return tenureTypes;
+        }
+
+        public async Task<int> UpdateTenancyAsync(tenancy tenancy)
+        {
+            _context.Add(tenancy);
+            return await _context.SaveChangesAsync();
         }
     }
 }

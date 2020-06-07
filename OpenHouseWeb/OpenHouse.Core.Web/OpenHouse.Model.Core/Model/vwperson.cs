@@ -16,6 +16,8 @@ namespace OpenHouse.Model.Core.Model
         public string middleName { get; set; }
         [Column(TypeName = "varchar(100)")]
         public string surname { get; set; }
+        [Column(TypeName = "varchar(201)")]
+        public string fullName { get; set; }
         [Column(TypeName = "int(11)")]
         public int? titleId { get; set; }
         [Column(TypeName = "varchar(100)")]

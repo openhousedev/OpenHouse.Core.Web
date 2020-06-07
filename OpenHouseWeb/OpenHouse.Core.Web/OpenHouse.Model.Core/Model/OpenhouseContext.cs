@@ -414,6 +414,10 @@ namespace OpenHouse.Model.Core.Model
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
 
+                entity.Property(e => e.fullName)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
                 entity.Property(e => e.middleName)
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");

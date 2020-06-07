@@ -1,5 +1,41 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<OpenHouse.Model.Core.Model.vwperson>
+
 @{
 }
+
+<div class="table-responsive">
+    <table class="table table-sm table-bordered table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">Title</th>
+                <th>Full Name</th>
+                <th class="text-center">Date of Birth</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var person in Model)
+            {
+                <tr>
+                    <td class="text-center">
+                        @person.personId
+                    </td>
+                    <td class="text-center">
+                        @person.title
+                    </td>
+                    <td>
+                        @person.fullName
+                    </td>
+                    <td class="text-center">
+                        @person.dateOfBirth.Value.ToString("dd/MM/yyyy")
+                    </td>
+                    <td class="text-center">
+                        <a class="btn btn-light" asp-controller="Persons" target="_blank" asp-action="Details" asp-route-id="@person.personId">Details</a>
+                        <a class="btn btn-light" asp-controller="Persons" target="_blank" asp-action="Edit" asp-route-id="@person.personId">Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,119 @@
+﻿@model IEnumerable<OpenHouse.Model.Core.Model.person>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.firstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.middleName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telephone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nextOfKinFrstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nextOfKinSurname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nextOfKinTelephone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.updatedByUserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.updatedDT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.createdByUserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.createdDT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nationality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.title)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.firstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.middleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telephone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nextOfKinFrstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nextOfKinSurname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nextOfKinTelephone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.updatedByUserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.updatedDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.createdByUserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.createdDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nationality.nationalityId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.title.titleId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.personId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.personId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.personId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
