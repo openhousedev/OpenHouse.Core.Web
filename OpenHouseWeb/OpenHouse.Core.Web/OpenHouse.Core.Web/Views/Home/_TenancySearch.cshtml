@@ -1,0 +1,37 @@
+﻿@model List<OpenHouse.Model.Core.Model.vwtenancy>
+
+@{
+}
+
+<div class="table-responsive">
+    <table class="table table-borderless">
+        <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th>Address</th>
+                <th class="text-center">Lead Tenant</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tenancy in Model)
+            {
+                <tr>
+                    <td>
+                        @tenancy.tenancyId
+                    </td>
+                    <td>
+                        @tenancy.contactAddress
+                    </td>
+                    <td class="text-center">
+                        @tenancy.leadTenant
+                    </td>
+                    <td align="center">
+                        <a class="btn btn-light" asp-controller="Tenancies" target="_blank" asp-action="Details" asp-route-id="@tenancy.tenancyId">Details</a>
+                        <a class="btn btn-light" asp-controller="Tenancies" target="_blank" asp-action="Edit" asp-route-id="@tenancy.tenancyId">Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

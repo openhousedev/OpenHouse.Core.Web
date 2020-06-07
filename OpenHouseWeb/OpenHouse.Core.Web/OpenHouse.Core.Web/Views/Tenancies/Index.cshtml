@@ -1,0 +1,95 @@
+﻿@model IEnumerable<OpenHouse.Model.Core.Model.tenancy>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.propertyId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.startDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.terminationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.terminationReasonId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.updatedByUserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.updatedDT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.createdByUserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.createdDT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.jointTenantPerson)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.leadTenantPerson)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tenureType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.propertyId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.startDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.terminationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.terminationReasonId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.updatedByUserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.updatedDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.createdByUserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.createdDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.jointTenantPerson.personId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.leadTenantPerson.personId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tenureType.tenureTypeId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.tenancyId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.tenancyId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.tenancyId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

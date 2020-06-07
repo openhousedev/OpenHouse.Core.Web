@@ -2,15 +2,121 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <div class="card">
-        <div class="card-header">
-            Search
+@section Scripts {
+    <script type="text/javascript">
+
+        $('#ddlSearchItem').change(function (e) {
+            var searchItem = $(this).children("option:selected").val(); //Get selected item
+
+            //Update placeholder text in search bar based on dropdown selection
+            if (searchItem == 'Property') {
+                $('#txtSearch').attr('placeholder', 'Search by property ID or address...');
+            }
+            else if (searchItem == 'Tenancy') {
+                $('#txtSearch').attr('placeholder', 'Search by tenancy ID or Lead tenant name...');
+            }
+            else if (searchItem == 'Person') {
+                $('#txtSearch').attr('placeholder', 'Search by person ID or person name...');
+            }
+
+            $('#txtSearch').val(''); //Clear search box
+        });
+
+        //Perform search on enter key press in search bar
+        $("#txtSearch").keyup(function (event) {
+            if (event.keyCode === 13) {
+                populateSearchResults();
+            }
+        });
+
+        function populateSearchResults() {
+            var searchItem = $('#ddlSearchItem').val();
+            var searchString = $('#txtSearch').val();
+            var returnViewAction;
+            var sendData = { searchString: searchString };
+            var sendJson = JSON.stringify(sendData);
+
+            if (searchItem == 'Property') {
+                returnViewAction = '@Url.Action("_PropertySearch")';
+            }
+            else if (searchItem == 'Tenancy') {
+                returnViewAction = '@Url.Action("_TenancySearch")';
+            }
+            else if (searchItem == 'Person') {
+                returnViewAction = '@Url.Action("_PersonSearch")';
+            }
+
+            $.ajax({
+                url: returnViewAction,
+                contentType: 'application/json',
+                type: 'GET',
+                data: sendData,
+                beforeSend: function () {
+                    $('#search-result').fadeOut();
+                    $('#search-result').LoadingOverlay("show");
+                },
+                success: function (data) { //AJAX Success
+                    $('#search-result').html(data); //Populate HTML from data
+                    $('#search-result').LoadingOverlay("hide");
+                    $('#search-result').fadeIn(); //Fade in
+                },
+                error: function(jqXHR, textStatus, errorThrown) { //AJAX Error
+                    console.log(textStatus, errorThrown); //Log error
+                    alert('Error loading search results');
+                }
+            });
+        }
+    </script>
+}
+<div class="col-12">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="search-tab" data-toggle="tab" href="#search" role="tab" aria-controls="search" aria-selected="true">Search</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="actions-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="actions" aria-selected="false">My Actions</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="search" role="tabpanel" aria-labelledby="search-tab">
+            <div class="row">
+                <div class="card w-100">
+                    <div class="card-header">
+                        <i class="fa fa-search"></i>&nbsp;Search
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <input type="text" id="txtSearch" name="txtSearch" placeholder="Search by property ID or address..." class="form-control" />
+                            </div>
+                            <div class="col-sm-3">
+                                <select id="ddlSearchItem" class="form-control float-right">
+                                    <option>Property</option>
+                                    <option>Tenancy</option>
+                                    <option>Person</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <button id="btnSearch" onclick="populateSearchResults()" class="btn btn-primary w-100">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div id="search-result" class="w-100">
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="card w-100">
+                <div class="card-header">
+                    <i class="fa fa-inbox"></i>&nbsp;My Actions
+                </div>
+                <div class="card-body">
+
+                </div>
+            </div>
         </div>
     </div>
 </div>

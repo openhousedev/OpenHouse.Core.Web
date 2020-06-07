@@ -4,14 +4,42 @@
    "DefaultDacpacSchema": null,
    "DoNotCombineNamespace": false,
    "IdReplace": false,
-   "IncludeConnectionString": false,
+   "IncludeConnectionString": true,
    "ModelNamespace": null,
    "OutputContextPath": null,
-   "OutputPath": null,
+   "OutputPath": "Model",
    "ProjectRootNamespace": "OpenHouse.Model.Core",
    "SelectedHandlebarsLanguage": 0,
    "SelectedToBeGenerated": 0,
    "Tables": [
+      {
+         "HasPrimaryKey": true,
+         "Name": "action"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "actiontype"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "alert"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "alerttype"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "nationality"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "note"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "person"
+      },
       {
          "HasPrimaryKey": true,
          "Name": "property"
@@ -19,11 +47,75 @@
       {
          "HasPrimaryKey": true,
          "Name": "propertyclass"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "propertynote"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "propertytype"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "relationship"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "rentaccount"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "tenancy"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "tenancyalert"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "tenancyhousehold"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "tenancynote"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "tenancyterminationreason"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "tenuretype"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "title"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "vwaction"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "vwperson"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "vwproperty"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "vwtenancy"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "vwtenancyhousehold"
       }
    ],
-   "UseDatabaseNames": false,
+   "UseDatabaseNames": true,
    "UseDbContextSplitting": false,
-   "UseFluentApiOnly": true,
+   "UseFluentApiOnly": false,
    "UseHandleBars": false,
    "UseInflector": false,
    "UseLegacyPluralizer": false,

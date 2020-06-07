@@ -69,3 +69,27 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* Logo Style */
+.top-logo-sm {
+    height: 96px !important;
+    width: 144px !important;
+}
+
+/* Row Styles */
+.row {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+/* Search Result Container */
+#search-result {
+    min-height: 250px;
+    padding: 20px 0 20px 0;
+}
+
+/* Center buttons in table cell */
+.table-btn-cell-center {
+    display: block;
+    margin: auto;
+}

@@ -1,0 +1,132 @@
+﻿@model OpenHouse.Model.Core.Model.property
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>property</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.propertyNum)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.propertyNum)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.propertySubNum)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.propertySubNum)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.address1)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.address1)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.address2)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.address2)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.address3)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.address3)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.address4)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.address4)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.postCode)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.postCode)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.demolitionDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.demolitionDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.creationDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.creationDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.livingRoomQty)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.livingRoomQty)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.singleBedroomQty)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.singleBedroomQty)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.doubleBedroomQty)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.doubleBedroomQty)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.maxOccupants)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.maxOccupants)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.updatedByUserID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.updatedByUserID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.updatedDT)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.updatedDT)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.createdByUserID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.createdByUserID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.createdDT)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.createdDT)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.propertyClass)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.propertyClass.propertyClassId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.propertyType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.propertyType.propertyTypeId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.propertyId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

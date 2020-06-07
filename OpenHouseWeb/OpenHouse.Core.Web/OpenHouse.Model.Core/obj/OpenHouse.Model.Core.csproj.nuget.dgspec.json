@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\UNIAPPS\\OpenHouseWeb\\OpenHouse.Core.Web\\OpenHouse.Model.Core\\OpenHouse.Model.Core.csproj": {}
+    "C:\\UNIAPPS\\OpenHouse\\OpenHouseWeb\\OpenHouse.Core.Web\\OpenHouse.Model.Core\\OpenHouse.Model.Core.csproj": {}
   },
   "projects": {
-    "C:\\UNIAPPS\\OpenHouseWeb\\OpenHouse.Core.Web\\OpenHouse.Model.Core\\OpenHouse.Model.Core.csproj": {
+    "C:\\UNIAPPS\\OpenHouse\\OpenHouseWeb\\OpenHouse.Core.Web\\OpenHouse.Model.Core\\OpenHouse.Model.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\UNIAPPS\\OpenHouseWeb\\OpenHouse.Core.Web\\OpenHouse.Model.Core\\OpenHouse.Model.Core.csproj",
+        "projectUniqueName": "C:\\UNIAPPS\\OpenHouse\\OpenHouseWeb\\OpenHouse.Core.Web\\OpenHouse.Model.Core\\OpenHouse.Model.Core.csproj",
         "projectName": "OpenHouse.Model.Core",
-        "projectPath": "C:\\UNIAPPS\\OpenHouseWeb\\OpenHouse.Core.Web\\OpenHouse.Model.Core\\OpenHouse.Model.Core.csproj",
+        "projectPath": "C:\\UNIAPPS\\OpenHouse\\OpenHouseWeb\\OpenHouse.Core.Web\\OpenHouse.Model.Core\\OpenHouse.Model.Core.csproj",
         "packagesPath": "C:\\Users\\ross.ballantine\\.nuget\\packages\\",
-        "outputPath": "C:\\UNIAPPS\\OpenHouseWeb\\OpenHouse.Core.Web\\OpenHouse.Model.Core\\obj\\",
+        "outputPath": "C:\\UNIAPPS\\OpenHouse\\OpenHouseWeb\\OpenHouse.Core.Web\\OpenHouse.Model.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -67,12 +67,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[3.1.2, 3.1.2]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"

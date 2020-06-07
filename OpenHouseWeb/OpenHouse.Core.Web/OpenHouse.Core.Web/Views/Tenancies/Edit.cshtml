@@ -1,0 +1,84 @@
+﻿@model OpenHouse.Model.Core.Model.tenancy
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>tenancy</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="tenancyId" />
+            <div class="form-group">
+                <label asp-for="propertyId" class="control-label"></label>
+                <input asp-for="propertyId" class="form-control" />
+                <span asp-validation-for="propertyId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="leadTenantPersonId" class="control-label"></label>
+                <select asp-for="leadTenantPersonId" class="form-control" asp-items="ViewBag.leadTenantPersonId"></select>
+                <span asp-validation-for="leadTenantPersonId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="jointTenantPersonId" class="control-label"></label>
+                <select asp-for="jointTenantPersonId" class="form-control" asp-items="ViewBag.jointTenantPersonId"></select>
+                <span asp-validation-for="jointTenantPersonId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="tenureTypeId" class="control-label"></label>
+                <select asp-for="tenureTypeId" class="form-control" asp-items="ViewBag.tenureTypeId"></select>
+                <span asp-validation-for="tenureTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="startDate" class="control-label"></label>
+                <input asp-for="startDate" class="form-control" />
+                <span asp-validation-for="startDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="terminationDate" class="control-label"></label>
+                <input asp-for="terminationDate" class="form-control" />
+                <span asp-validation-for="terminationDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="terminationReasonId" class="control-label"></label>
+                <input asp-for="terminationReasonId" class="form-control" />
+                <span asp-validation-for="terminationReasonId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="updatedByUserID" class="control-label"></label>
+                <input asp-for="updatedByUserID" class="form-control" />
+                <span asp-validation-for="updatedByUserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="updatedDT" class="control-label"></label>
+                <input asp-for="updatedDT" class="form-control" />
+                <span asp-validation-for="updatedDT" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="createdByUserID" class="control-label"></label>
+                <input asp-for="createdByUserID" class="form-control" />
+                <span asp-validation-for="createdByUserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="createdDT" class="control-label"></label>
+                <input asp-for="createdDT" class="form-control" />
+                <span asp-validation-for="createdDT" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenHouse.Core.Web", "OpenHouse.Core.Web\OpenHouse.Core.Web.csproj", "{86FA5387-4B8A-4A96-8E78-5F8B113694B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenHouse.Core.Web", "OpenHouse.Core.Web\OpenHouse.Core.Web.csproj", "{86FA5387-4B8A-4A96-8E78-5F8B113694B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenHouse.Model.Core", "OpenHouse.Model.Core\OpenHouse.Model.Core.csproj", "{212508EF-E8A2-4ED8-BA40-3B17414F66C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenHouse.Model.Core", "OpenHouse.Model.Core\OpenHouse.Model.Core.csproj", "{212508EF-E8A2-4ED8-BA40-3B17414F66C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

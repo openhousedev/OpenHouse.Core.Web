@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "edDL9gIw750OWpgGZPHoFkFXhxV6wan/cbHrhpZJsVcBR5eFnaY+ru+44V/HxA7CDfR6MwTIiiRCOkJnLGinVg==",
+  "dgSpecHash": "t3SlTN02ZDLHA9+2bqZBkzVJdQRY653J9+ElvUATBPvyGcXV4DpBX8X87nzE3LAW523zY+BgYw7A1FAoIz8mtQ==",
   "success": true,
-  "projectFilePath": "C:\\UNIAPPS\\OpenHouseWeb\\OpenHouse.Core.Web\\OpenHouse.Model.Core\\OpenHouse.Model.Core.csproj",
+  "projectFilePath": "C:\\UNIAPPS\\OpenHouse\\OpenHouseWeb\\OpenHouse.Core.Web\\OpenHouse.Model.Core\\OpenHouse.Model.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ross.ballantine\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\ross.ballantine\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
@@ -103,8 +103,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.threading.tasks.extensions\\4.3.0\\system.threading.tasks.extensions.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\ross.ballantine\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

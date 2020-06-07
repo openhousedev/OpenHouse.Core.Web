@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OpenHouse.Core.Services;
+using OpenHouse.Core.Services.Interfaces;
+using OpenHouse.Model.Core.Model;
 
 namespace OpenHouse.Core.Web
 {
@@ -24,6 +27,9 @@ namespace OpenHouse.Core.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<OpenhouseContext>();
+            services.AddScoped<IPropertyService, PropertyService>();
+            services.AddScoped<ITenancyService, TenancyService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

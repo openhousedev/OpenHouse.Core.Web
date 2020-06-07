@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "jquery-loading-overlay@2.1.7",
+      "destination": "wwwroot/lib/jquery-loading-overlay/"
+    }
+  ,
+{
+  "library": "font-awesome@5.12.0-2",
+  "destination": "wwwroot/lib/font-awesome/"
+}
+]
+}
