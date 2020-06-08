@@ -11,3 +11,4 @@ C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Model.Core\obj\De
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Model.Core\obj\Debug\netcoreapp3.1\OpenHouse.Model.Core.csproj.CoreCompileInputs.cache
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Model.Core\obj\Debug\netcoreapp3.1\OpenHouse.Model.Core.dll
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Model.Core\obj\Debug\netcoreapp3.1\OpenHouse.Model.Core.pdb
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Model.Core\obj\Debug\netcoreapp3.1\OpenHouse.Model.Core.csprojAssemblyReference.cache

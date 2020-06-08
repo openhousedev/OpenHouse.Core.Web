@@ -1,0 +1,83 @@
+﻿@model IEnumerable<OpenHouse.Model.Core.Model.action>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.assignedUserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.actionDueDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.actionCompletedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.updatedByUserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.updatedDT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.createdByUserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.createdDT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.actionType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tenancy)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.assignedUserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.actionDueDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.actionCompletedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.updatedByUserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.updatedDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.createdByUserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.createdDT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.actionType.actionTypeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tenancy.tenancyId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.actionId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.actionId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.actionId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -17,6 +17,7 @@ using OpenHouse.Model.Core.Model;
 using Microsoft.AspNetCore.DataProtection;
 using System.IO;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNet.OData.Extensions;
 
 namespace OpenHouse.Core.Web
 {
@@ -39,6 +40,8 @@ namespace OpenHouse.Core.Web
             services.AddScoped<ITenancyService, TenancyService>();
             services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IActionService, ActionService>();
+
+            services.AddOData();
 
             //services.AddDataProtection()
             //        .PersistKeysToFileSystem(new DirectoryInfo(@"C:\UNIAPPS\OpenHouse\OpenHouseAuthStore"))

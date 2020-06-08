@@ -228,3 +228,8 @@ C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Web\obj\Debu
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Web\obj\Debug\netcoreapp3.1\OpenHouse.Core.Web.csproj.CoreCompileInputs.cache
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Web\obj\Debug\netcoreapp3.1\OpenHouse.Core.Web.MvcApplicationPartsAssemblyInfo.cs
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Web\obj\Debug\netcoreapp3.1\OpenHouse.Core.Web.MvcApplicationPartsAssemblyInfo.cache
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Web\obj\Debug\netcoreapp3.1\Razor\Views\Actions\Create.cshtml.g.cs
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Web\obj\Debug\netcoreapp3.1\Razor\Views\Actions\Delete.cshtml.g.cs
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Web\obj\Debug\netcoreapp3.1\Razor\Views\Actions\Details.cshtml.g.cs
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Web\obj\Debug\netcoreapp3.1\Razor\Views\Actions\Edit.cshtml.g.cs
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Web\obj\Debug\netcoreapp3.1\Razor\Views\Actions\Index.cshtml.g.cs
