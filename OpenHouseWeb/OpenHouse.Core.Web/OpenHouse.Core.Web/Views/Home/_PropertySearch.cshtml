@@ -26,10 +26,18 @@
                     <td class="text-center">
                         @property.propertyClass
                     </td>
-                    <td align="center">
-                        <a class="btn btn-light" asp-controller="Properties" target="_blank" asp-action="Details" asp-route-id="@property.propertyId">Details</a>
-                        <a class="btn btn-light" asp-controller="Properties" target="_blank" asp-action="Edit" asp-route-id="@property.propertyId">Edit</a>
-                    </td>
+                    @if (ViewBag.DisplayType == "selector")
+                    {
+                        <td class="text-center">
+                            <a class="btn btn-light" onclick="selectProperty(@property.propertyId, '@property.contactAddress');">Select</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td align="center">
+                            <a class="btn btn-light" onauxclick="window.open('@Url.Action("Details", "Properties", new { @id = property.propertyId })');" onclick="window.open('@Url.Action("Details", "Properties", new { @id = property.propertyId })');">View</a>
+                        </td>
+                    }
                 </tr>
             }
         </tbody>

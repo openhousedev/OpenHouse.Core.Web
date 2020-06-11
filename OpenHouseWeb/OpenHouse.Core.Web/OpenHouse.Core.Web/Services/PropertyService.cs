@@ -48,6 +48,7 @@ namespace OpenHouse.Core.Services
             var properties = await _context.vwproperty
                                             .Where(p => (p.contactAddress.ToLower().Contains(searchString.ToLower()) || p.propertyId.ToString() == searchString))
                                             .OrderBy(p => p.contactAddress)
+                                            .Distinct()
                                             .ToListAsync();
 
             return properties;
@@ -65,6 +66,20 @@ namespace OpenHouse.Core.Services
                                         .Include(p => p.propertyType)
                                         .FirstOrDefaultAsync(m => m.propertyId == id);
             return property;
+        }
+
+        /// <summary>
+        /// Get vwProperty object from property ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<vwproperty> GetPropertyViewAsync(int id)
+        {
+            var propertyView = await _context.vwproperty
+                                            .Where(p => p.propertyId == id)
+                                            .FirstOrDefaultAsync();
+
+            return propertyView;
         }
 
         /// <summary>

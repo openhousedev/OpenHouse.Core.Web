@@ -1,84 +1,220 @@
-﻿@model OpenHouse.Model.Core.Model.tenancy
+﻿@model OpenHouse.Model.Core.Model.TenancyViewModel
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>tenancy</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.propertyId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.propertyId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.startDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.startDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.terminationDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.terminationDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.terminationReasonId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.terminationReasonId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.updatedByUserID)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.updatedByUserID)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.updatedDT)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.updatedDT)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.createdByUserID)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.createdByUserID)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.createdDT)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.createdDT)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.jointTenantPerson)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.jointTenantPerson.personId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.leadTenantPerson)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.leadTenantPerson.personId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.tenureType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.tenureType.tenureTypeId)
-        </dd>
-    </dl>
+<div class="row">
+    <div class="col-md-6">
+        <h4>Tenancy Details</h4>
+    </div>
+    <div class="col-md-6">
+        <input type="button" class="btn btn-outline-primary float-right ml-1" onClick="window.open('', '_self').close();" value="Done" />
+        <a class="btn btn-outline-primary float-right ml-1" asp-action="Edit" asp-route-id="@Model.tenancyId">Edit</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.tenancyId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<hr />
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="true">Details</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="household-tab" data-toggle="tab" href="#household" role="tab" aria-controls="household" aria-selected="false">Household Members</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes" role="tab" aria-controls="notes" aria-selected="false">Notes</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="audit-tab" data-toggle="tab" href="#audit" role="tab" aria-controls="audit" aria-selected="false">Audit</a>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.propertyId)
+                    </dt>
+                    <dd class="col-sm-10 border border border-secondary rounded mt-2">
+                        @Html.DisplayFor(model => model.propertyId)
+                    </dd>
+                    <dt class="col-sm-10">
+                        Address
+                    </dt>
+                    <dd class="col-sm-10 border border border-secondary rounded mt-2">
+                        @Html.DisplayFor(model => model.property.contactAddress)
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.leadTenantPerson)
+                    </dt>
+                    <dd class="col-sm-10 border border border-secondary rounded mt-2 pr-0">
+                        @Model.leadTenantPerson.firstName&nbsp;@Model.leadTenantPerson.surname
+                        <a class="btn btn-sm btn-light float-right" onauxclick="window.open('@Url.Action("Details", "Persons", new { @id = Model.leadTenantPerson.personId })');" onclick="window.open('@Url.Action("Details","Persons",new { @id = Model.leadTenantPerson.personId })');">View</a>
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.jointTenantPerson)
+                    </dt>
+                    <dd class="col-sm-10 border border border-secondary rounded mt-2 pr-0">
+                        @if (Model.jointTenantPersonId.HasValue)
+                        {
+                            @Model.jointTenantPerson.firstName @Model.jointTenantPerson.surname
+                            <a class="btn btn-sm btn-light float-right" onauxclick="window.open('@Url.Action("Details", "Persons", new { @id = Model.jointTenantPerson.personId })');" onclick="window.open('@Url.Action("Details", "Persons", new { @id = Model.jointTenantPerson.personId })');">View</a>
+                        }
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.tenureType)
+                    </dt>
+                    <dd class="col-sm-10 border border border-secondary rounded mt-2">
+                        @Html.DisplayFor(model => model.tenureType.tenureType1)
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl class="row">
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.startDate)
+                    </dt>
+                    <dd class="col-sm-10 border border border-secondary rounded mt-2">
+                        @Html.DisplayFor(model => model.startDate)
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.terminationDate)
+                    </dt>
+                    <dd class="col-sm-10 border border border-secondary rounded mt-2">
+                        @Html.DisplayFor(model => model.terminationDate)
+                    </dd>
+                    <dt class="col-sm-10">
+                        @Html.DisplayNameFor(model => model.terminationReasonId)
+                    </dt>
+                    <dd class="col-sm-10 border border border-secondary rounded mt-2">
+                        @Html.DisplayFor(model => model.terminationReason.terminationReason)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="household" role="tabpanel" aria-labelledby="household-tab">
+        <div class="row mt-4">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Person ID</th>
+                            <th>Name</th>
+                            <th>Relation to Lead Tenant</th>
+                            <th>Relation to Join Tenant</th>
+                            <th class="text-center">View</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var householdMember in Model.tenancyhousehold)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    @householdMember.personId
+                                </td>
+                                <td>
+                                    @householdMember.person.firstName&nbsp;@householdMember.person.surname
+                                </td>
+                                <td>
+                                    @householdMember.leadTenantRelationship.relationship1
+                                </td>
+                                <td>
+                                    @householdMember.jointTenantRelationship.relationship1
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-light" onauxclick="window.open('@Url.Action("Details", "Persons", new { @id = householdMember.personId })');" onclick="window.open('@Url.Action("Details","Persons",new { @id = householdMember.personId })');">View</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="notes" role="tabpanel" aria-labelledby="notes-tab">
+        <div class="row mt-4">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Note Id</th>
+                            <th>Note Summary</th>
+                            <th>Created Date</th>
+                            <th>View</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var note in Model.tenancynote)
+                        {
+                            <tr>
+                                <td>
+                                    @note.noteId
+                                </td>
+                                <td>
+                                    @if (note.note.note1.Length > 50)
+                                    {
+                                        @note.note.note1.Substring(0, 50)@:"..."
+                                    }
+                                    else
+                                    {
+                                        @note.note.note1;
+                                    }
+                                </td>
+                                <td>
+                                    @note.note.createdDT.ToString("dd/MM/yyyy");
+                                </td>
+                                <td>
+                                    <a class="btn btn-light" asp-controller="Notes" asp-action="Details" asp-route-id="@note.noteId"></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="audit" role="tabpanel" aria-labelledby="audit-tab">
+        <div class="row mt-3 mb-3">
+            <div class="card w-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <dl>
+                                <dt class="col-sm-10">
+                                    <i class="fa fa-user"></i>&nbsp;Updated By
+                                </dt>
+                                <dd class="col-sm-10 border border border-secondary rounded mt-2">
+                                    @Html.DisplayFor(model => model.updatedByUsername)
+                                </dd>
+                                <dt class="col-sm-10">
+                                    <i class="fa fa-user-clock"></i>&nbsp;Last updated:
+                                </dt>
+                                <dd class="col-sm-10 border border border-secondary rounded mt-2">
+                                    @Model.updatedDT.ToString("dd/MM/yyyy hh:mm")
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <dl>
+                                <dt class="col-sm-10">
+                                    <i class="fa fa-user"></i>&nbsp;Created By:
+                                </dt>
+                                <dd class="col-sm-10 border border border-secondary rounded mt-2">
+                                    @Html.DisplayFor(model => model.createdByUsername)
+                                </dd>
+                                <dt class="col-sm-10">
+                                    <i class="fa fa-user-clock"></i>&nbsp;Created On:
+                                </dt>
+                                <dd class="col-sm-10 border border border-secondary rounded mt-2">
+                                    @Model.createdDT.ToString("dd/MM/yyyy hh:mm")
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

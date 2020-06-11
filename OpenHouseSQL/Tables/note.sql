@@ -5,10 +5,10 @@ SET FOREIGN_KEY_CHECKS = 1;
 CREATE TABLE `note` (
 	`noteId` INT NOT NULL AUTO_INCREMENT,
 	`note` TEXT,
-	`updatedByUserID` INT,
-	`updatedDT` DATETIME,
-	`createdByUserID` INT,
-	`createdDT` DATETIME,
+	`updatedByUserID` VARCHAR(255) NOT NULL,
+	`updatedDT` DATETIME NOT NULL,
+	`createdByUserID` VARCHAR(255) NOT NULL,
+	`createdDT` DATETIME NOT NULL,aspnetuserclaims
 	PRIMARY KEY(`noteId`)
 )
 

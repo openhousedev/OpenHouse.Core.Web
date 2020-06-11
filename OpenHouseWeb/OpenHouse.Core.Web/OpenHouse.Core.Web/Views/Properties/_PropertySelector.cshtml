@@ -1,0 +1,28 @@
+﻿<div id="modalPropertySearch" class="modal fade" aria-hidden="true" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fa fa-home"></i>&nbsp;Property Search</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <input type="text" id="txtPropertySearch" name="txtPropertySearch" placeholder="Search by property ID or address..." class="form-control" />
+                    </div>
+                    <div class="col-sm-3">
+                        <button id="btnSearch" onclick="populatePropertySearchResults()" class="btn btn-primary w-100">Search</button>
+                    </div>
+                </div>
+                <div class="row mt-2" id="property-search-result">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="clearPropertySearch();" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

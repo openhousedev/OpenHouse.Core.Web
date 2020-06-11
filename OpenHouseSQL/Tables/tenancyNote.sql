@@ -7,7 +7,8 @@ CREATE TABLE `tenancyNote` (
 	`noteId` INT NOT NULL,
 	`tenancyId` INT NOT NULL,
 	PRIMARY KEY(`tenancyNoteId`),
-	FOREIGN KEY(`tenancyId`) REFERENCES tenancy(`tenancyId`)
+	FOREIGN KEY(`tenancyId`) REFERENCES tenancy(`tenancyId`),
+	FOREIGN KEY(`noteId`) REFERENCES note(`noteId`)
 )
 
 COLLATE='utf8_general_ci'

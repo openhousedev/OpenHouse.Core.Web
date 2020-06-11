@@ -47,12 +47,16 @@ namespace OpenHouse.Model.Core.Model
         [Column(TypeName = "int(11)")]
         public int? maxOccupants { get; set; }
         [Column(TypeName = "int(11)")]
-        public int? updatedByUserID { get; set; }
+        public int? tenancyId { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(255)")]
+        public string updatedByUserID { get; set; }
         [Column(TypeName = "datetime")]
-        public DateTime? updatedDT { get; set; }
-        [Column(TypeName = "int(11)")]
-        public int? createdByUserID { get; set; }
+        public DateTime updatedDT { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(255)")]
+        public string createdByUserID { get; set; }
         [Column(TypeName = "datetime")]
-        public DateTime? createdDT { get; set; }
+        public DateTime createdDT { get; set; }
     }
 }

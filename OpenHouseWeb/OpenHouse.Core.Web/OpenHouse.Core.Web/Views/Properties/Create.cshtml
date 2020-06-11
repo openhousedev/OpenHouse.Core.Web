@@ -1,24 +1,30 @@
-﻿@model OpenHouse.Model.Core.Model.property
+﻿@model OpenHouse.Model.Core.Model.PropertyViewModel
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>property</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+<form asp-action="Create">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Create Property</h4>
+        </div>
+        <div class="col-md-6">
+            <input type="button" class="btn btn-outline-primary float-right ml-1" onClick="window.open('', '_self').close();" value="Cancel" />
+            <input type="submit" class="btn btn-outline-primary float-right ml-1" value="Create" />
+        </div>
+    </div>
+    <hr />
+    <div class="row mt-4">
+        <div class="col-md-6">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="propertyClassId" class="control-label"></label>
-                <select asp-for="propertyClassId" class ="form-control" asp-items="ViewBag.propertyClassId"></select>
+                <select asp-for="propertyClassId" class="form-control" asp-items="ViewBag.propertyClassId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="propertyTypeId" class="control-label"></label>
-                <select asp-for="propertyTypeId" class ="form-control" asp-items="ViewBag.propertyTypeId"></select>
+                <select asp-for="propertyTypeId" class="form-control" asp-items="ViewBag.propertyTypeId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="propertyNum" class="control-label"></label>
@@ -55,6 +61,8 @@
                 <input asp-for="postCode" class="form-control" />
                 <span asp-validation-for="postCode" class="text-danger"></span>
             </div>
+        </div>
+        <div class="col-md-6">
             <div class="form-group">
                 <label asp-for="demolitionDate" class="control-label"></label>
                 <input asp-for="demolitionDate" class="form-control" />
@@ -80,16 +88,10 @@
                 <input asp-for="maxOccupants" class="form-control" />
                 <span asp-validation-for="maxOccupants" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+</form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

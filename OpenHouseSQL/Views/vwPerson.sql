@@ -30,4 +30,4 @@ FROM
 	INNER JOIN
 	nationality
 	ON
-		person.nationalityId = nationality.nationalityId
+		person.nationalityId = nationality.nationalityIdaspnetusers

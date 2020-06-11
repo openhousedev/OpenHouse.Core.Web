@@ -8,10 +8,10 @@ CREATE TABLE `alert` (
 	`alertText` TEXT,
 	`startDT` DATETIME,
 	`endDT` DATETIME,
-	`updatedByUserID` INT,
-	`updatedDT` DATETIME,
-	`createdByUserID` INT,
-	`createdDT` DATETIME,
+	`updatedByUserID` VARCHAR(255) NOT NULL,
+	`updatedDT` DATETIME NOT NULL,
+	`createdByUserID` VARCHAR(255) NOT NULL,
+	`createdDT` DATETIME NOT NULL,
 	PRIMARY KEY(`alertId`),
 	FOREIGN KEY(`alertTypeId`) REFERENCES alertType(`alertTypeId`)
 )

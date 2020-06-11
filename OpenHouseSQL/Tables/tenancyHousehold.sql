@@ -8,10 +8,10 @@ CREATE TABLE `tenancyHousehold` (
 	`personId` INT NOT NULL,
 	`leadTenantRelationshipId` INT NULL,
 	`jointTenantRelationshipId` INT NULL,
-	`updatedByUserID` INT,
-	`updatedDT` DATETIME,
-	`createdByUserID` INT,
-	`createdDT` DATETIME,
+	`updatedByUserID` VARCHAR(255) NOT NULL,
+	`updatedDT` DATETIME NOT NULL,
+	`createdByUserID` VARCHAR(255) NOT NULL,
+	`createdDT` DATETIME NOT NULL,
 	PRIMARY KEY(`tenancyHouseholdId`),
 	FOREIGN KEY(`tenancyId`) REFERENCES tenancy(`tenancyId`),
 	FOREIGN KEY(`personId`) REFERENCES person(`personId`),
@@ -24,6 +24,6 @@ ENGINE=InnoDB
 ;
 SET @currDate = CURDATE();
 
-INSERT INTO tenancyHousehold VALUES(NULL,2,4,5,5,1,CURDATE(),1,CURDATE());
-INSERT INTO tenancyHousehold VALUES(NULL,3,6,2,NULL,1,CURDATE(),1,CURDATE());
+INSERT INTO tenancyHousehold VALUES(NULL,2,4,5,5,'611a361a-bce9-4783-b715-da82528a5988',CURDATE(),'611a361a-bce9-4783-b715-da82528a5988',CURDATE());
+INSERT INTO tenancyHousehold VALUES(NULL,3,6,2,NULL,'611a361a-bce9-4783-b715-da82528a5988',CURDATE(),'611a361a-bce9-4783-b715-da82528a5988',CURDATE());
 

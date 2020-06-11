@@ -2,21 +2,47 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OpenHouse.Core.Services.Interfaces;
 using OpenHouse.Model.Core.Model;
+using OpenHouse.Core.Web.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
 
 namespace OpenHouse.Core.Web.Controllers
 {
+    [Authorize]
     public class PropertiesController : Controller
     {
         private readonly IPropertyService _propertySvc;
+        private readonly ITenancyService _tenancySvc;
+        private readonly MapperConfiguration _mapperConfig;
+        private readonly IMapper _mapper;
+        private readonly UserManager<User> _userManager;
 
-        public PropertiesController(IPropertyService propertySvc)
+        public PropertiesController(IPropertyService propertySvc, ITenancyService tenancySvc, UserManager<User> userManager)
         {
+            //Assign services
             _propertySvc = propertySvc;
+            _tenancySvc = tenancySvc;
+            _userManager = userManager;
+
+            //AutoMapper mapping config
+            _mapperConfig = new MapperConfiguration(cfg => {
+                cfg.CreateMap<property, PropertyViewModel>();
+                cfg.CreateMap<PropertyViewModel, property>();
+            });
+
+            //Create mapper instance
+            _mapper = _mapperConfig.CreateMapper();
+        }
+
+        public async Task<IActionResult> _PropertySelector()
+        {
+            return View();
         }
 
         // GET: Properties/Details/5
@@ -28,12 +54,23 @@ namespace OpenHouse.Core.Web.Controllers
             }
 
             var property = await _propertySvc.GetPropertyAsync(id.Value);
+
             if (property == null)
             {
                 return NotFound();
             }
 
-            return View(property);
+            PropertyViewModel propertyVM = _mapper.Map<PropertyViewModel>(property); //Map property model object to viewmodel
+            propertyVM.tenancyHistory = await _tenancySvc.GetTenanciesForPropertyIdAsync(id.Value); //Get tenancy history for property
+
+            //Get created by & update by username
+            User createByUser = await _userManager.FindByIdAsync(propertyVM.createdByUserID);
+            propertyVM.createdByUsername = createByUser.UserName;
+
+            User updatedByUser = await _userManager.FindByIdAsync(propertyVM.updatedByUserID);
+            propertyVM.updatedByUsername = updatedByUser.UserName;
+
+            return View(propertyVM);
         }
 
         // GET: Properties/Create
@@ -49,16 +86,28 @@ namespace OpenHouse.Core.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("propertyId,propertyClassId,propertyTypeId,PropertyNum,PropertySubNum,Address1,Address2,Address3,Address4,PostCode,DemolitionDate,CreationDate,LivingRoomQty,SingleBedroomQty,oubleBedroomQty,maxOccupants,updatedByUserID,updatedDT,createdByUserID,createdDT")] property property)
+        public async Task<IActionResult> Create([Bind("propertyId,propertyClassId,propertyTypeId,propertyNum,propertySubNum,address1,address2,address3,address4,postCode,demolitionDate,creationDate,livingRoomQty,singleBedroomQty,doubleBedroomQty,maxOccupants,updatedByUserID,updatedDT,createdByUserID,createdDT")] PropertyViewModel propertyVM)
         {
             if (ModelState.IsValid)
             {
-                await _propertySvc.AddPropertyAsync(property);
+                DateTime recordDT = DateTime.Now;
+                var _property = _mapper.Map<property>(propertyVM); //Map viewmodel to property model object
+
+                var user = await _userManager.GetUserAsync(HttpContext.User); //Get logged in user
+
+                //Set created by & updated by values for record
+                _property.updatedByUserID = user.Id;
+                _property.updatedDT = recordDT;
+                _property.createdByUserID = user.Id;
+                _property.createdDT = recordDT;
+
+                await _propertySvc.AddPropertyAsync(_property);
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.propertyClassId = new SelectList(await _propertySvc.GetPropertyClassesAsync(), "propertyClassId", "propertyClass1", property.propertyClassId);
-            ViewBag.propertyTypeId = new SelectList(await _propertySvc.GetPropertyTypesAsync(), "propertyTypeId", "propertyType1", property.propertyTypeId);
-            return View(property);
+
+            ViewBag.propertyClassId = new SelectList(await _propertySvc.GetPropertyClassesAsync(), "propertyClassId", "propertyClass1", propertyVM.propertyClassId);
+            ViewBag.propertyTypeId = new SelectList(await _propertySvc.GetPropertyTypesAsync(), "propertyTypeId", "propertyType1", propertyVM.propertyTypeId);
+            return View(propertyVM);
         }
 
         // GET: Properties/Edit/5
@@ -74,9 +123,12 @@ namespace OpenHouse.Core.Web.Controllers
             {
                 return NotFound();
             }
+
+            PropertyViewModel propertyVM = _mapper.Map<PropertyViewModel>(property);
+
             ViewBag.propertyClassId = new SelectList(await _propertySvc.GetPropertyClassesAsync(), "propertyClassId", "propertyClass1", property.propertyClassId);
             ViewBag.propertyTypeId = new SelectList(await _propertySvc.GetPropertyTypesAsync(), "propertyTypeId", "propertyType1", property.propertyTypeId);
-            return View(property);
+            return View(propertyVM);
         }
 
         // POST: Properties/Edit/5
@@ -84,9 +136,9 @@ namespace OpenHouse.Core.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("propertyId,propertyClassId,propertyTypeId,PropertyNum,PropertySubNum,Address1,Address2,Address3,Address4,PostCode,DemolitionDate,CreationDate,LivingRoomQty,SingleBedroomQty,oubleBedroomQty,maxOccupants,updatedByUserID,updatedDT,createdByUserID,createdDT")] property property)
+        public async Task<IActionResult> Edit(int id, [Bind("propertyId,propertyClassId,propertyTypeId,propertyNum,propertySubNum,address1,address2,address3,address4,postCode,demolitionDate,creationDate,livingRoomQty,singleBedroomQty,doubleBedroomQty,maxOccupants,updatedByUserID,updatedDT,createdByUserID,createdDT")] PropertyViewModel propertyVM)
         {
-            if (id != property.propertyId)
+            if (id != propertyVM.propertyId)
             {
                 return NotFound();
             }
@@ -95,11 +147,19 @@ namespace OpenHouse.Core.Web.Controllers
             {
                 try
                 {
-                    await _propertySvc.UpdatePropertyAsync(property);
+                    var _property = _mapper.Map<property>(propertyVM); //Map viewmodel to property model object
+
+                    var user = await _userManager.GetUserAsync(HttpContext.User); //Get logged in user
+
+                    //Set created by & updated by values for record
+                    _property.updatedByUserID = user.Id;
+                    _property.updatedDT = DateTime.Now;
+
+                    await _propertySvc.UpdatePropertyAsync(_property); //Update property async
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (! await PropertyExists(property.propertyId))
+                    if (! await PropertyExists(propertyVM.propertyId))
                     {
                         return NotFound();
                     }
@@ -108,11 +168,12 @@ namespace OpenHouse.Core.Web.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details),new { @id = propertyVM.propertyId });
             }
-            ViewBag.propertyClassId = new SelectList(await _propertySvc.GetPropertyClassesAsync(), "propertyClassId", "propertyClass1", property.propertyClassId);
-            ViewBag.propertyTypeId = new SelectList(await _propertySvc.GetPropertyTypesAsync(), "propertyTypeId", "propertyType1", property.propertyTypeId);
-            return View(property);
+            ViewBag.propertyClassId = new SelectList(await _propertySvc.GetPropertyClassesAsync(), "propertyClassId", "propertyClass1", propertyVM.propertyClassId);
+            ViewBag.propertyTypeId = new SelectList(await _propertySvc.GetPropertyTypesAsync(), "propertyTypeId", "propertyType1", propertyVM.propertyTypeId);
+
+            return View(propertyVM);
         }
 
         private async Task<bool> PropertyExists(int id)

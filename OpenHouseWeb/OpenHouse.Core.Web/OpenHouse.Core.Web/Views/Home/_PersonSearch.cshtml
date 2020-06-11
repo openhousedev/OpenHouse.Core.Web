@@ -1,8 +1,5 @@
 ﻿@model List<OpenHouse.Model.Core.Model.vwperson>
 
-@{
-}
-
 <div class="table-responsive">
     <table class="table table-sm table-bordered table-hover">
         <thead>
@@ -17,24 +14,33 @@
         <tbody>
             @foreach (var person in Model)
             {
-                <tr>
+            <tr>
+                <td class="text-center">
+                    @person.personId
+                </td>
+                <td class="text-center">
+                    @person.title
+                </td>
+                <td>
+                    @person.fullName
+                </td>
+                <td class="text-center">
+                    @person.dateOfBirth.Value.ToString("dd/MM/yyyy")
+                </td>
+                @if (ViewBag.DisplayType == "selector")
+                {
                     <td class="text-center">
-                        @person.personId
+                        <a class="btn btn-light" onclick="selectPerson(@person.personId, '@person.fullName');">Select</a>
                     </td>
+
+                }
+                else
+                {
                     <td class="text-center">
-                        @person.title
+                        <a class="btn btn-light" onauxclick="window.open('@Url.Action("Details", "Persons", new { @id = person.personId })');" onclick="window.open('@Url.Action("Details", "Persons", new { @id = person.personId })');">View</a>
                     </td>
-                    <td>
-                        @person.fullName
-                    </td>
-                    <td class="text-center">
-                        @person.dateOfBirth.Value.ToString("dd/MM/yyyy")
-                    </td>
-                    <td class="text-center">
-                        <a class="btn btn-light" asp-controller="Persons" target="_blank" asp-action="Details" asp-route-id="@person.personId">Details</a>
-                        <a class="btn btn-light" asp-controller="Persons" target="_blank" asp-action="Edit" asp-route-id="@person.personId">Edit</a>
-                    </td>
-                </tr>
+                }
+            </tr>
             }
         </tbody>
     </table>

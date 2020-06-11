@@ -77,10 +77,10 @@ body {
 }
 
 /* Row Styles */
-.row {
+/*.row {
     margin-top: 15px;
     margin-bottom: 15px;
-}
+}*/
 
 /* Search Result Container */
 #search-result {
@@ -92,4 +92,16 @@ body {
 .table-btn-cell-center {
     display: block;
     margin: auto;
+}
+
+.login-container {
+    margin-top: 100px;
+}
+
+dd {
+    min-height: 25px !important;
+}
+
+.form-control:read-only {
+    background-color: #fff !important;
 }

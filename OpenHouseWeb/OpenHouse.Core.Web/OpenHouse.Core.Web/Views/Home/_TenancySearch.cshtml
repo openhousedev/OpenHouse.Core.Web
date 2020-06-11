@@ -27,8 +27,7 @@
                         @tenancy.leadTenant
                     </td>
                     <td align="center">
-                        <a class="btn btn-light" asp-controller="Tenancies" target="_blank" asp-action="Details" asp-route-id="@tenancy.tenancyId">Details</a>
-                        <a class="btn btn-light" asp-controller="Tenancies" target="_blank" asp-action="Edit" asp-route-id="@tenancy.tenancyId">Edit</a>
+                        <a class="btn btn-light" onauxclick="window.open('@Url.Action("Details", "Tenancies", new { @id = tenancy.tenancyId })');" onclick="window.open('@Url.Action("Details","Tenancies",new { @id = tenancy.tenancyId })');">View</a>
                     </td>
                 </tr>
             }

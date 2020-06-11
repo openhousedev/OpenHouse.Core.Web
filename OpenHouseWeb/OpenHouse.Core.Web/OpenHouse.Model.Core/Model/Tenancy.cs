@@ -31,16 +31,18 @@ namespace OpenHouse.Model.Core.Model
         public DateTime? startDate { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime? terminationDate { get; set; }
-        [Column(TypeName = "varchar(5)")]
-        public string terminationReasonId { get; set; }
         [Column(TypeName = "int(11)")]
-        public int? updatedByUserID { get; set; }
+        public int? terminationReasonId { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(255)")]
+        public string updatedByUserID { get; set; }
         [Column(TypeName = "datetime")]
-        public DateTime? updatedDT { get; set; }
-        [Column(TypeName = "int(11)")]
-        public int? createdByUserID { get; set; }
+        public DateTime updatedDT { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(255)")]
+        public string createdByUserID { get; set; }
         [Column(TypeName = "datetime")]
-        public DateTime? createdDT { get; set; }
+        public DateTime createdDT { get; set; }
 
         [ForeignKey(nameof(jointTenantPersonId))]
         [InverseProperty(nameof(person.tenancyjointTenantPerson))]
@@ -51,6 +53,9 @@ namespace OpenHouse.Model.Core.Model
         [ForeignKey(nameof(tenureTypeId))]
         [InverseProperty(nameof(tenuretype.tenancy))]
         public virtual tenuretype tenureType { get; set; }
+        [ForeignKey(nameof(terminationReasonId))]
+        [InverseProperty(nameof(tenancyterminationreason.tenancy))]
+        public virtual tenancyterminationreason terminationReason { get; set; }
         [InverseProperty("tenancy")]
         public virtual ICollection<action> action { get; set; }
         [InverseProperty("tenancy")]

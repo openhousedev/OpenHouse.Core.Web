@@ -1,12 +1,22 @@
 DROP VIEW IF EXISTS `vwProperty`;
 
 CREATE VIEW `vwProperty` AS
-
+WITH cteActiveTenancy AS (
+SELECT t.tenancyId
+		,t.propertyId
+		,t.leadTenantPersonId
+FROM
+		 openhouse.tenancy t
+WHERE
+		 t.terminationDate IS NULL 
+		 OR 
+		 t.terminationDate > CURDATE()
+)
 SELECT p.propertyId
 	, p.propertyClassId
-    , pc.propertyClass
+   , pc.propertyClass
 	, p.propertyTypeId
-    , pt.propertyType
+   , pt.propertyType
 	, p.propertyNum
 	, p.propertySubNum
 	, p.address1
@@ -21,10 +31,11 @@ SELECT p.propertyId
 	, p.singleBedroomQty
 	, p.doubleBedroomQty
 	, p.maxOccupants
+	, t.tenancyId
 	, p.updatedByUserID
 	, p.updatedDT
 	, p.createdByUserID
-	, p.createdDT 
+	, p.createdDTvwtenancy
 FROM 
 	openhouse.property p
 INNER JOIN
@@ -35,3 +46,7 @@ INNER JOIN
 	openhouse.propertyType pt
 ON
 	p.propertyTypeId = pt.propertyTypeId
+LEFT JOIN
+	cteActiveTenancy t
+ON
+	t.propertyId = p.propertyId

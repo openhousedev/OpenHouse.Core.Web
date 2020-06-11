@@ -9,9 +9,9 @@ CREATE TABLE `action` (
 	`assignedUserId` INT NOT NULL,
 	`actionDueDate` DATETIME NOT NULL,
 	`actionCompletedDate` DATETIME,
-	`updatedByUserID` INT NOT NULL,
+	`updatedByUserID` VARCHAR(255) NOT NULL,
 	`updatedDT` DATETIME NOT NULL,
-	`createdByUserID` INT NOT NULL,
+	`createdByUserID` VARCHAR(255) NOT NULL,
 	`createdDT` DATETIME NOT NULL,
 	PRIMARY KEY(`actionId`),
 	FOREIGN KEY (`actionTypeId`) REFERENCES actionType(`actionTypeId`),
@@ -23,5 +23,5 @@ ENGINE=InnoDB
 ;
 SET @currDate = CURDATE();
 
-INSERT INTO `action` VALUES(NULL,2,1,1,@currDate,NULL,1,@currDate,1,@currdate);
+INSERT INTO `action` VALUES(NULL,2,1,1,@currDate,NULL,'611a361a-bce9-4783-b715-da82528a5988',CURDATE(),'611a361a-bce9-4783-b715-da82528a5988',CURDATE());
 

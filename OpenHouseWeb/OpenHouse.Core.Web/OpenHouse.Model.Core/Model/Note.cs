@@ -11,6 +11,7 @@ namespace OpenHouse.Model.Core.Model
         public note()
         {
             propertynote = new HashSet<propertynote>();
+            tenancynote = new HashSet<tenancynote>();
         }
 
         [Key]
@@ -18,16 +19,20 @@ namespace OpenHouse.Model.Core.Model
         public int noteId { get; set; }
         [Column("note", TypeName = "text")]
         public string note1 { get; set; }
-        [Column(TypeName = "int(11)")]
-        public int? updatedByUserID { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(255)")]
+        public string updatedByUserID { get; set; }
         [Column(TypeName = "datetime")]
-        public DateTime? updatedDT { get; set; }
-        [Column(TypeName = "int(11)")]
-        public int? createdByUserID { get; set; }
+        public DateTime updatedDT { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(255)")]
+        public string createdByUserID { get; set; }
         [Column(TypeName = "datetime")]
-        public DateTime? createdDT { get; set; }
+        public DateTime createdDT { get; set; }
 
         [InverseProperty("note")]
         public virtual ICollection<propertynote> propertynote { get; set; }
+        [InverseProperty("note")]
+        public virtual ICollection<tenancynote> tenancynote { get; set; }
     }
 }

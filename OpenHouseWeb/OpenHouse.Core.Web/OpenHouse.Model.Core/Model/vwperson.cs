@@ -38,13 +38,15 @@ namespace OpenHouse.Model.Core.Model
         public string nextOfKinSurname { get; set; }
         [Column(TypeName = "varchar(20)")]
         public string nextOfKinTelephone { get; set; }
-        [Column(TypeName = "int(11)")]
-        public int? updatedByUserID { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(255)")]
+        public string updatedByUserID { get; set; }
         [Column(TypeName = "datetime")]
-        public DateTime? updatedDT { get; set; }
-        [Column(TypeName = "int(11)")]
-        public int? createdByUserID { get; set; }
+        public DateTime updatedDT { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(255)")]
+        public string createdByUserID { get; set; }
         [Column(TypeName = "datetime")]
-        public DateTime? createdDT { get; set; }
+        public DateTime createdDT { get; set; }
     }
 }

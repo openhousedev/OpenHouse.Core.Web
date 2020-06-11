@@ -8,10 +8,18 @@ namespace OpenHouse.Model.Core.Model
 {
     public partial class tenancyterminationreason
     {
+        public tenancyterminationreason()
+        {
+            tenancy = new HashSet<tenancy>();
+        }
+
         [Key]
         [Column(TypeName = "int(11)")]
         public int tenancyTerminationReasonId { get; set; }
         [Column(TypeName = "varchar(100)")]
         public string terminationReason { get; set; }
+
+        [InverseProperty("terminationReason")]
+        public virtual ICollection<tenancy> tenancy { get; set; }
     }
 }

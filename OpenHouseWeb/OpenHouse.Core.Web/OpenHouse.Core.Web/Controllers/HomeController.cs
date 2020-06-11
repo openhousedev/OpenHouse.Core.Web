@@ -13,6 +13,7 @@ using OpenHouse.Model.Core.Model;
 
 namespace OpenHouse.Core.Web.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -38,10 +39,6 @@ namespace OpenHouse.Core.Web.Controllers
             return View(actions);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -49,22 +46,24 @@ namespace OpenHouse.Core.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public async Task<IActionResult> _PropertySearch(string searchString)
+        public async Task<IActionResult> _PropertySearch(string searchString, string displayType)
         {
             var properties = await _propertySvc.GetPropertiesAsync(searchString);
+            ViewBag.DisplayType = displayType;
 
             return PartialView(properties);
         }
 
-        public async Task<IActionResult> _TenancySearch(string searchString)
+        public async Task<IActionResult> _TenancySearch(string searchString, string displayType)
         {
             var tenancies = await _tenancySvc.GetTenanciesAsync(searchString);
 
             return PartialView(tenancies);
         }
-        public async Task<IActionResult> _PersonSearch(string searchString)
+        public async Task<IActionResult> _PersonSearch(string searchString, string displayType)
         {
             var persons = await _personSvc.GetPersonsAsync(searchString);
+            ViewBag.DisplayType = displayType;
 
             return PartialView(persons);
         }

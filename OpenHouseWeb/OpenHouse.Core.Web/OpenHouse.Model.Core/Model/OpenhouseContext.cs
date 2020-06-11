@@ -61,6 +61,14 @@ namespace OpenHouse.Model.Core.Model
                 entity.HasIndex(e => e.tenancyId)
                     .HasName("tenancyId");
 
+                entity.Property(e => e.createdByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.updatedByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
                 entity.HasOne(d => d.actionType)
                     .WithMany(p => p.action)
                     .HasForeignKey(d => d.actionTypeId)
@@ -90,6 +98,14 @@ namespace OpenHouse.Model.Core.Model
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
 
+                entity.Property(e => e.createdByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.updatedByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
                 entity.HasOne(d => d.alertType)
                     .WithMany(p => p.alert)
                     .HasForeignKey(d => d.alertTypeId)
@@ -112,7 +128,15 @@ namespace OpenHouse.Model.Core.Model
 
             modelBuilder.Entity<note>(entity =>
             {
+                entity.Property(e => e.createdByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
                 entity.Property(e => e.note1)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.updatedByUserID)
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
             });
@@ -124,6 +148,10 @@ namespace OpenHouse.Model.Core.Model
 
                 entity.HasIndex(e => e.titleId)
                     .HasName("titleId");
+
+                entity.Property(e => e.createdByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
 
                 entity.Property(e => e.email)
                     .HasCharSet("utf8")
@@ -154,6 +182,10 @@ namespace OpenHouse.Model.Core.Model
                     .HasCollation("utf8_general_ci");
 
                 entity.Property(e => e.telephone)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.updatedByUserID)
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
 
@@ -192,11 +224,19 @@ namespace OpenHouse.Model.Core.Model
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
 
+                entity.Property(e => e.createdByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
                 entity.Property(e => e.postCode)
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
 
                 entity.Property(e => e.propertySubNum)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.updatedByUserID)
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
 
@@ -272,7 +312,14 @@ namespace OpenHouse.Model.Core.Model
                 entity.HasIndex(e => e.tenureTypeId)
                     .HasName("tenureTypeId");
 
-                entity.Property(e => e.terminationReasonId)
+                entity.HasIndex(e => e.terminationReasonId)
+                    .HasName("terminationReasonId");
+
+                entity.Property(e => e.createdByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.updatedByUserID)
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
 
@@ -292,6 +339,11 @@ namespace OpenHouse.Model.Core.Model
                     .HasForeignKey(d => d.tenureTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("tenancy_ibfk_1");
+
+                entity.HasOne(d => d.terminationReason)
+                    .WithMany(p => p.tenancy)
+                    .HasForeignKey(d => d.terminationReasonId)
+                    .HasConstraintName("tenancy_ibfk_4");
             });
 
             modelBuilder.Entity<tenancyalert>(entity =>
@@ -329,6 +381,14 @@ namespace OpenHouse.Model.Core.Model
                 entity.HasIndex(e => e.tenancyId)
                     .HasName("tenancyId");
 
+                entity.Property(e => e.createdByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.updatedByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
                 entity.HasOne(d => d.jointTenantRelationship)
                     .WithMany(p => p.tenancyhouseholdjointTenantRelationship)
                     .HasForeignKey(d => d.jointTenantRelationshipId)
@@ -354,8 +414,17 @@ namespace OpenHouse.Model.Core.Model
 
             modelBuilder.Entity<tenancynote>(entity =>
             {
+                entity.HasIndex(e => e.noteId)
+                    .HasName("noteId");
+
                 entity.HasIndex(e => e.tenancyId)
                     .HasName("tenancyId");
+
+                entity.HasOne(d => d.note)
+                    .WithMany(p => p.tenancynote)
+                    .HasForeignKey(d => d.noteId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("tenancynote_ibfk_2");
 
                 entity.HasOne(d => d.tenancy)
                     .WithMany(p => p.tenancynote)
@@ -398,6 +467,14 @@ namespace OpenHouse.Model.Core.Model
                 entity.Property(e => e.contactAddress)
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.createdByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.updatedByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
             });
 
             modelBuilder.Entity<vwperson>(entity =>
@@ -405,6 +482,10 @@ namespace OpenHouse.Model.Core.Model
                 entity.HasNoKey();
 
                 entity.ToView("vwperson");
+
+                entity.Property(e => e.createdByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
 
                 entity.Property(e => e.email)
                     .HasCharSet("utf8")
@@ -449,6 +530,10 @@ namespace OpenHouse.Model.Core.Model
                 entity.Property(e => e.title)
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.updatedByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
             });
 
             modelBuilder.Entity<vwproperty>(entity =>
@@ -477,6 +562,10 @@ namespace OpenHouse.Model.Core.Model
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
 
+                entity.Property(e => e.createdByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
                 entity.Property(e => e.postCode)
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
@@ -492,6 +581,12 @@ namespace OpenHouse.Model.Core.Model
                 entity.Property(e => e.propertyType)
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.tenancyId).HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.updatedByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
             });
 
             modelBuilder.Entity<vwtenancy>(entity =>
@@ -501,6 +596,10 @@ namespace OpenHouse.Model.Core.Model
                 entity.ToView("vwtenancy");
 
                 entity.Property(e => e.contactAddress)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.createdByUserID)
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
 
@@ -520,7 +619,7 @@ namespace OpenHouse.Model.Core.Model
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
 
-                entity.Property(e => e.terminationReasonId)
+                entity.Property(e => e.updatedByUserID)
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
             });

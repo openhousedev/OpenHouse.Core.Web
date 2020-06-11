@@ -20,8 +20,6 @@
             else if (searchItem == 'Person') {
                 $('#txtSearch').attr('placeholder', 'Search by person ID or person name...');
             }
-
-            $('#txtSearch').val(''); //Clear search box
         });
 
         //Perform search on enter key press in search bar
@@ -35,7 +33,12 @@
             var searchItem = $('#ddlSearchItem').val();
             var searchString = $('#txtSearch').val();
             var returnViewAction;
-            var sendData = { searchString: searchString };
+
+            var sendData = {
+                searchString: searchString,
+                displayType: 'search'
+            };
+
             var sendJson = JSON.stringify(sendData);
 
             if (searchItem == 'Property') {
@@ -62,8 +65,11 @@
                     $('#search-result').LoadingOverlay("hide");
                     $('#search-result').fadeIn(); //Fade in
                 },
-                error: function(jqXHR, textStatus, errorThrown) { //AJAX Error
+                error: function (jqXHR, textStatus, errorThrown) { //AJAX Error
                     console.log(textStatus, errorThrown); //Log error
+                    $('#search-result').LoadingOverlay("hide");
+                    $('#search-result').fadeIn(); //Fade in
+                    $('#search-result').html('');
                     alert('Error loading search results');
                 }
             });
@@ -81,7 +87,7 @@
     </ul>
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="search" role="tabpanel" aria-labelledby="search-tab">
-            <div class="row">
+            <div class="row mt-3">
                 <div class="card w-100">
                     <div class="card-header">
                         <i class="fa fa-search"></i>&nbsp;Search
@@ -105,13 +111,13 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mt-4">
                 <div id="search-result" class="w-100">
                 </div>
             </div>
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <div class="row">
+            <div class="row mt-3">
                 <div class="card w-100">
                     <div class="card-header">
                         <i class="fa fa-inbox"></i>&nbsp;My Actions

@@ -21,7 +21,9 @@ namespace OpenHouse.Core.Services
         public async Task<int> AddPersonsAsync(person person)
         {
             _context.person.Add(person);
-            return await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
+
+            return person.personId;
         }
 
         public async Task<int> DeletePersonAsync(int personId)
@@ -41,6 +43,7 @@ namespace OpenHouse.Core.Services
             var person = await _context.person
                                          .Include(p => p.nationality)
                                          .Include(p => p.title)
+                                         .Distinct()
                                          .FirstOrDefaultAsync(m => m.personId == personId);
             return person;
         }

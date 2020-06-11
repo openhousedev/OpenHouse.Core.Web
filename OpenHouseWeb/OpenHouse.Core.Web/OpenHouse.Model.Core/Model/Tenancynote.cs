@@ -16,6 +16,9 @@ namespace OpenHouse.Model.Core.Model
         [Column(TypeName = "int(11)")]
         public int tenancyId { get; set; }
 
+        [ForeignKey(nameof(noteId))]
+        [InverseProperty("tenancynote")]
+        public virtual note note { get; set; }
         [ForeignKey(nameof(tenancyId))]
         [InverseProperty("tenancynote")]
         public virtual tenancy tenancy { get; set; }

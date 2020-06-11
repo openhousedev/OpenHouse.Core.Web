@@ -1,100 +1,85 @@
-﻿@model OpenHouse.Model.Core.Model.person
+﻿@model OpenHouse.Model.Core.Model.PersonViewModel
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>person</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+<form asp-action="Create">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Create Person</h4>
+        </div>
+        <div class="col-md-6">
+            <input type="button" class="btn btn-outline-primary float-right ml-1" onClick="window.open('', '_self').close();" value="Cancel" />
+            <input type="submit" class="btn btn-outline-primary float-right ml-1" value="Create" />
+        </div>
+    </div>
+    <hr />
+    <div class="row mt-4">
+        <div class="col-md-6">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="firstName" class="control-label"></label>
+                <label asp-for="titleId" class="control-label">Title</label>
+                <select asp-for="titleId" class="form-control" asp-items="ViewBag.titleId"></select>
+                <span asp-validation-for="titleId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="firstName" class="control-label">First name</label>
                 <input asp-for="firstName" class="form-control" />
                 <span asp-validation-for="firstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="middleName" class="control-label"></label>
+                <label asp-for="middleName" class="control-label">Middle name</label>
                 <input asp-for="middleName" class="form-control" />
                 <span asp-validation-for="middleName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="surname" class="control-label"></label>
+                <label asp-for="surname" class="control-label">Surname</label>
                 <input asp-for="surname" class="form-control" />
                 <span asp-validation-for="surname" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="titleId" class="control-label"></label>
-                <select asp-for="titleId" class ="form-control" asp-items="ViewBag.titleId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="dateOfBirth" class="control-label"></label>
+                <label asp-for="dateOfBirth" class="control-label">Date of Birth</label>
                 <input asp-for="dateOfBirth" class="form-control" />
                 <span asp-validation-for="dateOfBirth" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="telephone" class="control-label"></label>
+                <label asp-for="nationalityId" class="control-label">Nationality</label>
+                <select asp-for="nationalityId" class="form-control" asp-items="ViewBag.nationalityId"></select>
+                <span asp-validation-for="nationalityId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="telephone" class="control-label">Telephone</label>
                 <input asp-for="telephone" class="form-control" />
                 <span asp-validation-for="telephone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="email" class="control-label"></label>
+                <label asp-for="email" class="control-label">Email</label>
                 <input asp-for="email" class="form-control" />
                 <span asp-validation-for="email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="nationalityId" class="control-label"></label>
-                <select asp-for="nationalityId" class ="form-control" asp-items="ViewBag.nationalityId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="nextOfKinFrstName" class="control-label"></label>
+                <label asp-for="nextOfKinFrstName" class="control-label">Next of Kin First Name</label>
                 <input asp-for="nextOfKinFrstName" class="form-control" />
                 <span asp-validation-for="nextOfKinFrstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="nextOfKinSurname" class="control-label"></label>
+                <label asp-for="nextOfKinSurname" class="control-label">Next of Kin Surname</label>
                 <input asp-for="nextOfKinSurname" class="form-control" />
                 <span asp-validation-for="nextOfKinSurname" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="nextOfKinTelephone" class="control-label"></label>
+                <label asp-for="nextOfKinTelephone" class="control-label">Next of Kin Telephone</label>
                 <input asp-for="nextOfKinTelephone" class="form-control" />
                 <span asp-validation-for="nextOfKinTelephone" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="updatedByUserID" class="control-label"></label>
-                <input asp-for="updatedByUserID" class="form-control" />
-                <span asp-validation-for="updatedByUserID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="updatedDT" class="control-label"></label>
-                <input asp-for="updatedDT" class="form-control" />
-                <span asp-validation-for="updatedDT" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="createdByUserID" class="control-label"></label>
-                <input asp-for="createdByUserID" class="form-control" />
-                <span asp-validation-for="createdByUserID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="createdDT" class="control-label"></label>
-                <input asp-for="createdDT" class="form-control" />
-                <span asp-validation-for="createdDT" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+</form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
