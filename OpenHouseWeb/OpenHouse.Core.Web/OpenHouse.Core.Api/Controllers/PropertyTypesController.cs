@@ -12,50 +12,50 @@ namespace OpenHouse.Core.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonsController : ControllerBase
+    public class PropertyTypesController : ControllerBase
     {
         private readonly OpenhouseContext _context;
 
-        public PersonsController(OpenhouseContext context)
+        public PropertyTypesController(OpenhouseContext context)
         {
             _context = context;
         }
 
-        // GET: api/people
+        // GET: api/PropertyTypes
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<person>>> Getperson()
+        public async Task<ActionResult<IEnumerable<propertytype>>> Getpropertytype()
         {
-            return await _context.person.ToListAsync();
+            return await _context.propertytype.ToListAsync();
         }
 
-        // GET: api/people/5
+        // GET: api/PropertyTypes/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<person>> Getperson(int id)
+        public async Task<ActionResult<propertytype>> Getpropertytype(int id)
         {
-            var person = await _context.person.FindAsync(id);
+            var propertytype = await _context.propertytype.FindAsync(id);
 
-            if (person == null)
+            if (propertytype == null)
             {
                 return NotFound();
             }
 
-            return person;
+            return propertytype;
         }
 
-        // PUT: api/people/5
+        // PUT: api/PropertyTypes/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putperson(int id, person person)
+        public async Task<IActionResult> Putpropertytype(int id, propertytype propertytype)
         {
-            if (id != person.personId)
+            if (id != propertytype.propertyTypeId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(person).State = EntityState.Modified;
+            _context.Entry(propertytype).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace OpenHouse.Core.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!personExists(id))
+                if (!propertytypeExists(id))
                 {
                     return NotFound();
                 }
@@ -76,37 +76,37 @@ namespace OpenHouse.Core.Api.Controllers
             return NoContent();
         }
 
-        // POST: api/people
+        // POST: api/PropertyTypes
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<person>> Postperson(person person)
+        public async Task<ActionResult<propertytype>> Postpropertytype(propertytype propertytype)
         {
-            _context.person.Add(person);
+            _context.propertytype.Add(propertytype);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("Getperson", new { id = person.personId }, person);
+            return CreatedAtAction("Getpropertytype", new { id = propertytype.propertyTypeId }, propertytype);
         }
 
-        // DELETE: api/people/5
+        // DELETE: api/PropertyTypes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<person>> Deleteperson(int id)
+        public async Task<ActionResult<propertytype>> Deletepropertytype(int id)
         {
-            var person = await _context.person.FindAsync(id);
-            if (person == null)
+            var propertytype = await _context.propertytype.FindAsync(id);
+            if (propertytype == null)
             {
                 return NotFound();
             }
 
-            _context.person.Remove(person);
+            _context.propertytype.Remove(propertytype);
             await _context.SaveChangesAsync();
 
-            return person;
+            return propertytype;
         }
 
-        private bool personExists(int id)
+        private bool propertytypeExists(int id)
         {
-            return _context.person.Any(e => e.personId == id);
+            return _context.propertytype.Any(e => e.propertyTypeId == id);
         }
     }
 }

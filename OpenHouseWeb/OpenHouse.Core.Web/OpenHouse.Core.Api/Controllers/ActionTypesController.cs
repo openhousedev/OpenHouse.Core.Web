@@ -12,50 +12,50 @@ namespace OpenHouse.Core.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonsController : ControllerBase
+    public class ActionTypesController : ControllerBase
     {
         private readonly OpenhouseContext _context;
 
-        public PersonsController(OpenhouseContext context)
+        public ActionTypesController(OpenhouseContext context)
         {
             _context = context;
         }
 
-        // GET: api/people
+        // GET: api/ActionTypes
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<person>>> Getperson()
+        public async Task<ActionResult<IEnumerable<actiontype>>> Getactiontype()
         {
-            return await _context.person.ToListAsync();
+            return await _context.actiontype.ToListAsync();
         }
 
-        // GET: api/people/5
+        // GET: api/ActionTypes/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<person>> Getperson(int id)
+        public async Task<ActionResult<actiontype>> Getactiontype(int id)
         {
-            var person = await _context.person.FindAsync(id);
+            var actiontype = await _context.actiontype.FindAsync(id);
 
-            if (person == null)
+            if (actiontype == null)
             {
                 return NotFound();
             }
 
-            return person;
+            return actiontype;
         }
 
-        // PUT: api/people/5
+        // PUT: api/ActionTypes/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putperson(int id, person person)
+        public async Task<IActionResult> Putactiontype(int id, actiontype actiontype)
         {
-            if (id != person.personId)
+            if (id != actiontype.actionTypeId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(person).State = EntityState.Modified;
+            _context.Entry(actiontype).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace OpenHouse.Core.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!personExists(id))
+                if (!actiontypeExists(id))
                 {
                     return NotFound();
                 }
@@ -76,37 +76,37 @@ namespace OpenHouse.Core.Api.Controllers
             return NoContent();
         }
 
-        // POST: api/people
+        // POST: api/ActionTypes
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<person>> Postperson(person person)
+        public async Task<ActionResult<actiontype>> Postactiontype(actiontype actiontype)
         {
-            _context.person.Add(person);
+            _context.actiontype.Add(actiontype);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("Getperson", new { id = person.personId }, person);
+            return CreatedAtAction("Getactiontype", new { id = actiontype.actionTypeId }, actiontype);
         }
 
-        // DELETE: api/people/5
+        // DELETE: api/ActionTypes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<person>> Deleteperson(int id)
+        public async Task<ActionResult<actiontype>> Deleteactiontype(int id)
         {
-            var person = await _context.person.FindAsync(id);
-            if (person == null)
+            var actiontype = await _context.actiontype.FindAsync(id);
+            if (actiontype == null)
             {
                 return NotFound();
             }
 
-            _context.person.Remove(person);
+            _context.actiontype.Remove(actiontype);
             await _context.SaveChangesAsync();
 
-            return person;
+            return actiontype;
         }
 
-        private bool personExists(int id)
+        private bool actiontypeExists(int id)
         {
-            return _context.person.Any(e => e.personId == id);
+            return _context.actiontype.Any(e => e.actionTypeId == id);
         }
     }
 }

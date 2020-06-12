@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,50 +11,48 @@ namespace OpenHouse.Core.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonsController : ControllerBase
+    public class AlertsController : ControllerBase
     {
         private readonly OpenhouseContext _context;
 
-        public PersonsController(OpenhouseContext context)
+        public AlertsController(OpenhouseContext context)
         {
             _context = context;
         }
 
-        // GET: api/people
+        // GET: api/Alerts
         [HttpGet]
-        [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<person>>> Getperson()
+        public async Task<ActionResult<IEnumerable<alert>>> Getalert()
         {
-            return await _context.person.ToListAsync();
+            return await _context.alert.ToListAsync();
         }
 
-        // GET: api/people/5
+        // GET: api/Alerts/5
         [HttpGet("{id}")]
-        [EnableQuery()]
-        public async Task<ActionResult<person>> Getperson(int id)
+        public async Task<ActionResult<alert>> Getalert(int id)
         {
-            var person = await _context.person.FindAsync(id);
+            var alert = await _context.alert.FindAsync(id);
 
-            if (person == null)
+            if (alert == null)
             {
                 return NotFound();
             }
 
-            return person;
+            return alert;
         }
 
-        // PUT: api/people/5
+        // PUT: api/Alerts/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putperson(int id, person person)
+        public async Task<IActionResult> Putalert(int id, alert alert)
         {
-            if (id != person.personId)
+            if (id != alert.alertId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(person).State = EntityState.Modified;
+            _context.Entry(alert).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +60,7 @@ namespace OpenHouse.Core.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!personExists(id))
+                if (!alertExists(id))
                 {
                     return NotFound();
                 }
@@ -76,37 +73,37 @@ namespace OpenHouse.Core.Api.Controllers
             return NoContent();
         }
 
-        // POST: api/people
+        // POST: api/Alerts
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<person>> Postperson(person person)
+        public async Task<ActionResult<alert>> Postalert(alert alert)
         {
-            _context.person.Add(person);
+            _context.alert.Add(alert);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("Getperson", new { id = person.personId }, person);
+            return CreatedAtAction("Getalert", new { id = alert.alertId }, alert);
         }
 
-        // DELETE: api/people/5
+        // DELETE: api/Alerts/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<person>> Deleteperson(int id)
+        public async Task<ActionResult<alert>> Deletealert(int id)
         {
-            var person = await _context.person.FindAsync(id);
-            if (person == null)
+            var alert = await _context.alert.FindAsync(id);
+            if (alert == null)
             {
                 return NotFound();
             }
 
-            _context.person.Remove(person);
+            _context.alert.Remove(alert);
             await _context.SaveChangesAsync();
 
-            return person;
+            return alert;
         }
 
-        private bool personExists(int id)
+        private bool alertExists(int id)
         {
-            return _context.person.Any(e => e.personId == id);
+            return _context.alert.Any(e => e.alertId == id);
         }
     }
 }

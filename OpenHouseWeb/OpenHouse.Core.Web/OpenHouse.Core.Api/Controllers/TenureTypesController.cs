@@ -12,50 +12,50 @@ namespace OpenHouse.Core.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonsController : ControllerBase
+    public class TenureTypesController : ControllerBase
     {
         private readonly OpenhouseContext _context;
 
-        public PersonsController(OpenhouseContext context)
+        public TenureTypesController(OpenhouseContext context)
         {
             _context = context;
         }
 
-        // GET: api/people
+        // GET: api/TenureTypes
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<person>>> Getperson()
+        public async Task<ActionResult<IEnumerable<tenuretype>>> Gettenuretype()
         {
-            return await _context.person.ToListAsync();
+            return await _context.tenuretype.ToListAsync();
         }
 
-        // GET: api/people/5
+        // GET: api/TenureTypes/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<person>> Getperson(int id)
+        public async Task<ActionResult<tenuretype>> Gettenuretype(int id)
         {
-            var person = await _context.person.FindAsync(id);
+            var tenuretype = await _context.tenuretype.FindAsync(id);
 
-            if (person == null)
+            if (tenuretype == null)
             {
                 return NotFound();
             }
 
-            return person;
+            return tenuretype;
         }
 
-        // PUT: api/people/5
+        // PUT: api/TenureTypes/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putperson(int id, person person)
+        public async Task<IActionResult> Puttenuretype(int id, tenuretype tenuretype)
         {
-            if (id != person.personId)
+            if (id != tenuretype.tenureTypeId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(person).State = EntityState.Modified;
+            _context.Entry(tenuretype).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace OpenHouse.Core.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!personExists(id))
+                if (!tenuretypeExists(id))
                 {
                     return NotFound();
                 }
@@ -76,37 +76,37 @@ namespace OpenHouse.Core.Api.Controllers
             return NoContent();
         }
 
-        // POST: api/people
+        // POST: api/TenureTypes
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<person>> Postperson(person person)
+        public async Task<ActionResult<tenuretype>> Posttenuretype(tenuretype tenuretype)
         {
-            _context.person.Add(person);
+            _context.tenuretype.Add(tenuretype);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("Getperson", new { id = person.personId }, person);
+            return CreatedAtAction("Gettenuretype", new { id = tenuretype.tenureTypeId }, tenuretype);
         }
 
-        // DELETE: api/people/5
+        // DELETE: api/TenureTypes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<person>> Deleteperson(int id)
+        public async Task<ActionResult<tenuretype>> Deletetenuretype(int id)
         {
-            var person = await _context.person.FindAsync(id);
-            if (person == null)
+            var tenuretype = await _context.tenuretype.FindAsync(id);
+            if (tenuretype == null)
             {
                 return NotFound();
             }
 
-            _context.person.Remove(person);
+            _context.tenuretype.Remove(tenuretype);
             await _context.SaveChangesAsync();
 
-            return person;
+            return tenuretype;
         }
 
-        private bool personExists(int id)
+        private bool tenuretypeExists(int id)
         {
-            return _context.person.Any(e => e.personId == id);
+            return _context.tenuretype.Any(e => e.tenureTypeId == id);
         }
     }
 }

@@ -12,50 +12,50 @@ namespace OpenHouse.Core.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonsController : ControllerBase
+    public class RelationshipsController : ControllerBase
     {
         private readonly OpenhouseContext _context;
 
-        public PersonsController(OpenhouseContext context)
+        public RelationshipsController(OpenhouseContext context)
         {
             _context = context;
         }
 
-        // GET: api/people
+        // GET: api/Relationships
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<person>>> Getperson()
+        public async Task<ActionResult<IEnumerable<relationship>>> Getrelationship()
         {
-            return await _context.person.ToListAsync();
+            return await _context.relationship.ToListAsync();
         }
 
-        // GET: api/people/5
+        // GET: api/Relationships/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<person>> Getperson(int id)
+        public async Task<ActionResult<relationship>> Getrelationship(int id)
         {
-            var person = await _context.person.FindAsync(id);
+            var relationship = await _context.relationship.FindAsync(id);
 
-            if (person == null)
+            if (relationship == null)
             {
                 return NotFound();
             }
 
-            return person;
+            return relationship;
         }
 
-        // PUT: api/people/5
+        // PUT: api/Relationships/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putperson(int id, person person)
+        public async Task<IActionResult> Putrelationship(int id, relationship relationship)
         {
-            if (id != person.personId)
+            if (id != relationship.relationshipId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(person).State = EntityState.Modified;
+            _context.Entry(relationship).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace OpenHouse.Core.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!personExists(id))
+                if (!relationshipExists(id))
                 {
                     return NotFound();
                 }
@@ -76,37 +76,37 @@ namespace OpenHouse.Core.Api.Controllers
             return NoContent();
         }
 
-        // POST: api/people
+        // POST: api/Relationships
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<person>> Postperson(person person)
+        public async Task<ActionResult<relationship>> Postrelationship(relationship relationship)
         {
-            _context.person.Add(person);
+            _context.relationship.Add(relationship);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("Getperson", new { id = person.personId }, person);
+            return CreatedAtAction("Getrelationship", new { id = relationship.relationshipId }, relationship);
         }
 
-        // DELETE: api/people/5
+        // DELETE: api/Relationships/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<person>> Deleteperson(int id)
+        public async Task<ActionResult<relationship>> Deleterelationship(int id)
         {
-            var person = await _context.person.FindAsync(id);
-            if (person == null)
+            var relationship = await _context.relationship.FindAsync(id);
+            if (relationship == null)
             {
                 return NotFound();
             }
 
-            _context.person.Remove(person);
+            _context.relationship.Remove(relationship);
             await _context.SaveChangesAsync();
 
-            return person;
+            return relationship;
         }
 
-        private bool personExists(int id)
+        private bool relationshipExists(int id)
         {
-            return _context.person.Any(e => e.personId == id);
+            return _context.relationship.Any(e => e.relationshipId == id);
         }
     }
 }

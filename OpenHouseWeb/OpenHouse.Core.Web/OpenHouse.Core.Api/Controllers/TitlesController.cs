@@ -12,50 +12,50 @@ namespace OpenHouse.Core.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonsController : ControllerBase
+    public class TitlesController : ControllerBase
     {
         private readonly OpenhouseContext _context;
 
-        public PersonsController(OpenhouseContext context)
+        public TitlesController(OpenhouseContext context)
         {
             _context = context;
         }
 
-        // GET: api/people
+        // GET: api/Titles
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<person>>> Getperson()
+        public async Task<ActionResult<IEnumerable<title>>> Gettitle()
         {
-            return await _context.person.ToListAsync();
+            return await _context.title.ToListAsync();
         }
 
-        // GET: api/people/5
+        // GET: api/Titles/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<person>> Getperson(int id)
+        public async Task<ActionResult<title>> Gettitle(int id)
         {
-            var person = await _context.person.FindAsync(id);
+            var title = await _context.title.FindAsync(id);
 
-            if (person == null)
+            if (title == null)
             {
                 return NotFound();
             }
 
-            return person;
+            return title;
         }
 
-        // PUT: api/people/5
+        // PUT: api/Titles/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putperson(int id, person person)
+        public async Task<IActionResult> Puttitle(int id, title title)
         {
-            if (id != person.personId)
+            if (id != title.titleId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(person).State = EntityState.Modified;
+            _context.Entry(title).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace OpenHouse.Core.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!personExists(id))
+                if (!titleExists(id))
                 {
                     return NotFound();
                 }
@@ -76,37 +76,37 @@ namespace OpenHouse.Core.Api.Controllers
             return NoContent();
         }
 
-        // POST: api/people
+        // POST: api/Titles
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<person>> Postperson(person person)
+        public async Task<ActionResult<title>> Posttitle(title title)
         {
-            _context.person.Add(person);
+            _context.title.Add(title);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("Getperson", new { id = person.personId }, person);
+            return CreatedAtAction("Gettitle", new { id = title.titleId }, title);
         }
 
-        // DELETE: api/people/5
+        // DELETE: api/Titles/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<person>> Deleteperson(int id)
+        public async Task<ActionResult<title>> Deletetitle(int id)
         {
-            var person = await _context.person.FindAsync(id);
-            if (person == null)
+            var title = await _context.title.FindAsync(id);
+            if (title == null)
             {
                 return NotFound();
             }
 
-            _context.person.Remove(person);
+            _context.title.Remove(title);
             await _context.SaveChangesAsync();
 
-            return person;
+            return title;
         }
 
-        private bool personExists(int id)
+        private bool titleExists(int id)
         {
-            return _context.person.Any(e => e.personId == id);
+            return _context.title.Any(e => e.titleId == id);
         }
     }
 }

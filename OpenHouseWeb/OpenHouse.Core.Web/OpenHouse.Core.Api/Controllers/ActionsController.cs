@@ -12,50 +12,50 @@ namespace OpenHouse.Core.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonsController : ControllerBase
+    public class ActionsController : ControllerBase
     {
         private readonly OpenhouseContext _context;
 
-        public PersonsController(OpenhouseContext context)
+        public ActionsController(OpenhouseContext context)
         {
             _context = context;
         }
 
-        // GET: api/people
+        // GET: api/Actions
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<person>>> Getperson()
+        public async Task<ActionResult<IEnumerable<action>>> Getaction()
         {
-            return await _context.person.ToListAsync();
+            return await _context.action.ToListAsync();
         }
 
-        // GET: api/people/5
+        // GET: api/Actions/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<person>> Getperson(int id)
+        public async Task<ActionResult<action>> Getaction(int id)
         {
-            var person = await _context.person.FindAsync(id);
+            var action = await _context.action.FindAsync(id);
 
-            if (person == null)
+            if (action == null)
             {
                 return NotFound();
             }
 
-            return person;
+            return action;
         }
 
-        // PUT: api/people/5
+        // PUT: api/Actions/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putperson(int id, person person)
+        public async Task<IActionResult> Putaction(int id, action action)
         {
-            if (id != person.personId)
+            if (id != action.actionId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(person).State = EntityState.Modified;
+            _context.Entry(action).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace OpenHouse.Core.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!personExists(id))
+                if (!actionExists(id))
                 {
                     return NotFound();
                 }
@@ -76,37 +76,37 @@ namespace OpenHouse.Core.Api.Controllers
             return NoContent();
         }
 
-        // POST: api/people
+        // POST: api/Actions
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<person>> Postperson(person person)
+        public async Task<ActionResult<action>> Postaction(action action)
         {
-            _context.person.Add(person);
+            _context.action.Add(action);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("Getperson", new { id = person.personId }, person);
+            return CreatedAtAction("Getaction", new { id = action.actionId }, action);
         }
 
-        // DELETE: api/people/5
+        // DELETE: api/Actions/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<person>> Deleteperson(int id)
+        public async Task<ActionResult<action>> Deleteaction(int id)
         {
-            var person = await _context.person.FindAsync(id);
-            if (person == null)
+            var action = await _context.action.FindAsync(id);
+            if (action == null)
             {
                 return NotFound();
             }
 
-            _context.person.Remove(person);
+            _context.action.Remove(action);
             await _context.SaveChangesAsync();
 
-            return person;
+            return action;
         }
 
-        private bool personExists(int id)
+        private bool actionExists(int id)
         {
-            return _context.person.Any(e => e.personId == id);
+            return _context.action.Any(e => e.actionId == id);
         }
     }
 }

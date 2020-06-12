@@ -12,50 +12,50 @@ namespace OpenHouse.Core.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonsController : ControllerBase
+    public class NationalitiesController : ControllerBase
     {
         private readonly OpenhouseContext _context;
 
-        public PersonsController(OpenhouseContext context)
+        public NationalitiesController(OpenhouseContext context)
         {
             _context = context;
         }
 
-        // GET: api/people
+        // GET: api/Nationalities
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<person>>> Getperson()
+        public async Task<ActionResult<IEnumerable<nationality>>> Getnationality()
         {
-            return await _context.person.ToListAsync();
+            return await _context.nationality.ToListAsync();
         }
 
-        // GET: api/people/5
+        // GET: api/Nationalities/5
         [HttpGet("{id}")]
-        [EnableQuery()]
-        public async Task<ActionResult<person>> Getperson(int id)
+        public async Task<ActionResult<nationality>> Getnationality(int id)
         {
-            var person = await _context.person.FindAsync(id);
+            var nationality = await _context.nationality.FindAsync(id);
 
-            if (person == null)
+            if (nationality == null)
             {
                 return NotFound();
             }
 
-            return person;
+            return nationality;
         }
 
-        // PUT: api/people/5
+        // PUT: api/Nationalities/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putperson(int id, person person)
+        [EnableQuery()]
+        public async Task<IActionResult> Putnationality(int id, nationality nationality)
         {
-            if (id != person.personId)
+            if (id != nationality.nationalityId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(person).State = EntityState.Modified;
+            _context.Entry(nationality).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace OpenHouse.Core.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!personExists(id))
+                if (!nationalityExists(id))
                 {
                     return NotFound();
                 }
@@ -76,37 +76,37 @@ namespace OpenHouse.Core.Api.Controllers
             return NoContent();
         }
 
-        // POST: api/people
+        // POST: api/Nationalities
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<person>> Postperson(person person)
+        public async Task<ActionResult<nationality>> Postnationality(nationality nationality)
         {
-            _context.person.Add(person);
+            _context.nationality.Add(nationality);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("Getperson", new { id = person.personId }, person);
+            return CreatedAtAction("Getnationality", new { id = nationality.nationalityId }, nationality);
         }
 
-        // DELETE: api/people/5
+        // DELETE: api/Nationalities/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<person>> Deleteperson(int id)
+        public async Task<ActionResult<nationality>> Deletenationality(int id)
         {
-            var person = await _context.person.FindAsync(id);
-            if (person == null)
+            var nationality = await _context.nationality.FindAsync(id);
+            if (nationality == null)
             {
                 return NotFound();
             }
 
-            _context.person.Remove(person);
+            _context.nationality.Remove(nationality);
             await _context.SaveChangesAsync();
 
-            return person;
+            return nationality;
         }
 
-        private bool personExists(int id)
+        private bool nationalityExists(int id)
         {
-            return _context.person.Any(e => e.personId == id);
+            return _context.nationality.Any(e => e.nationalityId == id);
         }
     }
 }

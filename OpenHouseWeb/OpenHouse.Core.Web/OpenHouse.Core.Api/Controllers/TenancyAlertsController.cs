@@ -12,50 +12,50 @@ namespace OpenHouse.Core.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonsController : ControllerBase
+    public class TenancyAlertsController : ControllerBase
     {
         private readonly OpenhouseContext _context;
 
-        public PersonsController(OpenhouseContext context)
+        public TenancyAlertsController(OpenhouseContext context)
         {
             _context = context;
         }
 
-        // GET: api/people
+        // GET: api/TenancyAlerts
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<person>>> Getperson()
+        public async Task<ActionResult<IEnumerable<tenancyalert>>> Gettenancyalert()
         {
-            return await _context.person.ToListAsync();
+            return await _context.tenancyalert.ToListAsync();
         }
 
-        // GET: api/people/5
+        // GET: api/TenancyAlerts/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<person>> Getperson(int id)
+        public async Task<ActionResult<tenancyalert>> Gettenancyalert(int id)
         {
-            var person = await _context.person.FindAsync(id);
+            var tenancyalert = await _context.tenancyalert.FindAsync(id);
 
-            if (person == null)
+            if (tenancyalert == null)
             {
                 return NotFound();
             }
 
-            return person;
+            return tenancyalert;
         }
 
-        // PUT: api/people/5
+        // PUT: api/TenancyAlerts/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putperson(int id, person person)
+        public async Task<IActionResult> Puttenancyalert(int id, tenancyalert tenancyalert)
         {
-            if (id != person.personId)
+            if (id != tenancyalert.tenancyAlertId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(person).State = EntityState.Modified;
+            _context.Entry(tenancyalert).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace OpenHouse.Core.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!personExists(id))
+                if (!tenancyalertExists(id))
                 {
                     return NotFound();
                 }
@@ -76,37 +76,37 @@ namespace OpenHouse.Core.Api.Controllers
             return NoContent();
         }
 
-        // POST: api/people
+        // POST: api/TenancyAlerts
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<person>> Postperson(person person)
+        public async Task<ActionResult<tenancyalert>> Posttenancyalert(tenancyalert tenancyalert)
         {
-            _context.person.Add(person);
+            _context.tenancyalert.Add(tenancyalert);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("Getperson", new { id = person.personId }, person);
+            return CreatedAtAction("Gettenancyalert", new { id = tenancyalert.tenancyAlertId }, tenancyalert);
         }
 
-        // DELETE: api/people/5
+        // DELETE: api/TenancyAlerts/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<person>> Deleteperson(int id)
+        public async Task<ActionResult<tenancyalert>> Deletetenancyalert(int id)
         {
-            var person = await _context.person.FindAsync(id);
-            if (person == null)
+            var tenancyalert = await _context.tenancyalert.FindAsync(id);
+            if (tenancyalert == null)
             {
                 return NotFound();
             }
 
-            _context.person.Remove(person);
+            _context.tenancyalert.Remove(tenancyalert);
             await _context.SaveChangesAsync();
 
-            return person;
+            return tenancyalert;
         }
 
-        private bool personExists(int id)
+        private bool tenancyalertExists(int id)
         {
-            return _context.person.Any(e => e.personId == id);
+            return _context.tenancyalert.Any(e => e.tenancyAlertId == id);
         }
     }
 }

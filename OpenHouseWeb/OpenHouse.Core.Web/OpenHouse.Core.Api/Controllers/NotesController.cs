@@ -12,50 +12,50 @@ namespace OpenHouse.Core.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonsController : ControllerBase
+    public class NotesController : ControllerBase
     {
         private readonly OpenhouseContext _context;
 
-        public PersonsController(OpenhouseContext context)
+        public NotesController(OpenhouseContext context)
         {
             _context = context;
         }
 
-        // GET: api/people
+        // GET: api/Notes
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<person>>> Getperson()
+        public async Task<ActionResult<IEnumerable<note>>> Getnote()
         {
-            return await _context.person.ToListAsync();
+            return await _context.note.ToListAsync();
         }
 
-        // GET: api/people/5
+        // GET: api/Notes/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<person>> Getperson(int id)
+        public async Task<ActionResult<note>> Getnote(int id)
         {
-            var person = await _context.person.FindAsync(id);
+            var note = await _context.note.FindAsync(id);
 
-            if (person == null)
+            if (note == null)
             {
                 return NotFound();
             }
 
-            return person;
+            return note;
         }
 
-        // PUT: api/people/5
+        // PUT: api/Notes/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putperson(int id, person person)
+        public async Task<IActionResult> Putnote(int id, note note)
         {
-            if (id != person.personId)
+            if (id != note.noteId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(person).State = EntityState.Modified;
+            _context.Entry(note).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace OpenHouse.Core.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!personExists(id))
+                if (!noteExists(id))
                 {
                     return NotFound();
                 }
@@ -76,37 +76,37 @@ namespace OpenHouse.Core.Api.Controllers
             return NoContent();
         }
 
-        // POST: api/people
+        // POST: api/Notes
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<person>> Postperson(person person)
+        public async Task<ActionResult<note>> Postnote(note note)
         {
-            _context.person.Add(person);
+            _context.note.Add(note);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("Getperson", new { id = person.personId }, person);
+            return CreatedAtAction("Getnote", new { id = note.noteId }, note);
         }
 
-        // DELETE: api/people/5
+        // DELETE: api/Notes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<person>> Deleteperson(int id)
+        public async Task<ActionResult<note>> Deletenote(int id)
         {
-            var person = await _context.person.FindAsync(id);
-            if (person == null)
+            var note = await _context.note.FindAsync(id);
+            if (note == null)
             {
                 return NotFound();
             }
 
-            _context.person.Remove(person);
+            _context.note.Remove(note);
             await _context.SaveChangesAsync();
 
-            return person;
+            return note;
         }
 
-        private bool personExists(int id)
+        private bool noteExists(int id)
         {
-            return _context.person.Any(e => e.personId == id);
+            return _context.note.Any(e => e.noteId == id);
         }
     }
 }
