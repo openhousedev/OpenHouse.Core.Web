@@ -1,21 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNet.OData.Extensions;
+using Microsoft.AspNet.OData.Formatter;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OData.Edm;
-using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using OpenHouse.Model.Core.Model;
-using Newtonsoft.Json;
+using Microsoft.Net.Http.Headers;
 
 namespace OpenHouse.Core.Api
 {
@@ -34,7 +28,24 @@ namespace OpenHouse.Core.Api
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddControllers().AddNewtonsoftJson();
             services.AddDbContext<OpenhouseContext>();
+
+            //Register OData functionality
             services.AddOData();
+
+            services.AddMvcCore(options =>
+            {
+                foreach (var outputFormatter in options.OutputFormatters.OfType<ODataOutputFormatter>().Where(_ => _.SupportedMediaTypes.Count == 0))
+                {
+                    outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+                }
+                foreach (var inputFormatter in options.InputFormatters.OfType<ODataInputFormatter>().Where(_ => _.SupportedMediaTypes.Count == 0))
+                {
+                    inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+                }
+            });
+
+            // Register the Swagger services
+            services.AddSwaggerDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,15 +62,14 @@ namespace OpenHouse.Core.Api
 
             app.UseAuthorization();
 
+            // Register the Swagger generator and the Swagger UI middlewares
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
+
             app.UseMvc(routeBuilder => {
                 routeBuilder.EnableDependencyInjection();
                 routeBuilder.Expand().Select().OrderBy().Filter();
             });
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllers();
-            //});
         }
 
         IEdmModel GetEdmModel()
