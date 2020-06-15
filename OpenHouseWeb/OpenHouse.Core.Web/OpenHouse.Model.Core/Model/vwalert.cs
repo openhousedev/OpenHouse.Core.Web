@@ -6,38 +6,35 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OpenHouse.Model.Core.Model
 {
-    public partial class vwaction
+    public partial class vwalert
     {
         [Column(TypeName = "int(11)")]
-        public int actionId { get; set; }
-        [Column(TypeName = "int(11)")]
-        public int actionTypeId { get; set; }
-        [Column(TypeName = "varchar(100)")]
-        public string actionType { get; set; }
+        public int tenancyAlertId { get; set; }
         [Column(TypeName = "int(11)")]
         public int tenancyId { get; set; }
         [Column(TypeName = "int(11)")]
-        public int? propertyId { get; set; }
+        public int alertId { get; set; }
+        [Column(TypeName = "int(11)")]
+        public int? alertTypeId { get; set; }
         [Column(TypeName = "text")]
-        public string contactAddress { get; set; }
+        public string alertText { get; set; }
         [Column(TypeName = "datetime")]
-        public DateTime actionDueDate { get; set; }
+        public DateTime? startDT { get; set; }
         [Column(TypeName = "datetime")]
-        public DateTime? actionCompletedDate { get; set; }
+        public DateTime? endDT { get; set; }
         [Required]
         [Column(TypeName = "varchar(255)")]
         public string updatedByUserID { get; set; }
+        [Column(TypeName = "varchar(256)")]
+        public string updateByUsername { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime updatedDT { get; set; }
         [Required]
         [Column(TypeName = "varchar(255)")]
         public string createdByUserID { get; set; }
+        [Column(TypeName = "varchar(256)")]
+        public string createdByUsername { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime createdDT { get; set; }
-        [Required]
-        [Column(TypeName = "varchar(255)")]
-        public string assignedUserId { get; set; }
-        [Column(TypeName = "varchar(256)")]
-        public string assignedUsername { get; set; }
     }
 }

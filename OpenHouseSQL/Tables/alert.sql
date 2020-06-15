@@ -6,7 +6,7 @@ CREATE TABLE `alert` (
 	`alertId` INT NOT NULL AUTO_INCREMENT,
 	`alertTypeId` INT,
 	`alertText` TEXT,
-	`startDT` DATETIME,
+	`startDT` DATETIME,alert
 	`endDT` DATETIME,
 	`updatedByUserID` VARCHAR(255) NOT NULL,
 	`updatedDT` DATETIME NOT NULL,

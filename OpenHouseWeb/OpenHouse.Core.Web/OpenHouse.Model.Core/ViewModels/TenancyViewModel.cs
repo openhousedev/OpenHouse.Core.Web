@@ -9,7 +9,6 @@ namespace OpenHouse.Model.Core.Model
     {
         public TenancyViewModel()
         {
-            tenancyalert = new HashSet<tenancyalert>();
             tenancyhousehold = new HashSet<tenancyhousehold>();
             tenancynote = new HashSet<tenancynote>();
         }
@@ -32,6 +31,7 @@ namespace OpenHouse.Model.Core.Model
         [Display(Name = "Termination Date")]
         [DataType(DataType.Date)]
         public DateTime? terminationDate { get; set; }
+        [Display(Name = "Termination Reason")]
         public string terminationReasonId { get; set; }
         public string updatedByUserID { get; set; }
         public string updatedByUsername { get; set; }
@@ -46,7 +46,7 @@ namespace OpenHouse.Model.Core.Model
         public tenuretype tenureType { get; set; }
         public tenancyterminationreason terminationReason { get; set; }
         public ICollection<vwaction> actions { get; set; }
-        public ICollection<tenancyalert> tenancyalert { get; set; }
+        public ICollection<vwalert> alerts { get; set; }
         public ICollection<tenancyhousehold> tenancyhousehold { get; set; }
         public ICollection<tenancynote> tenancynote { get; set; }
     }

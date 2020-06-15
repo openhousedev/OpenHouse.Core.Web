@@ -98,6 +98,10 @@
       },
       {
          "HasPrimaryKey": true,
+         "Name": "vwalert"
+      },
+      {
+         "HasPrimaryKey": true,
          "Name": "vwperson"
       },
       {

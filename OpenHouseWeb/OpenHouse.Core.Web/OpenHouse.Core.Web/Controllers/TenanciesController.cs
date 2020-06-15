@@ -22,17 +22,19 @@ namespace OpenHouse.Core.Web.Controllers
         private readonly ITenancyService _tenancySvc;
         private readonly IPropertyService _propertySvc;
         private readonly IActionService _actionSvc;
+        private readonly IAlertService _alertSvc;
         private readonly OpenhouseContext _context;
         private readonly MapperConfiguration _mapperConfig;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
 
-        public TenanciesController(IConfiguration config, ITenancyService tenancySvc, IPropertyService propertySvc, IActionService actionSvc, UserManager<User> userManager)
+        public TenanciesController(IConfiguration config, ITenancyService tenancySvc, IPropertyService propertySvc, IActionService actionSvc, IAlertService alertSvc, UserManager<User> userManager)
         {
             _config = config;
             _tenancySvc = tenancySvc;
             _propertySvc = propertySvc;
             _actionSvc = actionSvc;
+            _alertSvc = alertSvc;
             _userManager = userManager;
 
             //AutoMapper mapping config
@@ -81,6 +83,7 @@ namespace OpenHouse.Core.Web.Controllers
             tenancyVM.tenancyhousehold = await _tenancySvc.GetTenancyHouseholdAsync(tenancyVM.tenancyId); //Get household data for tenancy
             tenancyVM.property = await _propertySvc.GetPropertyViewAsync(tenancyVM.propertyId.Value); //Get property view data for tenancy
             tenancyVM.actions = await _actionSvc.GetActionsForTenancyAsync(tenancyVM.tenancyId); //Get actions data for tenancy
+            tenancyVM.alerts = await _alertSvc.GetAlertsForTenancyAsync(tenancyVM.tenancyId); //Get all alerts for tenancy
 
             ViewBag.ApiLocation = _config["APILocation"]; //Set API location URL
             ViewBag.LoggedInUserId = user.Id; //Set logged in user Id

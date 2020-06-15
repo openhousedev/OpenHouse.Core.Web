@@ -37,6 +37,7 @@ namespace OpenHouse.Model.Core.Model
         public virtual DbSet<tenuretype> tenuretype { get; set; }
         public virtual DbSet<title> title { get; set; }
         public virtual DbSet<vwaction> vwaction { get; set; }
+        public virtual DbSet<vwalert> vwalert { get; set; }
         public virtual DbSet<vwperson> vwperson { get; set; }
         public virtual DbSet<vwproperty> vwproperty { get; set; }
         public virtual DbSet<vwtenancy> vwtenancy { get; set; }
@@ -484,6 +485,33 @@ namespace OpenHouse.Model.Core.Model
                 entity.Property(e => e.createdByUserID)
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.updatedByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+            });
+
+            modelBuilder.Entity<vwalert>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vwalert");
+
+                entity.Property(e => e.alertText)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.createdByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.createdByUsername)
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_general_ci");
+
+                entity.Property(e => e.updateByUsername)
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_general_ci");
 
                 entity.Property(e => e.updatedByUserID)
                     .HasCharSet("utf8")
