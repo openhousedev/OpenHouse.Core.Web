@@ -6,7 +6,7 @@ CREATE TABLE `action` (
 	`actionId` INT NOT NULL AUTO_INCREMENT,
 	`actionTypeId` INT NOT NULL,
 	`tenancyId` INT NOT NULL,
-	`assignedUserId` INT NOT NULL,
+	`assignedUserId` VARCHAR(255) NOT NULL,
 	`actionDueDate` DATETIME NOT NULL,
 	`actionCompletedDate` DATETIME,
 	`updatedByUserID` VARCHAR(255) NOT NULL,
@@ -23,5 +23,5 @@ ENGINE=InnoDB
 ;
 SET @currDate = CURDATE();
 
-INSERT INTO `action` VALUES(NULL,2,1,1,@currDate,NULL,'611a361a-bce9-4783-b715-da82528a5988',CURDATE(),'611a361a-bce9-4783-b715-da82528a5988',CURDATE());
+INSERT INTO `action` VALUES(NULL,2,1,'611a361a-bce9-4783-b715-da82528a5988'vwaction,@currDate,NULL,'611a361a-bce9-4783-b715-da82528a5988',CURDATE(),'611a361a-bce9-4783-b715-da82528a5988',CURDATE());
 

@@ -14,7 +14,8 @@ SELECT
 	action.updatedDT, 
 	action.createdByUserID, 
 	action.createdDT, 
-	action.assignedUserId
+	action.assignedUserId,
+	vwuser.UserName AS assignedUsername
 FROM
 	action
 	INNER JOIN
@@ -25,3 +26,7 @@ FROM
 	vwtenancy
 	ON 
 		action.tenancyId = vwtenancy.tenancyId
+	INNER JOIN
+	vwuser
+	ON
+		action.assignedUserId = vwUser.Id

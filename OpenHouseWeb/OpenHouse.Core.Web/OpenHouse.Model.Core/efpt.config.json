@@ -111,6 +111,10 @@
       {
          "HasPrimaryKey": true,
          "Name": "vwtenancyhousehold"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "vwuser"
       }
    ],
    "UseDatabaseNames": true,

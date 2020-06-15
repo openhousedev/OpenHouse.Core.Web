@@ -4,6 +4,35 @@
     ViewData["Title"] = "Details";
 }
 
+@section Scripts {
+    <script type="text/javascript">
+        //Set logged in user & API URL Variables
+
+        var _apiLocation = '@ViewBag.ApiLocation'; //Set API location URL
+        var _loggedInUserId = '@ViewBag.LoggedInUserId'; //Set logged in user Id
+
+        //Save active tab & navigate back to on refresh
+        $(document).ready(function () {
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) { //On tab selected
+                localStorage.setItem('activeTabProperty', $(e.target).attr('href')); //log selected tab to local storage
+            });
+
+            if (performance.navigation.type == 1) { //If page is refreshes or accessed via location.reload()
+                console.info("This page is reloaded");
+
+                var activeTab = localStorage.getItem('activeTabProperty'); //Retrieve active tab from local storage
+
+                if (activeTab) {
+                    $('.nav-tabs a[href="' + activeTab + '"]').tab('show'); //Select active tab
+                }
+            }
+        });
+    </script>
+}
+
+@*Include note manager view component *@
+@await Component.InvokeAsync("Note")
+
 <div class="row">
     <div class="col-md-6">
         <h4>Property Details</h4>
@@ -176,21 +205,26 @@
     </div>
     <div class="tab-pane fade" id="notes" role="tabpanel" aria-labelledby="notes-tab">
         <div class="row mt-4">
+            <div class="col-md-12">
+                <a class="btn btn-lg btn-primary text-white float-right mr-2" onclick="createNote(@Model.propertyId,'PropertyNote')"><i class="fa fa-sticky-note"></i>&nbsp;Create Note</a>
+            </div>
+        </div>
+        <div class="row mt-4">
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Note Id</th>
+                            <th class="text-center">Note Id</th>
                             <th>Note Summary</th>
-                            <th>Created Date</th>
-                            <th>View</th>
+                            <th class="text-center">Created Date</th>
+                            <th class="text-center">View</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var note in Model.propertynote)
                         {
                             <tr>
-                                <td>
+                                <td class="text-center">
                                     @note.noteId
                                 </td>
                                 <td>
@@ -203,11 +237,12 @@
                                         @note.note.note1;
                                     }
                                 </td>
-                                <td>
-                                    @note.note.createdDT.ToString("dd/MM/yyyy");
+                                <td class="text-center">
+                                    @note.note.createdDT.ToString("dd/MM/yyyy")
                                 </td>
-                                <td>
-                                    <a class="btn btn-light" asp-controller="Notes" asp-action="Details" asp-route-id="@note.noteId"></a>
+                                <td class="text-center">
+                                    <a class="btn btn-light" onclick="editNote(@note.noteId, @note.propertyId, 'PropertyNote');">Edit</a>
+                                    <a class="btn btn-light" onclick="viewNote(@note.noteId)">View</a>
                                 </td>
                             </tr>
                         }

@@ -81,6 +81,8 @@ namespace OpenHouse.Core.Services
         public async Task<tenancy> GetTenancyAsync(int tenancyId)
         {
             var tenancy = await _context.tenancy
+                        .Include(t => t.tenancynote)
+                            .ThenInclude(t => t.note)
                         .Include(t => t.jointTenantPerson)
                         .Include(t => t.leadTenantPerson)
                         .Include(t => t.tenureType)
@@ -125,6 +127,17 @@ namespace OpenHouse.Core.Services
         {
             var termindationReasons = await _context.tenancyterminationreason.ToListAsync();
             return termindationReasons;
+        }
+
+        /// <summary>
+        /// Gets all available tenant relationships for tenancy household composition
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<relationship>> GetTenantHouseholdRelationshipsAsync()
+        {
+            var relationships = await _context.relationship.ToListAsync();
+
+            return relationships;
         }
 
     }

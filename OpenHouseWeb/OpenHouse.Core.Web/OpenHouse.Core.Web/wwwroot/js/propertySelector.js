@@ -21,7 +21,7 @@ function populatePropertySearchResults() {
         };
 
         $.ajax({
-            url: '/Home/_PropertySearch',
+            url: '/Properties/_PropertySearch',
             contentType: 'application/json',
             type: 'GET',
             data: sendData,

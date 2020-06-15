@@ -9,7 +9,6 @@ namespace OpenHouse.Model.Core.Model
     {
         public TenancyViewModel()
         {
-            action = new HashSet<action>();
             tenancyalert = new HashSet<tenancyalert>();
             tenancyhousehold = new HashSet<tenancyhousehold>();
             tenancynote = new HashSet<tenancynote>();
@@ -46,7 +45,7 @@ namespace OpenHouse.Model.Core.Model
         public person leadTenantPerson { get; set; }
         public tenuretype tenureType { get; set; }
         public tenancyterminationreason terminationReason { get; set; }
-        public ICollection<action> action { get; set; }
+        public ICollection<vwaction> actions { get; set; }
         public ICollection<tenancyalert> tenancyalert { get; set; }
         public ICollection<tenancyhousehold> tenancyhousehold { get; set; }
         public ICollection<tenancynote> tenancynote { get; set; }

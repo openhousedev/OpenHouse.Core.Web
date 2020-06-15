@@ -41,6 +41,7 @@ namespace OpenHouse.Model.Core.Model
         public virtual DbSet<vwproperty> vwproperty { get; set; }
         public virtual DbSet<vwtenancy> vwtenancy { get; set; }
         public virtual DbSet<vwtenancyhousehold> vwtenancyhousehold { get; set; }
+        public virtual DbSet<vwuser> vwuser { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -60,6 +61,10 @@ namespace OpenHouse.Model.Core.Model
 
                 entity.HasIndex(e => e.tenancyId)
                     .HasName("tenancyId");
+
+                entity.Property(e => e.assignedUserId)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
 
                 entity.Property(e => e.createdByUserID)
                     .HasCharSet("utf8")
@@ -464,6 +469,14 @@ namespace OpenHouse.Model.Core.Model
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
 
+                entity.Property(e => e.assignedUserId)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.assignedUsername)
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_general_ci");
+
                 entity.Property(e => e.contactAddress)
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
@@ -669,6 +682,25 @@ namespace OpenHouse.Model.Core.Model
                 entity.Property(e => e.title)
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
+            });
+
+            modelBuilder.Entity<vwuser>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vwuser");
+
+                entity.Property(e => e.Email)
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_general_ci");
+
+                entity.Property(e => e.Id)
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_general_ci");
+
+                entity.Property(e => e.UserName)
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_general_ci");
             });
 
             OnModelCreatingPartial(modelBuilder);

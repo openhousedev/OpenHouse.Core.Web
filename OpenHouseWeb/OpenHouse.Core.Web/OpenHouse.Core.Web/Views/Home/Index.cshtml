@@ -42,13 +42,13 @@
             var sendJson = JSON.stringify(sendData);
 
             if (searchItem == 'Property') {
-                returnViewAction = '@Url.Action("_PropertySearch")';
+                returnViewAction = '@Url.Action("_PropertySearch","Properties")';
             }
             else if (searchItem == 'Tenancy') {
-                returnViewAction = '@Url.Action("_TenancySearch")';
+                returnViewAction = '@Url.Action("_TenancySearch","Tenancies")';
             }
             else if (searchItem == 'Person') {
-                returnViewAction = '@Url.Action("_PersonSearch")';
+                returnViewAction = '@Url.Action("_PersonSearch","Persons")';
             }
 
             $.ajax({

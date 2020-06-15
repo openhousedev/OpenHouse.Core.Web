@@ -11,24 +11,28 @@ using OpenHouse.Model.Core.Model;
 using OpenHouse.Core.Web.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
+using Microsoft.Extensions.Configuration;
 
 namespace OpenHouse.Core.Web.Controllers
 {
     [Authorize]
     public class TenanciesController : Controller
     {
+        private readonly IConfiguration _config;
         private readonly ITenancyService _tenancySvc;
         private readonly IPropertyService _propertySvc;
+        private readonly IActionService _actionSvc;
         private readonly OpenhouseContext _context;
         private readonly MapperConfiguration _mapperConfig;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
 
-        public TenanciesController(ITenancyService tenancySvc, IPropertyService propertySvc, OpenhouseContext context, UserManager<User> userManager)
+        public TenanciesController(IConfiguration config, ITenancyService tenancySvc, IPropertyService propertySvc, IActionService actionSvc, UserManager<User> userManager)
         {
+            _config = config;
             _tenancySvc = tenancySvc;
             _propertySvc = propertySvc;
-            _context = context;
+            _actionSvc = actionSvc;
             _userManager = userManager;
 
             //AutoMapper mapping config
@@ -39,6 +43,14 @@ namespace OpenHouse.Core.Web.Controllers
 
             //Create mapper instance
             _mapper = _mapperConfig.CreateMapper();
+        }
+
+        // GET Tenancies/_TenancySearch
+        public async Task<IActionResult> _TenancySearch(string searchString, string displayType)
+        {
+            var tenancies = await _tenancySvc.GetTenanciesAsync(searchString);
+
+            return PartialView(tenancies);
         }
 
         // GET: Tenancies/Details/5
@@ -56,7 +68,8 @@ namespace OpenHouse.Core.Web.Controllers
                 return NotFound();
             }
 
-            tenancyVM = _mapper.Map<TenancyViewModel>(_tenancy);
+            var user = await _userManager.GetUserAsync(HttpContext.User); //Get logged in user
+            tenancyVM = _mapper.Map<TenancyViewModel>(_tenancy); //Map tenancy object to ViewModel
               
             //Get created by & update by username
             User createByUser = await _userManager.FindByIdAsync(tenancyVM.createdByUserID);
@@ -66,7 +79,11 @@ namespace OpenHouse.Core.Web.Controllers
             tenancyVM.updatedByUsername = updatedByUser.UserName;
 
             tenancyVM.tenancyhousehold = await _tenancySvc.GetTenancyHouseholdAsync(tenancyVM.tenancyId); //Get household data for tenancy
-            tenancyVM.property = await _propertySvc.GetPropertyViewAsync(tenancyVM.propertyId.Value);
+            tenancyVM.property = await _propertySvc.GetPropertyViewAsync(tenancyVM.propertyId.Value); //Get property view data for tenancy
+            tenancyVM.actions = await _actionSvc.GetActionsForTenancyAsync(tenancyVM.tenancyId); //Get actions data for tenancy
+
+            ViewBag.ApiLocation = _config["APILocation"]; //Set API location URL
+            ViewBag.LoggedInUserId = user.Id; //Set logged in user Id
 
             return View(tenancyVM);
         }

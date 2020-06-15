@@ -21,7 +21,7 @@ function populatePersonSearchResults() {
         };
 
         $.ajax({
-            url: '/Home/_PersonSearch',
+            url: '/Persons/_PersonSearch',
             contentType: 'application/json',
             type: 'GET',
             data: sendData,

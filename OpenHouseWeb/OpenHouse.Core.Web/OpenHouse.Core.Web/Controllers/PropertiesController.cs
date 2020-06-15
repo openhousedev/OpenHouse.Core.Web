@@ -11,19 +11,21 @@ using OpenHouse.Model.Core.Model;
 using OpenHouse.Core.Web.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
+using Microsoft.Extensions.Configuration;
 
 namespace OpenHouse.Core.Web.Controllers
 {
     [Authorize]
     public class PropertiesController : Controller
     {
+        private readonly IConfiguration _config;
         private readonly IPropertyService _propertySvc;
         private readonly ITenancyService _tenancySvc;
         private readonly MapperConfiguration _mapperConfig;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
 
-        public PropertiesController(IPropertyService propertySvc, ITenancyService tenancySvc, UserManager<User> userManager)
+        public PropertiesController(IConfiguration config, IPropertyService propertySvc, ITenancyService tenancySvc, UserManager<User> userManager)
         {
             //Assign services
             _propertySvc = propertySvc;
@@ -40,9 +42,19 @@ namespace OpenHouse.Core.Web.Controllers
             _mapper = _mapperConfig.CreateMapper();
         }
 
+        // GET: Properties/_PropertySearch
+        public async Task<IActionResult> _PropertySearch(string searchString, string displayType)
+        {
+            var properties = await _propertySvc.GetPropertiesAsync(searchString);
+            ViewBag.DisplayType = displayType;
+
+            return PartialView(properties);
+        }
+
+        // GET: Properties/_PropertySelector
         public async Task<IActionResult> _PropertySelector()
         {
-            return View();
+            return await Task.Run(() => View());
         }
 
         // GET: Properties/Details/5
@@ -60,6 +72,7 @@ namespace OpenHouse.Core.Web.Controllers
                 return NotFound();
             }
 
+            var user = await _userManager.GetUserAsync(HttpContext.User); //Get logged in user
             PropertyViewModel propertyVM = _mapper.Map<PropertyViewModel>(property); //Map property model object to viewmodel
             propertyVM.tenancyHistory = await _tenancySvc.GetTenanciesForPropertyIdAsync(id.Value); //Get tenancy history for property
 
@@ -69,6 +82,9 @@ namespace OpenHouse.Core.Web.Controllers
 
             User updatedByUser = await _userManager.FindByIdAsync(propertyVM.updatedByUserID);
             propertyVM.updatedByUsername = updatedByUser.UserName;
+
+            ViewBag.ApiLocation = _config["APILocation"]; //Set API location URL
+            ViewBag.LoggedInUserId = user.Id; //Set logged in user Id
 
             return View(propertyVM);
         }

@@ -15,8 +15,9 @@ namespace OpenHouse.Model.Core.Model
         public int actionTypeId { get; set; }
         [Column(TypeName = "int(11)")]
         public int tenancyId { get; set; }
-        [Column(TypeName = "int(11)")]
-        public int assignedUserId { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(255)")]
+        public string assignedUserId { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime actionDueDate { get; set; }
         [Column(TypeName = "datetime")]

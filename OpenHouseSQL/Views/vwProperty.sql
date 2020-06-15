@@ -2,7 +2,8 @@ DROP VIEW IF EXISTS `vwProperty`;
 
 CREATE VIEW `vwProperty` AS
 WITH cteActiveTenancy AS (
-SELECT t.tenancyId
+SELECT DISTINCT 
+		 t.tenancyId
 		,t.propertyId
 		,t.leadTenantPersonId
 FROM
@@ -12,7 +13,8 @@ WHERE
 		 OR 
 		 t.terminationDate > CURDATE()
 )
-SELECT p.propertyId
+SELECT DISTINCT 
+	  p.propertyId
 	, p.propertyClassId
    , pc.propertyClass
 	, p.propertyTypeId
@@ -35,7 +37,7 @@ SELECT p.propertyId
 	, p.updatedByUserID
 	, p.updatedDT
 	, p.createdByUserID
-	, p.createdDTvwtenancy
+	, p.createdDT
 FROM 
 	openhouse.property p
 INNER JOIN

@@ -1,0 +1,28 @@
+﻿@model List<OpenHouse.Core.Web.Areas.Identity.Data.User>
+
+@{
+}
+
+<div class="table-responsive">
+    <table class="table table-sm table-bordered table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Username</th>
+                <th class="text-center"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td class="text-center">
+                        @user.UserName
+                    </td>
+                    <td class="text-center">
+                        <a class="btn btn-light" onclick="selectUser('@user.Id', '@user.UserName');">Select</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

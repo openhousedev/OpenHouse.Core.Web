@@ -62,6 +62,8 @@ namespace OpenHouse.Core.Services
         public async Task<property> GetPropertyAsync(int id)
         {
             var property = await _context.property
+                                        .Include(p => p.propertynote)
+                                            .ThenInclude(p => p.note)
                                         .Include(p => p.propertyClass)
                                         .Include(p => p.propertyType)
                                         .FirstOrDefaultAsync(m => m.propertyId == id);

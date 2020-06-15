@@ -16,5 +16,6 @@ namespace OpenHouse.Core.Services.Interfaces
         public Task<List<tenuretype>> GetTenuretypesAsync();
         public Task<List<tenancyhousehold>> GetTenancyHouseholdAsync(int tenancyId);
         public Task<List<tenancyterminationreason>> GetTenancyterminationreasonsAsync();
+        public Task<List<relationship>> GetTenantHouseholdRelationshipsAsync();
     }
 }

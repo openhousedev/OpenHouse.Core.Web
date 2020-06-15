@@ -23,6 +23,8 @@ namespace OpenHouse.Core.Web
 {
     public class Startup
     {
+        readonly string CorsPolicyName = "CorsPolicy";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -33,6 +35,18 @@ namespace OpenHouse.Core.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: CorsPolicyName,
+                                  builder =>
+                                  {
+                                      builder.AllowAnyOrigin();
+                                      builder.AllowAnyMethod();
+                                      builder.AllowAnyHeader();
+                                  });
+            });
+
+
             services.AddControllersWithViews();
             services.AddRazorPages();
 
@@ -94,7 +108,7 @@ namespace OpenHouse.Core.Web
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseCors(CorsPolicyName);
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -102,7 +116,8 @@ namespace OpenHouse.Core.Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}")
+                .RequireCors(CorsPolicyName);
 
                 endpoints.MapRazorPages();
             });

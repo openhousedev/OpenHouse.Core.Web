@@ -24,20 +24,31 @@ namespace OpenHouse.Core.Services
 
         public async Task<action> GetActionAsync(int actionId)
         {
-            //var action 
-            throw new NotImplementedException();
+            var action = await _context.action.Include(a => a.actionType)
+                                              .Where(a => a.actionId == actionId)
+                                              .FirstOrDefaultAsync();
+            return action;
         }
 
         public async Task<List<vwaction>> GetActionsForTenancyAsync(int tenancyId)
         {
-            var actions = await _context.vwaction.Where(a => a.tenancyId == tenancyId).ToListAsync();
+            var actions = await _context.vwaction.Where(a => a.tenancyId == tenancyId)
+                                                 .ToListAsync();
 
             return actions;
         }
 
-        public async Task<List<vwaction>> GetOpenActionsForUserAsync(int userId)
+        public async Task<List<actiontype>> GetActionTypesAsync()
         {
-            var actions = await _context.vwaction.Where(a => a.assignedUserId == userId && a.actionCompletedDate == null).ToListAsync();
+            var actionTypes = await _context.actiontype.ToListAsync();
+            return actionTypes;
+        }
+
+        public async Task<List<vwaction>> GetOpenActionsForUserAsync(string userId)
+        {
+            var actions = await _context.vwaction.Where(a => a.assignedUserId == userId 
+                                                          && a.actionCompletedDate == null)
+                                                 .ToListAsync();
 
             return actions;
         }

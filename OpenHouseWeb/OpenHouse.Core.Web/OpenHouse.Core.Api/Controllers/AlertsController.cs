@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,7 @@ namespace OpenHouse.Core.Api.Controllers
 
         // GET: api/Alerts
         [HttpGet]
+        [EnableQuery()]
         public async Task<ActionResult<IEnumerable<alert>>> Getalert()
         {
             return await _context.alert.ToListAsync();
@@ -29,6 +31,7 @@ namespace OpenHouse.Core.Api.Controllers
 
         // GET: api/Alerts/5
         [HttpGet("{id}")]
+        [EnableQuery()]
         public async Task<ActionResult<alert>> Getalert(int id)
         {
             var alert = await _context.alert.FindAsync(id);

@@ -1,0 +1,43 @@
+﻿<div id="modalAlertCreate" class="modal fade" aria-hidden="true" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fa fa-user"></i>&nbsp;Add/Edit Alert</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label">Alert Type</label>
+                            <select class="form-control" id="selAlertType" asp-items="ViewBag.AlertTypeId"></select>
+                        </div>
+                        <div class="form-row">
+                            <label class="control-label">
+                                Alert Text
+                            </label>
+                        </div>
+                        <div class="form-row">
+                            <textarea id="txtAlertText" class="form-control w-100" rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtAlertStartDate" class="control-label">Start Date</label>
+                            <input type="date" id="txtAlertStartDate" class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                            <span id="txtAlertStartDateValidationResult" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtAlertEndDate" class="control-label">End Date</label>
+                            <input type="date" id="txtAlertEndDate" class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="processAlert();" data-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-secondary" onclick="clearAlertModal();" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

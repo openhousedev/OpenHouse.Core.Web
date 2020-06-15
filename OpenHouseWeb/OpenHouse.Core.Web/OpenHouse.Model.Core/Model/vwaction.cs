@@ -34,7 +34,11 @@ namespace OpenHouse.Model.Core.Model
         public string createdByUserID { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime createdDT { get; set; }
-        [Column(TypeName = "int(11)")]
-        public int assignedUserId { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(255)")]
+        public string assignedUserId { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(255)")]
+        public string assignedUsername { get; set; }
     }
 }

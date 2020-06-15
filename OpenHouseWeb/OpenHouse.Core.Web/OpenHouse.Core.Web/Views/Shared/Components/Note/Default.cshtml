@@ -1,0 +1,23 @@
+﻿<div id="modalNoteCreate" class="modal fade" aria-hidden="true" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fa fa-user"></i>&nbsp;Add/Edit Note</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <textarea id="txtNoteText" class="form-control w-100" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="processNote('@ViewBag.Action')" data-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-secondary" onclick="clearNoteModal();" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

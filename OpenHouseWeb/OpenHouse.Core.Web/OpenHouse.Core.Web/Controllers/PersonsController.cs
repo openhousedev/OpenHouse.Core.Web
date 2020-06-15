@@ -38,9 +38,19 @@ namespace OpenHouse.Core.Web.Controllers
             _mapper = _mapperConfig.CreateMapper();
         }
 
+        // GET Person/_PersonSearch
+        public async Task<IActionResult> _PersonSearch(string searchString, string displayType)
+        {
+            var persons = await _personSvc.GetPersonsAsync(searchString);
+            ViewBag.DisplayType = displayType;
+
+            return PartialView(persons);
+        }
+
+        // GET: Person/_PersonSelector
         public async Task<IActionResult> _PersonSelector()
         {
-            return View();
+            return await Task.Run(() => View());
         }
 
         // GET: Persons/Details/5

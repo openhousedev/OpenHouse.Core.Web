@@ -15,6 +15,8 @@ namespace OpenHouse.Core.Api
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_allowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,6 +28,18 @@ namespace OpenHouse.Core.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(options => options.EnableEndpointRouting = false);
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder =>
+                                  {
+                                    builder.AllowAnyOrigin();
+                                    builder.AllowAnyMethod();
+                                    builder.AllowAnyHeader();
+                                  });
+                            });
+
             services.AddControllers().AddNewtonsoftJson();
             services.AddDbContext<OpenhouseContext>();
 
@@ -56,17 +70,17 @@ namespace OpenHouse.Core.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseHttpsRedirection();
-
-            app.UseRouting();
-
+            app.UseRouting(); 
             app.UseAuthorization();
 
             // Register the Swagger generator and the Swagger UI middlewares
             app.UseOpenApi();
             app.UseSwaggerUi3();
 
-            app.UseMvc(routeBuilder => {
+            app.UseMvc(routeBuilder =>
+            {
                 routeBuilder.EnableDependencyInjection();
                 routeBuilder.Expand().Select().OrderBy().Filter();
             });

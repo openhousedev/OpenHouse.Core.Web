@@ -4,6 +4,27 @@
     ViewData["Title"] = "Details";
 }
 
+@section Scripts {
+    <script type="text/javascript">
+        //Save active tab & navigate back to on refresh
+        $(document).ready(function () {
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) { //On tab selected
+                localStorage.setItem('activeTabPerson', $(e.target).attr('href')); //log selected tab to local storage
+            });
+
+            if (performance.navigation.type == 1) { //If page is refreshes or accessed via location.reload()
+                console.info("This page is reloaded");
+
+                var activeTab = localStorage.getItem('activeTabPerson'); //Retrieve active tab from local storage
+
+                if (activeTab) {
+                    $('.nav-tabs a[href="' + activeTab + '"]').tab('show'); //Select active tab
+                }
+            }
+        });
+    </script>
+}
+
 <div class="row">
     <div class="col-md-6">
         <h4>Person Details</h4>
