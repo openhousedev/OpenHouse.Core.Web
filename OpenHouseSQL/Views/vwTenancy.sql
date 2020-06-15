@@ -2,7 +2,7 @@ DROP VIEW IF EXISTS `vwTenancy`;
 
 CREATE VIEW `vwTenancy` AS
 
-SELECT
+SELECT DISTINCT
 	tenancy.tenancyId, 
 	tenancy.propertyId, 
 	vwproperty.contactAddress, 

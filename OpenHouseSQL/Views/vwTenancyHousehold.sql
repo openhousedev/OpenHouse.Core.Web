@@ -3,7 +3,7 @@ DROP VIEW IF EXISTS `vwTenancyHouseHold`;
 CREATE VIEW `vwTenancyHousehold` AS
 
 WITH cteLeadTenanct AS
-SELECT
+SELECT DISTINCT
 	0,
 	tenancyhousehold.tenancyId, 
 	tenancyhousehold.personId, 

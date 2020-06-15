@@ -83,6 +83,7 @@ namespace OpenHouse.Core.Services
             var tenancy = await _context.tenancy
                         .Include(t => t.tenancynote)
                             .ThenInclude(t => t.note)
+                        .Include(t => t.)
                         .Include(t => t.jointTenantPerson)
                         .Include(t => t.leadTenantPerson)
                         .Include(t => t.tenureType)
