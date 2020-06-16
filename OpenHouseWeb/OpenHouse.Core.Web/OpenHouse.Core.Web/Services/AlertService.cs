@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenHouse.Core.Web.Services
+namespace OpenHouse.Core.Services
 {
     public class AlertService : IAlertService
     {
@@ -27,6 +27,17 @@ namespace OpenHouse.Core.Web.Services
             var alerts = await _context.vwalert.Where(t => t.tenancyId == tenancyId).ToListAsync();
 
             return alerts;
+        }
+
+        /// <summary>
+        /// Gets list of all available alert types
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<alerttype>> GetAlertTypesAsync()
+        {
+            var alertTypes = await _context.alerttype.ToListAsync();
+
+            return alertTypes;
         }
     }
 }

@@ -1,6 +1,14 @@
 ﻿var _idControlName = null;
 var _displayControlName = null;
 
+$(document).ready(function () {
+    $("#txtPropertySearch").keyup(function (event) {
+        if (event.keyCode === 13) {
+            populatePropertySearchResults();
+        }
+    });
+});
+
 //Display  search dialog
 function openPropertySeach(idControlName, displayControlName) {
     $('#modalPropertySearch').modal('show');

@@ -9,5 +9,6 @@ namespace OpenHouse.Core.Services.Interfaces
     public interface IAlertService
     {
         public Task<List<vwalert>> GetAlertsForTenancyAsync(int tenancyId);
+        public Task<List<alerttype>> GetAlertTypesAsync();
     }
 }

@@ -60,6 +60,7 @@ namespace OpenHouse.Model.Core.Model
         [Display(Name = "Max Occupants")]
         [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
         public int? maxOccupants { get; set; }
+        public int? tenancyId { get; set; }
         public string updatedByUserID { get; set; }
         public string updatedByUsername { get; set; }
         public DateTime updatedDT { get; set; }

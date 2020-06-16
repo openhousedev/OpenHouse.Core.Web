@@ -16,6 +16,8 @@ namespace OpenHouse.Model.Core.Model
         public int alertId { get; set; }
         [Column(TypeName = "int(11)")]
         public int? alertTypeId { get; set; }
+        [Column(TypeName = "varchar(100)")]
+        public string alerttype { get; set; }
         [Column(TypeName = "text")]
         public string alertText { get; set; }
         [Column(TypeName = "datetime")]

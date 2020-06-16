@@ -27,6 +27,9 @@ namespace OpenHouse.Core.Web.Controllers
 
         public PropertiesController(IConfiguration config, IPropertyService propertySvc, ITenancyService tenancySvc, UserManager<User> userManager)
         {
+            //Get config instance
+            _config = config;
+
             //Assign services
             _propertySvc = propertySvc;
             _tenancySvc = tenancySvc;
@@ -73,8 +76,13 @@ namespace OpenHouse.Core.Web.Controllers
             }
 
             var user = await _userManager.GetUserAsync(HttpContext.User); //Get logged in user
+            var activeTenancy = await _tenancySvc.GetActiveTenancyForPropertyIdAsync(id.Value);
+
             PropertyViewModel propertyVM = _mapper.Map<PropertyViewModel>(property); //Map property model object to viewmodel
             propertyVM.tenancyHistory = await _tenancySvc.GetTenanciesForPropertyIdAsync(id.Value); //Get tenancy history for property
+
+            if (activeTenancy != null)
+                propertyVM.tenancyId = activeTenancy.tenancyId;
 
             //Get created by & update by username
             User createByUser = await _userManager.FindByIdAsync(propertyVM.createdByUserID);

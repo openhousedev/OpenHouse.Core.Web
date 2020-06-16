@@ -38,6 +38,9 @@
 @*Include tenancy household manager view component*@
 @await Component.InvokeAsync("TenancyHousehold")
 
+@*Include alert manager view component*@
+@await Component.InvokeAsync("Alert")
+
 @*Include user selector partial view*@
 @await Html.PartialAsync("~/Views/Users/_UserSelector.cshtml")
 
@@ -54,6 +57,9 @@
     </div>
 </div>
 <hr />
+@*Display active alerts component*@
+@await Component.InvokeAsync("AlertDisplay", new { @tenancyId = Model.tenancyId })
+
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
         <a class="nav-link active" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="true">Details</a>
@@ -92,24 +98,24 @@
                         @Html.DisplayFor(model => model.property.contactAddress)
                     </dd>
                     <dt class="col-sm-10">
-                        @Html.DisplayNameFor(model => model.leadTenantPerson)
+                        Lead Tenant
                     </dt>
                     <dd class="col-sm-10 border border border-secondary rounded mt-2 pr-0">
                         @Model.leadTenantPerson.firstName&nbsp;@Model.leadTenantPerson.surname
                         <a class="btn btn-sm btn-light float-right" onauxclick="window.open('@Url.Action("Details", "Persons", new { @id = Model.leadTenantPerson.personId })');" onclick="window.open('@Url.Action("Details","Persons",new { @id = Model.leadTenantPerson.personId })');">View</a>
                     </dd>
                     <dt class="col-sm-10">
-                        @Html.DisplayNameFor(model => model.jointTenantPerson)
+                        Joint Tenant
                     </dt>
                     <dd class="col-sm-10 border border border-secondary rounded mt-2 pr-0">
                         @if (Model.jointTenantPersonId.HasValue)
                         {
-                        @Model.jointTenantPerson.firstName  @Model.jointTenantPerson.surname
-                        <a class="btn btn-sm btn-light float-right" onauxclick="window.open('@Url.Action("Details", "Persons", new { @id = Model.jointTenantPerson.personId })');" onclick="window.open('@Url.Action("Details", "Persons", new { @id = Model.jointTenantPerson.personId })');">View</a>
+                            @Model.jointTenantPerson.firstName @:&nbsp; @Model.jointTenantPerson.surname
+                            <a class="btn btn-sm btn-light float-right" onauxclick="window.open('@Url.Action("Details", "Persons", new { @id = Model.jointTenantPerson.personId })');" onclick="window.open('@Url.Action("Details", "Persons", new { @id = Model.jointTenantPerson.personId })');">View</a>
                         }
                     </dd>
                     <dt class="col-sm-10">
-                        @Html.DisplayNameFor(model => model.tenureType)
+                        Tenure Type
                     </dt>
                     <dd class="col-sm-10 border border border-secondary rounded mt-2">
                         @Html.DisplayFor(model => model.tenureType.tenureType1)
@@ -161,25 +167,25 @@
                     <tbody>
                         @foreach (var householdMember in Model.tenancyhousehold)
                         {
-                        <tr>
-                            <td class="text-center">
-                                @householdMember.personId
-                            </td>
-                            <td>
-                                @householdMember.person.firstName&nbsp;@householdMember.person.surname
-                            </td>
-                            <td>
-                                @householdMember.leadTenantRelationship.relationship1
-                            </td>
-                            <td>
-                                @householdMember.jointTenantRelationship.relationship1
-                            </td>
-                            <td class="text-center">
-                                <a class="btn btn-light" onclick="editTenancyHousehold(@householdMember.tenancyHouseholdId)">Edit</a>
-                                <a class="btn btn-light" onauxclick="window.open('@Url.Action("Details", "Persons", new { @id = householdMember.personId })');" onclick="window.open('@Url.Action("Details","Persons",new { @id = householdMember.personId })');">View Person</a>
-                                <a class="btn btn-light" onclick="showDeleteTenancyHouseholdConfirmation(@householdMember.tenancyHouseholdId)">Delete</a>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td class="text-center">
+                                    @householdMember.personId
+                                </td>
+                                <td>
+                                    @householdMember.person.firstName&nbsp;@householdMember.person.surname
+                                </td>
+                                <td>
+                                    @householdMember.leadTenantRelationship.relationship1
+                                </td>
+                                <td>
+                                    @householdMember.jointTenantRelationship.relationship1
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-light" onclick="editTenancyHousehold(@householdMember.tenancyHouseholdId)">Edit</a>
+                                    <a class="btn btn-light" onauxclick="window.open('@Url.Action("Details", "Persons", new { @id = householdMember.personId })');" onclick="window.open('@Url.Action("Details","Persons",new { @id = householdMember.personId })');">View Person</a>
+                                    <a class="btn btn-light" onclick="showDeleteTenancyHouseholdConfirmation(@householdMember.tenancyHouseholdId)">Delete</a>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>
@@ -189,7 +195,7 @@
     <div class="tab-pane fade" id="alerts" role="tabpanel" aria-labelledby="alerts-tab">
         <div class="row mt-4">
             <div class="col-md-12">
-                <a class="btn btn-lg btn-primary text-white float-right mr-2" onclick="createTenancyHousehold(@Model.tenancyId)"><i class="fa fa-dan"></i>&nbsp;Create Alert</a>
+                <a class="btn btn-lg btn-primary text-white float-right mr-2" onclick="createAlert(@Model.tenancyId)"><i class="fa fa-exclamation-triangle"></i>&nbsp;Create Alert</a>
             </div>
         </div>
         <div class="row mt-4">
@@ -200,32 +206,43 @@
                             <th class="text-center">Alert ID</th>
                             <th>Type</th>
                             <th>Alert Text</th>
-                            <th>Relation to Join Tenant</th>
-                            <th class="text-center">View</th>
+                            <th>Start Date</th>
+                            <th class="text-center">End Date</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var householdMember in Model.tenancyhousehold)
+                        @foreach (var alert in Model.alerts)
                         {
-                        <tr>
-                            <td class="text-center">
-                                @householdMember.personId
-                            </td>
-                            <td>
-                                @householdMember.person.firstName&nbsp;@householdMember.person.surname
-                            </td>
-                            <td>
-                                @householdMember.leadTenantRelationship.relationship1
-                            </td>
-                            <td>
-                                @householdMember.jointTenantRelationship.relationship1
-                            </td>
-                            <td class="text-center">
-                                <a class="btn btn-light" onclick="editTenancyHousehold(@householdMember.tenancyHouseholdId)">Edit</a>
-                                <a class="btn btn-light" onauxclick="window.open('@Url.Action("Details", "Persons", new { @id = householdMember.personId })');" onclick="window.open('@Url.Action("Details","Persons",new { @id = householdMember.personId })');">View Person</a>
-                                <a class="btn btn-light" onclick="showDeleteTenancyHouseholdConfirmation(@householdMember.tenancyHouseholdId)">Delete</a>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td class="text-center">
+                                    @alert.alertId
+                                </td>
+                                <td>
+                                    @alert.alerttype
+                                </td>
+                                <td>
+                                    @if (alert.alertText.Length > 30)
+                                    {
+                                        @alert.alertText.Substring(0, 30)@:"..."
+                                    }
+                                    else
+                                    {
+                                        @alert.alertText
+                                    }
+                                </td>
+                                <td>
+                                    @alert.startDT.Value.ToString("dd/MM/yyyy")
+                                </td>
+                                <td>
+                                    @(alert.endDT.HasValue ? alert.endDT.Value.ToString("dd/MM/yyyy") : "-")
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-light" onclick="viewAlert(@alert.alertId)">View</a>
+                                    <a class="btn btn-light" onclick="editAlert(@alert.alertId,@Model.tenancyId)">Edit</a>
+                                    <a class="btn btn-light" onclick="confirmDeleteAlert(@alert.tenancyAlertId)">Delete</a>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>
@@ -251,25 +268,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach(var action in Model.actions){
-                        <tr>
-                            <td>
-                                @action.actionId
-                            </td>
-                            <td>
-                                @action.actionType
-                            </td>
-                            <td>
-                                @action.assignedUsername
-                            </td>
-                            <td>
-                                @action.actionDueDate.ToString("dd/MM/yyyy")
-                            </td>
-                            <td class="text-center">
-                                <a class="btn btn-light" onclick="editAction(@action.actionId, @action.tenancyId);">Edit</a>
-                                <a class="btn btn-light" onclick="viewAction(@action.actionId)">View</a>
-                            </td>
-                        </tr>
+                        @foreach (var action in Model.actions)
+                        {
+                            <tr>
+                                <td>
+                                    @action.actionId
+                                </td>
+                                <td>
+                                    @action.actionType
+                                </td>
+                                <td>
+                                    @action.assignedUsername
+                                </td>
+                                <td>
+                                    @action.actionDueDate.ToString("dd/MM/yyyy")
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-light" onclick="editAction(@action.actionId, @action.tenancyId);">Edit</a>
+                                    <a class="btn btn-light" onclick="viewAction(@action.actionId)">View</a>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>
@@ -296,28 +314,28 @@
                     <tbody>
                         @foreach (var note in Model.tenancynote)
                         {
-                        <tr>
-                            <td class="text-center">
-                                @note.noteId
-                            </td>
-                            <td>
-                                @if (note.note.note1.Length > 50)
-                                {
-                                @note.note.note1.Substring(0, 50)@:"..."
-                                }
-                                else
-                                {
-                                @note.note.note1;
-                                }
-                            </td>
-                            <td class="text-center">
-                                @note.note.createdDT.ToString("dd/MM/yyyy")
-                            </td>
-                            <td class="text-center">
-                                <a class="btn btn-light" onclick="editNote(@note.noteId, @note.tenancyId, 'TenancyNote');">Edit</a>
-                                <a class="btn btn-light" onclick="viewNote(@note.noteId)">View</a>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td class="text-center">
+                                    @note.noteId
+                                </td>
+                                <td>
+                                    @if (note.note.note1.Length > 50)
+                                    {
+                                        @note.note.note1.Substring(0, 50)@:"..."
+                                    }
+                                    else
+                                    {
+                                        @note.note.note1;
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    @note.note.createdDT.ToString("dd/MM/yyyy")
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-light" onclick="editNote(@note.noteId, @note.tenancyId, 'TenancyNote');">Edit</a>
+                                    <a class="btn btn-light" onclick="viewNote(@note.noteId)">View</a>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>

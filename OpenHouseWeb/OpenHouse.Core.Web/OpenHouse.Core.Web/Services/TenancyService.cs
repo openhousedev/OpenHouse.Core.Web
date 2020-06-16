@@ -74,6 +74,21 @@ namespace OpenHouse.Core.Services
         }
 
         /// <summary>
+        /// Get full tenancy history for property
+        /// </summary>
+        /// <param name="propertyId"></param>
+        /// <returns></returns>
+        public async Task<vwtenancy> GetActiveTenancyForPropertyIdAsync(int propertyId)
+        {
+            var tenancy = await _context.vwtenancy
+                              .Where(t => t.propertyId == propertyId
+                                          && t.terminationDate == null)
+                              .FirstOrDefaultAsync();
+
+            return tenancy;
+        }
+
+        /// <summary>
         /// Gets individual tenancy
         /// </summary>
         /// <param name="tenancyId"></param>
@@ -83,7 +98,6 @@ namespace OpenHouse.Core.Services
             var tenancy = await _context.tenancy
                         .Include(t => t.tenancynote)
                             .ThenInclude(t => t.note)
-                        .Include(t => t.)
                         .Include(t => t.jointTenantPerson)
                         .Include(t => t.leadTenantPerson)
                         .Include(t => t.tenureType)

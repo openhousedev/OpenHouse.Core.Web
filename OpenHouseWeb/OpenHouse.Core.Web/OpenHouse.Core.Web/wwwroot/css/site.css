@@ -105,3 +105,7 @@ dd {
 .form-control:read-only {
     background-color: #fff !important;
 }
+
+.control-label {
+    font-weight: bold;
+}

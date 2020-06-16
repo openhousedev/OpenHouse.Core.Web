@@ -6,27 +6,28 @@
 
 @section Scripts {
     <script type="text/javascript">
+        $(document).ready(function () {
+            $('#ddlSearchItem').change(function (e) {
+                var searchItem = $(this).children("option:selected").val(); //Get selected item
 
-        $('#ddlSearchItem').change(function (e) {
-            var searchItem = $(this).children("option:selected").val(); //Get selected item
+                //Update placeholder text in search bar based on dropdown selection
+                if (searchItem == 'Property') {
+                    $('#txtSearch').attr('placeholder', 'Search by property ID or address...');
+                }
+                else if (searchItem == 'Tenancy') {
+                    $('#txtSearch').attr('placeholder', 'Search by tenancy ID or Lead tenant name...');
+                }
+                else if (searchItem == 'Person') {
+                    $('#txtSearch').attr('placeholder', 'Search by person ID or person name...');
+                }
+            });
 
-            //Update placeholder text in search bar based on dropdown selection
-            if (searchItem == 'Property') {
-                $('#txtSearch').attr('placeholder', 'Search by property ID or address...');
-            }
-            else if (searchItem == 'Tenancy') {
-                $('#txtSearch').attr('placeholder', 'Search by tenancy ID or Lead tenant name...');
-            }
-            else if (searchItem == 'Person') {
-                $('#txtSearch').attr('placeholder', 'Search by person ID or person name...');
-            }
-        });
-
-        //Perform search on enter key press in search bar
-        $("#txtSearch").keyup(function (event) {
-            if (event.keyCode === 13) {
-                populateSearchResults();
-            }
+            //Perform search on enter key press in search bar
+            $("#txtSearch").keyup(function (event) {
+                if (event.keyCode === 13) {
+                    populateSearchResults();
+                }
+            });
         });
 
         function populateSearchResults() {

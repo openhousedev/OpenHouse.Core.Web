@@ -1,12 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -14,9 +7,6 @@ using OpenHouse.Core.Services;
 using OpenHouse.Core.Services.Interfaces;
 using OpenHouse.Core.Web.Services.Interfaces;
 using OpenHouse.Model.Core.Model;
-using Microsoft.AspNetCore.DataProtection;
-using System.IO;
-using Microsoft.Extensions.Options;
 using Microsoft.AspNet.OData.Extensions;
 
 namespace OpenHouse.Core.Web
@@ -56,6 +46,7 @@ namespace OpenHouse.Core.Web
             services.AddScoped<ITenancyService, TenancyService>();
             services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IActionService, ActionService>();
+            services.AddScoped<IAlertService, AlertService>();
 
             services.AddOData();
 

@@ -17,6 +17,7 @@ function editAlert(alertId, tenancyId) {
 
     getAlert(alertId)
         .then(data => { //On get alert success
+            $('#selAlertTypeId').val(data.alertTypeId);
             $('#txtAlertText').val(data.alertText); //Display alert text
             $('#txtAlertStartDate').val(new moment(data.startDT).format('YYYY-MM-DD'));
             $('#txtAlertEndDate').val(new moment(data.endDT).format('YYYY-MM-DD'));
@@ -35,9 +36,15 @@ function viewAlert(alertId) {
     $.LoadingOverlay("show");
     getAlert(alertId)
         .then(data => { //On get alert success
-            $('#txtAlertText').val(data.alert1); //Display alert text
+            $('#selAlertTypeId').val(data.alertTypeId);
+            $('#selAlertTypeId').attr('disabled', 'disabled');
+            $('#txtAlertText').val(data.alertText); //Display alert text
             $('#txtAlertText').attr('disabled', 'disabled'); //Set textarea read only
             $('#btnSaveAlert').hide(); //Hide save alert button
+            $('#txtAlertStartDate').val(new moment(data.startDT).format('YYYY-MM-DD'));
+            $('#txtAlertStartDate').attr('disabled', 'disabled');
+            $('#txtAlertEndDate').val(new moment(data.endDT).format('YYYY-MM-DD'));
+            $('#txtAlertEndDate').attr('disabled', 'disabled');
             $.LoadingOverlay("hide");
             $('#modalAlertCreate').modal('show');
         })
@@ -49,26 +56,50 @@ function viewAlert(alertId) {
 
 //Process alert for saving
 function processAlert() {
+    var alertTypeId = $('#selAlertTypeId').val();
     var alertText = $('#txtAlertText').val().trim();
+    var startDT = new moment($('#txtAlertStartDate').val()).toISOString();
+    var endDT = $('#txtAlertEndDate').val();
+
+    if (endDT.length > 0) {
+        endDT = new moment(endDT).toISOString();
+    }
+
     $.LoadingOverlay("show");
 
     if (_alertId == null) { //If existing alert Id alert set, create new alert
-        postAlert(alertText)
+        postAlert(alertText, alertTypeId, startDT, endDT)
             .then(data => { //On post alert success
-                clearAlertModal();
-                location.reload(); //Reload form on completion
+                postAlertParent(data.alertId, _tenancyId)
+                    .then(data => {
+                        clearAlertModal();
+                        location.reload(); //Reload form on completion
+                    })
+                    .catch(error => {
+                        console.log(error.message);
+                        $.LoadingOverlay("hide");
+                        alert('Error creating alert parent');
+                    })
             })
             .catch(error => { //On post alert error
                 console.log(error.message);
                 $.LoadingOverlay("hide");
-                alert('Error loading alert');
+                alert('Error creating alert');
             });
     }
     else {
-        putAlert(alertText) // If existing alert Id set, update existing
+        putAlert(_alertId, alertText, alertTypeId, startDT, endDT) // If existing alert Id set, update existing
             .then(data => { //Update alert successful
-                clearAlertModal();
-                location.reload(); //Reload form on completion
+                postAlertParent(data.alertId, _tenancyId)
+                    .then(data => {
+                        clearAlertModal();
+                        location.reload(); //Reload form on completion
+                    })
+                    .catch(error => {
+                        console.log(error.message);
+                        $.LoadingOverlay("hide");
+                        alert('Error creating alert parent');
+                    })
             })
             .catch(error => {
                 console.log(error.message); //Update alert error
@@ -80,31 +111,27 @@ function processAlert() {
 
 //Clear down alert modal popup
 function clearAlertModal() {
+    $('#selAlertTypeId').val('1');
+    $('#selAlertTypeId').removeAttr('disabled');
     $('#txtAlertText').val('').removeAttr('disabled');
+    $('#txtAlertStartDate').val(new moment().format('YYYY-MM-DD'));
+    $('#txtAlertStartDate').removeAttr('disabled');
+    $('#txtAlertEndDate').val('');
+    $('#txtAlertEndDate').removeAttr('disabled');
     $('#btnSaveAlert').show();
 }
 
 //POST PropertyAlert or TenancyAlert
-function postAlertParent(alertId) {
+function postAlertParent(alertId, tenancyId) {
     return new Promise((resolve, reject) => {
         var sendData;
 
-        if (_alertParentType == 'PropertyAlert') { //Assign alert to property
-            _apiLocation = _apiLocation + 'api/PropertyAlerts';
+        _apiLocation = _apiLocation + 'api/TenancyAlerts';
 
-            sendData = {
-                propertyId: _alertParentId,
-                alertId: alertId
-            };
-        }
-        else if (_alertParentType == 'TenancyAlert') { //Assign alert to tenancy
-            _apiLocation = _apiLocation + 'api/TenancyAlerts';
-
-            sendData = {
-                tenancyId: _alertParentId,
-                alertId: alertId
-            };
-        }
+        sendData = {
+            tenancyId: tenancyId,
+            alertId: alertId
+        };
 
         var sendJson = JSON.stringify(sendData);
 
@@ -162,7 +189,7 @@ function postAlert(alertText, alertTypeId, startDT, endDT) {
 }
 
 //PUT existing alert object
-function putAlert(alertText, alertTypeId, startDT, endDT) {
+function putAlert(alertId, alertText, alertTypeId, startDT, endDT) {
     return new Promise((resolve, reject) => {
         var recordDT = new moment().toISOString();
 

@@ -269,3 +269,5 @@ C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Web\obj\Debu
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Web\obj\Debug\netcoreapp3.1\Razor\Views\Users\_UserSelector.cshtml.g.cs
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Action\Default.cshtml.g.cs
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\TenancyHousehold\Default.cshtml.g.cs
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\AlertDisplay\Default.cshtml.g.cs
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Web\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Alert\Default.cshtml.g.cs

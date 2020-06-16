@@ -1,0 +1,21 @@
+﻿@model List<OpenHouse.Model.Core.Model.vwalert>
+
+@if (Model.Count > 0)
+{
+    <div class="row mt-3 mb-3">
+        <div class="card w-100">
+            <div class="card-header font-weight-bold">
+                Active Tenancy Alerts
+            </div>
+            <div class="card-body">
+                @foreach (var alert in Model)
+                {
+                    <div class="alert border border-primary rounded w-100">
+                        <span class="font-weight-bold text-primary text-capitalize"><i class="fa fa-exclamation-triangle text-danger"></i>&nbsp;&nbsp;@alert.alerttype.ToUpper() ALERT</span>
+                        <a class="btn btn-sm btn-primary float-right" onclick="viewAlert(@alert.alertId,@alert.tenancyId);">View</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

@@ -4,30 +4,28 @@ using Microsoft.AspNetCore.Identity;
 using OpenHouse.Core.Web.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using OpenHouse.Core.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GENerate.ViewComponents
 {
     [Authorize]
-    public class AlertViewComponent : ViewComponent
+    public class AlertDisplayViewComponent : ViewComponent
     {
         private readonly UserManager<User> _userManager;
         private readonly IAlertService _alertSvc;
 
-        public AlertViewComponent(UserManager<User> userManager, IAlertService alertSvc)
+        public AlertDisplayViewComponent(UserManager<User> userManager, IAlertService alertSvc)
         {
-            _alertSvc = alertSvc;
             _userManager = userManager;
+            _alertSvc = alertSvc;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(int tenancyId)
         {
             var loggedInUserId = await _userManager.GetUserAsync(HttpContext.User);
             ViewBag.LoggedInUserId = loggedInUserId.Id;
 
-            ViewBag.AlertTypeId = new SelectList(await _alertSvc.GetAlertTypesAsync(), "alertTypeId", "alertType1");
-
-            return View();
+            var alerts = await _alertSvc.GetAlertsForTenancyAsync(tenancyId);
+            return View(alerts);
         }
     }
 }

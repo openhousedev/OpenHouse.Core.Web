@@ -11,6 +11,7 @@ namespace OpenHouse.Core.Services.Interfaces
         public Task<tenancy> GetTenancyAsync(int tenancyId);
         public Task<List<vwtenancy>> GetTenanciesAsync(string searchString);
         public Task<List<vwtenancy>> GetTenanciesForPropertyIdAsync(int propertyId);
+        public Task<vwtenancy> GetActiveTenancyForPropertyIdAsync(int propertyId);
         public Task<int> AddTenancyAsync(tenancy tenancy);
         public Task<int> UpdateTenancyAsync(tenancy tenancy);
         public Task<List<tenuretype>> GetTenuretypesAsync();

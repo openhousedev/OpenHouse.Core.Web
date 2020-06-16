@@ -6,6 +6,7 @@
 	  , ta.tenancyId
 	  , a.alertId
 	  , a.alertTypeId
+	  , alt.alerttype
 	  , a.alertText
 	  , a.startDT
 	  , a.endDT
@@ -17,6 +18,10 @@
 	  , createdDT
 	FROM 
 		alert a
+	INNER JOIN
+		alerttype alt
+	ON
+		a.alertTypeId = alt.alertTypeId
 	INNER JOIN
 		tenancyalert ta
 	ON

@@ -501,6 +501,10 @@ namespace OpenHouse.Model.Core.Model
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
 
+                entity.Property(e => e.alerttype)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
                 entity.Property(e => e.createdByUserID)
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");

@@ -1,6 +1,14 @@
 ﻿var _idControlName = null;
 var _displayControlName = null;
 
+$(document).ready(function () {
+    $("#txtPersonSearch").keyup(function (event) {
+        if (event.keyCode === 13) {
+            populatePersonSearchResults();
+        }
+    });
+});
+
 //Display  search dialog
 function openPersonSeach(idControlName, displayControlName) {
     $('#modalPersonSearch').modal('show');

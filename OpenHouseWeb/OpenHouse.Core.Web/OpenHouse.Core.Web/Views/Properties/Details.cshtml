@@ -33,6 +33,9 @@
 @*Include note manager view component *@
 @await Component.InvokeAsync("Note")
 
+@*Include alert manager view component *@
+@await Component.InvokeAsync("Alert")
+
 <div class="row">
     <div class="col-md-6">
         <h4>Property Details</h4>
@@ -43,6 +46,13 @@
     </div>
 </div>
 <hr />
+
+@*If tenancy is present for property, display active alerts component*@
+@if (Model.tenancyId.HasValue)
+{
+    @(await Component.InvokeAsync("AlertDisplay", new { @tenancyId = Model.tenancyId }))
+}
+
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
         <a class="nav-link active" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="details" aria-selected="true">Details</a>
