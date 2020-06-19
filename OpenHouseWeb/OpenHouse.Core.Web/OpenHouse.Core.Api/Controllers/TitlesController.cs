@@ -24,7 +24,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/Titles
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<title>>> Gettitle()
+        public async Task<ActionResult<IEnumerable<title>>> GetTitle()
         {
             return await _context.title.ToListAsync();
         }
@@ -32,7 +32,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/Titles/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<title>> Gettitle(int id)
+        public async Task<ActionResult<title>> GetTitle(int id)
         {
             var title = await _context.title.FindAsync(id);
 
@@ -48,7 +48,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Puttitle(int id, title title)
+        public async Task<IActionResult> PutTitle(int id, title title)
         {
             if (id != title.titleId)
             {
@@ -80,7 +80,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<title>> Posttitle(title title)
+        public async Task<ActionResult<title>> PostTitle(title title)
         {
             _context.title.Add(title);
             await _context.SaveChangesAsync();
@@ -90,7 +90,7 @@ namespace OpenHouse.Core.Api.Controllers
 
         // DELETE: api/Titles/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<title>> Deletetitle(int id)
+        public async Task<ActionResult<title>> DeleteTitle(int id)
         {
             var title = await _context.title.FindAsync(id);
             if (title == null)

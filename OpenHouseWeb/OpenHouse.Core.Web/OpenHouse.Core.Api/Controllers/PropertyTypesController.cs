@@ -24,7 +24,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/PropertyTypes
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<propertytype>>> Getpropertytype()
+        public async Task<ActionResult<IEnumerable<propertytype>>> GetPropertyType()
         {
             return await _context.propertytype.ToListAsync();
         }
@@ -32,7 +32,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/PropertyTypes/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<propertytype>> Getpropertytype(int id)
+        public async Task<ActionResult<propertytype>> GetPropertyType(int id)
         {
             var propertytype = await _context.propertytype.FindAsync(id);
 
@@ -48,7 +48,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putpropertytype(int id, propertytype propertytype)
+        public async Task<IActionResult> PutPropertyType(int id, propertytype propertytype)
         {
             if (id != propertytype.propertyTypeId)
             {
@@ -80,7 +80,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<propertytype>> Postpropertytype(propertytype propertytype)
+        public async Task<ActionResult<propertytype>> PostPropertyType(propertytype propertytype)
         {
             _context.propertytype.Add(propertytype);
             await _context.SaveChangesAsync();
@@ -90,7 +90,7 @@ namespace OpenHouse.Core.Api.Controllers
 
         // DELETE: api/PropertyTypes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<propertytype>> Deletepropertytype(int id)
+        public async Task<ActionResult<propertytype>> DeletePropertyType(int id)
         {
             var propertytype = await _context.propertytype.FindAsync(id);
             if (propertytype == null)

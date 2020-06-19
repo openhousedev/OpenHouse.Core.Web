@@ -24,7 +24,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/Properties
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<property>>> Getproperty()
+        public async Task<ActionResult<IEnumerable<property>>> GetProperty()
         {
             return await _context.property.ToListAsync();
         }
@@ -32,7 +32,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/Properties/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<property>> Getproperty(int id)
+        public async Task<ActionResult<property>> GetProperty(int id)
         {
             var @property = await _context.property.FindAsync(id);
 
@@ -48,7 +48,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putproperty(int id, property @property)
+        public async Task<IActionResult> PutProperty(int id, property @property)
         {
             if (id != @property.propertyId)
             {
@@ -80,7 +80,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<property>> Postproperty(property @property)
+        public async Task<ActionResult<property>> PostProperty(property @property)
         {
             _context.property.Add(@property);
             await _context.SaveChangesAsync();
@@ -90,7 +90,7 @@ namespace OpenHouse.Core.Api.Controllers
 
         // DELETE: api/Properties/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<property>> Deleteproperty(int id)
+        public async Task<ActionResult<property>> DeleteProperty(int id)
         {
             var @property = await _context.property.FindAsync(id);
             if (@property == null)

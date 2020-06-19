@@ -10,6 +10,7 @@ namespace OpenHouse.Model.Core.Model
     {
         public property()
         {
+            propertycharge = new HashSet<propertycharge>();
             propertynote = new HashSet<propertynote>();
         }
 
@@ -63,6 +64,8 @@ namespace OpenHouse.Model.Core.Model
         [ForeignKey(nameof(propertyTypeId))]
         [InverseProperty(nameof(propertytype.property))]
         public virtual propertytype propertyType { get; set; }
+        [InverseProperty("property")]
+        public virtual ICollection<propertycharge> propertycharge { get; set; }
         [InverseProperty("property")]
         public virtual ICollection<propertynote> propertynote { get; set; }
     }

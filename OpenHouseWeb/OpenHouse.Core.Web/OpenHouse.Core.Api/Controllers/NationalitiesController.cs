@@ -24,14 +24,14 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/Nationalities
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<nationality>>> Getnationality()
+        public async Task<ActionResult<IEnumerable<nationality>>> GetNationality()
         {
             return await _context.nationality.ToListAsync();
         }
 
         // GET: api/Nationalities/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<nationality>> Getnationality(int id)
+        public async Task<ActionResult<nationality>> GetNationality(int id)
         {
             var nationality = await _context.nationality.FindAsync(id);
 
@@ -48,7 +48,7 @@ namespace OpenHouse.Core.Api.Controllers
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         [EnableQuery()]
-        public async Task<IActionResult> Putnationality(int id, nationality nationality)
+        public async Task<IActionResult> PutNationality(int id, nationality nationality)
         {
             if (id != nationality.nationalityId)
             {
@@ -80,7 +80,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<nationality>> Postnationality(nationality nationality)
+        public async Task<ActionResult<nationality>> PostNationality(nationality nationality)
         {
             _context.nationality.Add(nationality);
             await _context.SaveChangesAsync();
@@ -90,7 +90,7 @@ namespace OpenHouse.Core.Api.Controllers
 
         // DELETE: api/Nationalities/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<nationality>> Deletenationality(int id)
+        public async Task<ActionResult<nationality>> DeleteNationality(int id)
         {
             var nationality = await _context.nationality.FindAsync(id);
             if (nationality == null)

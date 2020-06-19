@@ -24,7 +24,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/Notes
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<note>>> Getnote()
+        public async Task<ActionResult<IEnumerable<note>>> GetNote()
         {
             return await _context.note.ToListAsync();
         }
@@ -32,7 +32,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/Notes/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<note>> Getnote(int id)
+        public async Task<ActionResult<note>> GetNote(int id)
         {
             var note = await _context.note.FindAsync(id);
 
@@ -48,7 +48,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putnote(int id, note note)
+        public async Task<IActionResult> PutNote(int id, note note)
         {
             if (id != note.noteId)
             {
@@ -80,7 +80,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<note>> Postnote(note note)
+        public async Task<ActionResult<note>> PostNote(note note)
         {
             _context.note.Add(note);
             await _context.SaveChangesAsync();
@@ -90,7 +90,7 @@ namespace OpenHouse.Core.Api.Controllers
 
         // DELETE: api/Notes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<note>> Deletenote(int id)
+        public async Task<ActionResult<note>> DeleteNote(int id)
         {
             var note = await _context.note.FindAsync(id);
             if (note == null)

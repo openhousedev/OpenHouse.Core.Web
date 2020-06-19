@@ -24,7 +24,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/AlertTypes
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<alerttype>>> Getalerttype()
+        public async Task<ActionResult<IEnumerable<alerttype>>> GetAlertType()
         {
             return await _context.alerttype.ToListAsync();
         }
@@ -48,7 +48,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putalerttype(int id, alerttype alerttype)
+        public async Task<IActionResult> PutAlertType(int id, alerttype alerttype)
         {
             if (id != alerttype.alertTypeId)
             {
@@ -80,7 +80,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<alerttype>> Postalerttype(alerttype alerttype)
+        public async Task<ActionResult<alerttype>> PostAlertType(alerttype alerttype)
         {
             _context.alerttype.Add(alerttype);
             await _context.SaveChangesAsync();
@@ -90,7 +90,7 @@ namespace OpenHouse.Core.Api.Controllers
 
         // DELETE: api/AlertTypes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<alerttype>> Deletealerttype(int id)
+        public async Task<ActionResult<alerttype>> DeleteAlertType(int id)
         {
             var alerttype = await _context.alerttype.FindAsync(id);
             if (alerttype == null)

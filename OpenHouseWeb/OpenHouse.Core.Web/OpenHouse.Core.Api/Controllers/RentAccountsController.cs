@@ -22,14 +22,14 @@ namespace OpenHouse.Core.Api.Controllers
 
         // GET: api/RentAccounts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<rentaccount>>> Getrentaccount()
+        public async Task<ActionResult<IEnumerable<rentaccount>>> GetRentAccount()
         {
             return await _context.rentaccount.ToListAsync();
         }
 
         // GET: api/RentAccounts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<rentaccount>> Getrentaccount(int id)
+        public async Task<ActionResult<rentaccount>> GetRentAccount(int id)
         {
             var rentaccount = await _context.rentaccount.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putrentaccount(int id, rentaccount rentaccount)
+        public async Task<IActionResult> PutRentAccount(int id, rentaccount rentaccount)
         {
             if (id != rentaccount.rentAccountId)
             {
@@ -77,7 +77,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<rentaccount>> Postrentaccount(rentaccount rentaccount)
+        public async Task<ActionResult<rentaccount>> PostRentAccount(rentaccount rentaccount)
         {
             _context.rentaccount.Add(rentaccount);
             await _context.SaveChangesAsync();
@@ -87,7 +87,7 @@ namespace OpenHouse.Core.Api.Controllers
 
         // DELETE: api/RentAccounts/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<rentaccount>> Deleterentaccount(int id)
+        public async Task<ActionResult<rentaccount>> DeleteRentAccount(int id)
         {
             var rentaccount = await _context.rentaccount.FindAsync(id);
             if (rentaccount == null)

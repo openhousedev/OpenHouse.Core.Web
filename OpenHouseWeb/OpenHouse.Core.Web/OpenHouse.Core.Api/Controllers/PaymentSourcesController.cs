@@ -12,50 +12,50 @@ namespace OpenHouse.Core.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TenancyNotesController : ControllerBase
+    public class PaymentSourcesController : ControllerBase
     {
         private readonly OpenhouseContext _context;
 
-        public TenancyNotesController(OpenhouseContext context)
+        public PaymentSourcesController(OpenhouseContext context)
         {
             _context = context;
         }
 
-        // GET: api/TenancyNotes
+        // GET: api/PaymentSources
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<tenancynote>>> GetTenancyNote()
+        public async Task<ActionResult<IEnumerable<paymentsource>>> GetPaymentSource()
         {
-            return await _context.tenancynote.ToListAsync();
+            return await _context.paymentsource.ToListAsync();
         }
 
-        // GET: api/TenancyNotes/5
+        // GET: api/PaymentSources/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<tenancynote>> GetTenancyNote(int id)
+        public async Task<ActionResult<paymentsource>> GetPaymentSource(int id)
         {
-            var tenancynote = await _context.tenancynote.FindAsync(id);
+            var paymentsource = await _context.paymentsource.FindAsync(id);
 
-            if (tenancynote == null)
+            if (paymentsource == null)
             {
                 return NotFound();
             }
 
-            return tenancynote;
+            return paymentsource;
         }
 
-        // PUT: api/TenancyNotes/5
+        // PUT: api/PaymentSources/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTenancyNote(int id, tenancynote tenancynote)
+        public async Task<IActionResult> PutPaymentSource(int id, paymentsource paymentsource)
         {
-            if (id != tenancynote.tenancyNoteId)
+            if (id != paymentsource.paymentSourceId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(tenancynote).State = EntityState.Modified;
+            _context.Entry(paymentsource).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace OpenHouse.Core.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!tenancynoteExists(id))
+                if (!paymentsourceExists(id))
                 {
                     return NotFound();
                 }
@@ -76,37 +76,37 @@ namespace OpenHouse.Core.Api.Controllers
             return NoContent();
         }
 
-        // POST: api/TenancyNotes
+        // POST: api/PaymentSources
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<tenancynote>> PostTenancyNote(tenancynote tenancynote)
+        public async Task<ActionResult<paymentsource>> PostPaymentSource(paymentsource paymentsource)
         {
-            _context.tenancynote.Add(tenancynote);
+            _context.paymentsource.Add(paymentsource);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("Gettenancynote", new { id = tenancynote.tenancyNoteId }, tenancynote);
+            return CreatedAtAction("Getpaymentsource", new { id = paymentsource.paymentSourceId }, paymentsource);
         }
 
-        // DELETE: api/TenancyNotes/5
+        // DELETE: api/PaymentSources/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<tenancynote>> DeleteTenancyNote(int id)
+        public async Task<ActionResult<paymentsource>> DeletePaymentSource(int id)
         {
-            var tenancynote = await _context.tenancynote.FindAsync(id);
-            if (tenancynote == null)
+            var paymentsource = await _context.paymentsource.FindAsync(id);
+            if (paymentsource == null)
             {
                 return NotFound();
             }
 
-            _context.tenancynote.Remove(tenancynote);
+            _context.paymentsource.Remove(paymentsource);
             await _context.SaveChangesAsync();
 
-            return tenancynote;
+            return paymentsource;
         }
 
-        private bool tenancynoteExists(int id)
+        private bool paymentsourceExists(int id)
         {
-            return _context.tenancynote.Any(e => e.tenancyNoteId == id);
+            return _context.paymentsource.Any(e => e.paymentSourceId == id);
         }
     }
 }

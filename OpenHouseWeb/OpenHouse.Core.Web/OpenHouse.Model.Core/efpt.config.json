@@ -38,11 +38,23 @@
       },
       {
          "HasPrimaryKey": true,
+         "Name": "payment"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "paymentsource"
+      },
+      {
+         "HasPrimaryKey": true,
          "Name": "person"
       },
       {
          "HasPrimaryKey": true,
          "Name": "property"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "propertycharge"
       },
       {
          "HasPrimaryKey": true,

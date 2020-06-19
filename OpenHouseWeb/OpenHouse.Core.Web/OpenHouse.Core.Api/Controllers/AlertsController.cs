@@ -24,7 +24,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/Alerts
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<alert>>> Getalert()
+        public async Task<ActionResult<IEnumerable<alert>>> GetAlert()
         {
             return await _context.alert.ToListAsync();
         }
@@ -32,7 +32,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/Alerts/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<alert>> Getalert(int id)
+        public async Task<ActionResult<alert>> GetAlert(int id)
         {
             var alert = await _context.alert.FindAsync(id);
 
@@ -48,7 +48,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putalert(int id, alert alert)
+        public async Task<IActionResult> PutAlert(int id, alert alert)
         {
             if (id != alert.alertId)
             {
@@ -80,7 +80,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<alert>> Postalert(alert alert)
+        public async Task<ActionResult<alert>> PostAlert(alert alert)
         {
             _context.alert.Add(alert);
             await _context.SaveChangesAsync();
@@ -90,7 +90,7 @@ namespace OpenHouse.Core.Api.Controllers
 
         // DELETE: api/Alerts/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<alert>> Deletealert(int id)
+        public async Task<ActionResult<alert>> DeleteAlert(int id)
         {
             var alert = await _context.alert.FindAsync(id);
             if (alert == null)

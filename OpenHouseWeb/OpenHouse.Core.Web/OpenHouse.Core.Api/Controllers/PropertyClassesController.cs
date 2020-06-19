@@ -24,7 +24,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/PropertyClasses
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<propertyclass>>> Getpropertyclass()
+        public async Task<ActionResult<IEnumerable<propertyclass>>> GetPropertyClass()
         {
             return await _context.propertyclass.ToListAsync();
         }
@@ -32,7 +32,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/PropertyClasses/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<propertyclass>> Getpropertyclass(int id)
+        public async Task<ActionResult<propertyclass>> GetPropertyClass(int id)
         {
             var propertyclass = await _context.propertyclass.FindAsync(id);
 
@@ -48,7 +48,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putpropertyclass(int id, propertyclass propertyclass)
+        public async Task<IActionResult> PutPropertyClass(int id, propertyclass propertyclass)
         {
             if (id != propertyclass.propertyClassId)
             {
@@ -80,7 +80,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<propertyclass>> Postpropertyclass(propertyclass propertyclass)
+        public async Task<ActionResult<propertyclass>> PostPropertyClass(propertyclass propertyclass)
         {
             _context.propertyclass.Add(propertyclass);
             await _context.SaveChangesAsync();
@@ -90,7 +90,7 @@ namespace OpenHouse.Core.Api.Controllers
 
         // DELETE: api/PropertyClasses/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<propertyclass>> Deletepropertyclass(int id)
+        public async Task<ActionResult<propertyclass>> DeletePropertyClass(int id)
         {
             var propertyclass = await _context.propertyclass.FindAsync(id);
             if (propertyclass == null)

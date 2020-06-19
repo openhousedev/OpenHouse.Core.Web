@@ -24,7 +24,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/ActionTypes
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<actiontype>>> Getactiontype()
+        public async Task<ActionResult<IEnumerable<actiontype>>> GetActionType()
         {
             return await _context.actiontype.ToListAsync();
         }
@@ -48,7 +48,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putactiontype(int id, actiontype actiontype)
+        public async Task<IActionResult> PutActionType(int id, actiontype actiontype)
         {
             if (id != actiontype.actionTypeId)
             {
@@ -80,7 +80,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<actiontype>> Postactiontype(actiontype actiontype)
+        public async Task<ActionResult<actiontype>> PostActionType(actiontype actiontype)
         {
             _context.actiontype.Add(actiontype);
             await _context.SaveChangesAsync();
@@ -90,7 +90,7 @@ namespace OpenHouse.Core.Api.Controllers
 
         // DELETE: api/ActionTypes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<actiontype>> Deleteactiontype(int id)
+        public async Task<ActionResult<actiontype>> DeleteActionType(int id)
         {
             var actiontype = await _context.actiontype.FindAsync(id);
             if (actiontype == null)

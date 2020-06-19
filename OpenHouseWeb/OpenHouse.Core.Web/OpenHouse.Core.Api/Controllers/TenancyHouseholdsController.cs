@@ -24,7 +24,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/TenancyHouseholds
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<tenancyhousehold>>> Gettenancyhousehold()
+        public async Task<ActionResult<IEnumerable<tenancyhousehold>>> GetTenancyHousehold()
         {
             return await _context.tenancyhousehold.ToListAsync();
         }
@@ -48,7 +48,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Puttenancyhousehold(int id, tenancyhousehold tenancyhousehold)
+        public async Task<IActionResult> PutTenancyHousehold(int id, tenancyhousehold tenancyhousehold)
         {
             if (id != tenancyhousehold.tenancyHouseholdId)
             {
@@ -80,7 +80,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<tenancyhousehold>> Posttenancyhousehold(tenancyhousehold tenancyhousehold)
+        public async Task<ActionResult<tenancyhousehold>> PostTenancyHousehold(tenancyhousehold tenancyhousehold)
         {
             _context.tenancyhousehold.Add(tenancyhousehold);
             await _context.SaveChangesAsync();
@@ -90,7 +90,7 @@ namespace OpenHouse.Core.Api.Controllers
 
         // DELETE: api/TenancyHouseholds/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<tenancyhousehold>> Deletetenancyhousehold(int id)
+        public async Task<ActionResult<tenancyhousehold>> DeleteTenancyHousehold(int id)
         {
             var tenancyhousehold = await _context.tenancyhousehold.FindAsync(id);
             if (tenancyhousehold == null)

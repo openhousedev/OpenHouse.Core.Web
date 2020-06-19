@@ -24,7 +24,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/Tenancies
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<tenancy>>> Gettenancy()
+        public async Task<ActionResult<IEnumerable<tenancy>>> GetTenancy()
         {
             return await _context.tenancy.ToListAsync();
         }
@@ -32,7 +32,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/Tenancies/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<tenancy>> Gettenancy(int id)
+        public async Task<ActionResult<tenancy>> GetTenancy(int id)
         {
             var tenancy = await _context.tenancy.FindAsync(id);
 
@@ -48,7 +48,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Puttenancy(int id, tenancy tenancy)
+        public async Task<IActionResult> PutTenancy(int id, tenancy tenancy)
         {
             if (id != tenancy.tenancyId)
             {
@@ -80,7 +80,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<tenancy>> Posttenancy(tenancy tenancy)
+        public async Task<ActionResult<tenancy>> PostTenancy(tenancy tenancy)
         {
             _context.tenancy.Add(tenancy);
             await _context.SaveChangesAsync();
@@ -90,7 +90,7 @@ namespace OpenHouse.Core.Api.Controllers
 
         // DELETE: api/Tenancies/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<tenancy>> Deletetenancy(int id)
+        public async Task<ActionResult<tenancy>> DeleteTenancy(int id)
         {
             var tenancy = await _context.tenancy.FindAsync(id);
             if (tenancy == null)

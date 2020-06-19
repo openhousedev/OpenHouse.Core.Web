@@ -24,7 +24,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/TenancyTerminationReasons
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<tenancyterminationreason>>> Gettenancyterminationreason()
+        public async Task<ActionResult<IEnumerable<tenancyterminationreason>>> GettenancyTerminationReason()
         {
             return await _context.tenancyterminationreason.ToListAsync();
         }
@@ -32,7 +32,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/TenancyTerminationReasons/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<tenancyterminationreason>> Gettenancyterminationreason(int id)
+        public async Task<ActionResult<tenancyterminationreason>> GettenancyTerminationReason(int id)
         {
             var tenancyterminationreason = await _context.tenancyterminationreason.FindAsync(id);
 
@@ -48,7 +48,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Puttenancyterminationreason(int id, tenancyterminationreason tenancyterminationreason)
+        public async Task<IActionResult> PuttenancyTerminationReason(int id, tenancyterminationreason tenancyterminationreason)
         {
             if (id != tenancyterminationreason.tenancyTerminationReasonId)
             {
@@ -80,7 +80,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<tenancyterminationreason>> Posttenancyterminationreason(tenancyterminationreason tenancyterminationreason)
+        public async Task<ActionResult<tenancyterminationreason>> PosttenancyTerminationReason(tenancyterminationreason tenancyterminationreason)
         {
             _context.tenancyterminationreason.Add(tenancyterminationreason);
             await _context.SaveChangesAsync();
@@ -90,7 +90,7 @@ namespace OpenHouse.Core.Api.Controllers
 
         // DELETE: api/TenancyTerminationReasons/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<tenancyterminationreason>> Deletetenancyterminationreason(int id)
+        public async Task<ActionResult<tenancyterminationreason>> DeletetenancyTerminationReason(int id)
         {
             var tenancyterminationreason = await _context.tenancyterminationreason.FindAsync(id);
             if (tenancyterminationreason == null)

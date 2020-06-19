@@ -24,7 +24,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/TenureTypes
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<tenuretype>>> Gettenuretype()
+        public async Task<ActionResult<IEnumerable<tenuretype>>> GetTenureType()
         {
             return await _context.tenuretype.ToListAsync();
         }
@@ -32,7 +32,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/TenureTypes/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<tenuretype>> Gettenuretype(int id)
+        public async Task<ActionResult<tenuretype>> GetTenureType(int id)
         {
             var tenuretype = await _context.tenuretype.FindAsync(id);
 
@@ -48,7 +48,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Puttenuretype(int id, tenuretype tenuretype)
+        public async Task<IActionResult> PutTenureType(int id, tenuretype tenuretype)
         {
             if (id != tenuretype.tenureTypeId)
             {
@@ -90,7 +90,7 @@ namespace OpenHouse.Core.Api.Controllers
 
         // DELETE: api/TenureTypes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<tenuretype>> Deletetenuretype(int id)
+        public async Task<ActionResult<tenuretype>> DeleteTenureType(int id)
         {
             var tenuretype = await _context.tenuretype.FindAsync(id);
             if (tenuretype == null)

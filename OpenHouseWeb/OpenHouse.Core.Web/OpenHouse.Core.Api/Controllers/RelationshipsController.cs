@@ -24,7 +24,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/Relationships
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<relationship>>> Getrelationship()
+        public async Task<ActionResult<IEnumerable<relationship>>> GetRelationship()
         {
             return await _context.relationship.ToListAsync();
         }
@@ -32,7 +32,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/Relationships/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<relationship>> Getrelationship(int id)
+        public async Task<ActionResult<relationship>> GetRelationship(int id)
         {
             var relationship = await _context.relationship.FindAsync(id);
 
@@ -48,7 +48,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putrelationship(int id, relationship relationship)
+        public async Task<IActionResult> PutRelationship(int id, relationship relationship)
         {
             if (id != relationship.relationshipId)
             {
@@ -80,7 +80,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<relationship>> Postrelationship(relationship relationship)
+        public async Task<ActionResult<relationship>> PostRelationship(relationship relationship)
         {
             _context.relationship.Add(relationship);
             await _context.SaveChangesAsync();
@@ -90,7 +90,7 @@ namespace OpenHouse.Core.Api.Controllers
 
         // DELETE: api/Relationships/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<relationship>> Deleterelationship(int id)
+        public async Task<ActionResult<relationship>> DeleteRelationship(int id)
         {
             var relationship = await _context.relationship.FindAsync(id);
             if (relationship == null)

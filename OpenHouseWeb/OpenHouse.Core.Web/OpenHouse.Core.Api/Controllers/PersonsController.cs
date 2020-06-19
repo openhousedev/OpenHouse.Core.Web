@@ -24,7 +24,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/people
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<person>>> Getperson()
+        public async Task<ActionResult<IEnumerable<person>>> GetPerson()
         {
             return await _context.person.ToListAsync();
         }
@@ -32,7 +32,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/people/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<person>> Getperson(int id)
+        public async Task<ActionResult<person>> GetPerson(int id)
         {
             var person = await _context.person.FindAsync(id);
 
@@ -48,7 +48,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putperson(int id, person person)
+        public async Task<IActionResult> PutPerson(int id, person person)
         {
             if (id != person.personId)
             {
@@ -80,7 +80,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<person>> Postperson(person person)
+        public async Task<ActionResult<person>> PostPerson(person person)
         {
             _context.person.Add(person);
             await _context.SaveChangesAsync();
@@ -90,7 +90,7 @@ namespace OpenHouse.Core.Api.Controllers
 
         // DELETE: api/people/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<person>> Deleteperson(int id)
+        public async Task<ActionResult<person>> DeletePerson(int id)
         {
             var person = await _context.person.FindAsync(id);
             if (person == null)

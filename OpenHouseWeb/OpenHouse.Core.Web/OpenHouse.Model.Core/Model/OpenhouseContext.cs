@@ -22,8 +22,11 @@ namespace OpenHouse.Model.Core.Model
         public virtual DbSet<alerttype> alerttype { get; set; }
         public virtual DbSet<nationality> nationality { get; set; }
         public virtual DbSet<note> note { get; set; }
+        public virtual DbSet<payment> payment { get; set; }
+        public virtual DbSet<paymentsource> paymentsource { get; set; }
         public virtual DbSet<person> person { get; set; }
         public virtual DbSet<property> property { get; set; }
+        public virtual DbSet<propertycharge> propertycharge { get; set; }
         public virtual DbSet<propertyclass> propertyclass { get; set; }
         public virtual DbSet<propertynote> propertynote { get; set; }
         public virtual DbSet<propertytype> propertytype { get; set; }
@@ -147,6 +150,55 @@ namespace OpenHouse.Model.Core.Model
                     .HasCollation("utf8_general_ci");
             });
 
+            modelBuilder.Entity<payment>(entity =>
+            {
+                entity.HasIndex(e => e.paymentSourceId)
+                    .HasName("paymentSourceId");
+
+                entity.HasIndex(e => e.propertyChargeId)
+                    .HasName("propertyChargeId");
+
+                entity.HasIndex(e => e.tenancyId)
+                    .HasName("tenancyId");
+
+                entity.Property(e => e.createdByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.paymentProviderReference)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.updatedByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.HasOne(d => d.paymentSource)
+                    .WithMany(p => p.payment)
+                    .HasForeignKey(d => d.paymentSourceId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("payment_ibfk_3");
+
+                entity.HasOne(d => d.propertyCharge)
+                    .WithMany(p => p.payment)
+                    .HasForeignKey(d => d.propertyChargeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("payment_ibfk_1");
+
+                entity.HasOne(d => d.tenancy)
+                    .WithMany(p => p.payment)
+                    .HasForeignKey(d => d.tenancyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("payment_ibfk_2");
+            });
+
+            modelBuilder.Entity<paymentsource>(entity =>
+            {
+                entity.Property(e => e.source)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+            });
+
             modelBuilder.Entity<person>(entity =>
             {
                 entity.HasIndex(e => e.nationalityId)
@@ -256,6 +308,35 @@ namespace OpenHouse.Model.Core.Model
                     .WithMany(p => p.property)
                     .HasForeignKey(d => d.propertyTypeId)
                     .HasConstraintName("property_ibfk_2");
+            });
+
+            modelBuilder.Entity<propertycharge>(entity =>
+            {
+                entity.HasIndex(e => e.propertyId)
+                    .HasName("propertyId");
+
+                entity.HasIndex(e => e.rentAccountId)
+                    .HasName("rentAccountId");
+
+                entity.Property(e => e.createdByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.updatedByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.HasOne(d => d.property)
+                    .WithMany(p => p.propertycharge)
+                    .HasForeignKey(d => d.propertyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("propertycharge_ibfk_1");
+
+                entity.HasOne(d => d.rentAccount)
+                    .WithMany(p => p.propertycharge)
+                    .HasForeignKey(d => d.rentAccountId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("propertycharge_ibfk_2");
             });
 
             modelBuilder.Entity<propertyclass>(entity =>

@@ -24,7 +24,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/PropertyNotes
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<propertynote>>> Getpropertynote()
+        public async Task<ActionResult<IEnumerable<propertynote>>> GetPropertyNote()
         {
             return await _context.propertynote.ToListAsync();
         }

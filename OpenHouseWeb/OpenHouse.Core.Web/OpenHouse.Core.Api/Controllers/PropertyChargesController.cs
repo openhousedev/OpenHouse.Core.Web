@@ -12,50 +12,50 @@ namespace OpenHouse.Core.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TenancyNotesController : ControllerBase
+    public class PropertyChargesController : ControllerBase
     {
         private readonly OpenhouseContext _context;
 
-        public TenancyNotesController(OpenhouseContext context)
+        public PropertyChargesController(OpenhouseContext context)
         {
             _context = context;
         }
 
-        // GET: api/TenancyNotes
+        // GET: api/PropertyCharges
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<tenancynote>>> GetTenancyNote()
+        public async Task<ActionResult<IEnumerable<propertycharge>>> GetPropertyCharge()
         {
-            return await _context.tenancynote.ToListAsync();
+            return await _context.propertycharge.ToListAsync();
         }
 
-        // GET: api/TenancyNotes/5
+        // GET: api/PropertyCharges/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<tenancynote>> GetTenancyNote(int id)
+        public async Task<ActionResult<propertycharge>> GetPropertyCharge(int id)
         {
-            var tenancynote = await _context.tenancynote.FindAsync(id);
+            var propertycharge = await _context.propertycharge.FindAsync(id);
 
-            if (tenancynote == null)
+            if (propertycharge == null)
             {
                 return NotFound();
             }
 
-            return tenancynote;
+            return propertycharge;
         }
 
-        // PUT: api/TenancyNotes/5
+        // PUT: api/PropertyCharges/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTenancyNote(int id, tenancynote tenancynote)
+        public async Task<IActionResult> PutPropertyCharge(int id, propertycharge propertycharge)
         {
-            if (id != tenancynote.tenancyNoteId)
+            if (id != propertycharge.propertyChargeId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(tenancynote).State = EntityState.Modified;
+            _context.Entry(propertycharge).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +63,7 @@ namespace OpenHouse.Core.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!tenancynoteExists(id))
+                if (!propertychargeExists(id))
                 {
                     return NotFound();
                 }
@@ -76,37 +76,37 @@ namespace OpenHouse.Core.Api.Controllers
             return NoContent();
         }
 
-        // POST: api/TenancyNotes
+        // POST: api/PropertyCharges
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<tenancynote>> PostTenancyNote(tenancynote tenancynote)
+        public async Task<ActionResult<propertycharge>> PostPropertyCharge(propertycharge propertycharge)
         {
-            _context.tenancynote.Add(tenancynote);
+            _context.propertycharge.Add(propertycharge);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("Gettenancynote", new { id = tenancynote.tenancyNoteId }, tenancynote);
+            return CreatedAtAction("Getpropertycharge", new { id = propertycharge.propertyChargeId }, propertycharge);
         }
 
-        // DELETE: api/TenancyNotes/5
+        // DELETE: api/PropertyCharges/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<tenancynote>> DeleteTenancyNote(int id)
+        public async Task<ActionResult<propertycharge>> DeletePropertyCharge(int id)
         {
-            var tenancynote = await _context.tenancynote.FindAsync(id);
-            if (tenancynote == null)
+            var propertycharge = await _context.propertycharge.FindAsync(id);
+            if (propertycharge == null)
             {
                 return NotFound();
             }
 
-            _context.tenancynote.Remove(tenancynote);
+            _context.propertycharge.Remove(propertycharge);
             await _context.SaveChangesAsync();
 
-            return tenancynote;
+            return propertycharge;
         }
 
-        private bool tenancynoteExists(int id)
+        private bool propertychargeExists(int id)
         {
-            return _context.tenancynote.Any(e => e.tenancyNoteId == id);
+            return _context.propertycharge.Any(e => e.propertyChargeId == id);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/Actions
         [HttpGet]
         [EnableQuery()]
-        public async Task<ActionResult<IEnumerable<action>>> Getaction()
+        public async Task<ActionResult<IEnumerable<action>>> GetAction()
         {
             return await _context.action.ToListAsync();
         }
@@ -32,7 +32,7 @@ namespace OpenHouse.Core.Api.Controllers
         // GET: api/Actions/5
         [HttpGet("{id}")]
         [EnableQuery()]
-        public async Task<ActionResult<action>> Getaction(int id)
+        public async Task<ActionResult<action>> GetAction(int id)
         {
             var action = await _context.action.FindAsync(id);
 
@@ -48,7 +48,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> Putaction(int id, action action)
+        public async Task<IActionResult> PutAction(int id, action action)
         {
             if (id != action.actionId)
             {
@@ -80,7 +80,7 @@ namespace OpenHouse.Core.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<action>> Postaction(action action)
+        public async Task<ActionResult<action>> PostAction(action action)
         {
             _context.action.Add(action);
             await _context.SaveChangesAsync();
@@ -90,7 +90,7 @@ namespace OpenHouse.Core.Api.Controllers
 
         // DELETE: api/Actions/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<action>> Deleteaction(int id)
+        public async Task<ActionResult<action>> DeleteAction(int id)
         {
             var action = await _context.action.FindAsync(id);
             if (action == null)

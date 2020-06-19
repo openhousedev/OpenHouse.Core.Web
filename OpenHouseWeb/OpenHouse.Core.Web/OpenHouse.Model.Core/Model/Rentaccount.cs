@@ -8,10 +8,18 @@ namespace OpenHouse.Model.Core.Model
 {
     public partial class rentaccount
     {
+        public rentaccount()
+        {
+            propertycharge = new HashSet<propertycharge>();
+        }
+
         [Key]
         [Column(TypeName = "int(11)")]
         public int rentAccountId { get; set; }
         [Column("rentAccount", TypeName = "varchar(100)")]
         public string rentAccount1 { get; set; }
+
+        [InverseProperty("rentAccount")]
+        public virtual ICollection<propertycharge> propertycharge { get; set; }
     }
 }
