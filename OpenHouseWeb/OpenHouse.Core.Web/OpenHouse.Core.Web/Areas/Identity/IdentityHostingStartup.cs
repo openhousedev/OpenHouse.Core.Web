@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -13,15 +14,22 @@ namespace OpenHouse.Core.Web.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {
+        private readonly RoleManager<IdentityRole> _roleManager;
+        public IdentityHostingStartup(RoleManager<IdentityRole> roleManager)
+        {
+            _roleManager = roleManager;
+        }
+
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
+            builder.ConfigureServices((context, services) =>
+            {
                 services.AddDbContext<IdentityContext>(options =>
                     options.UseMySql(
                         context.Configuration.GetConnectionString("IdentityContextConnection")));
 
-                services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
-                    .AddEntityFrameworkStores<IdentityContext>();
+
+
             });
         }
     }

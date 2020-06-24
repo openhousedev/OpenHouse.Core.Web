@@ -11,9 +11,9 @@ namespace OpenHouse.Core.Web.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public UsersController(UserManager<User> userManager)
+        public UsersController(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
         }

@@ -151,7 +151,7 @@ namespace OpenHouse.Core.Web.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("OpenHouse.Core.Web.Areas.Identity.Data.User", b =>
+            modelBuilder.Entity("OpenHouse.Core.Web.Areas.Identity.Data.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
@@ -226,7 +226,7 @@ namespace OpenHouse.Core.Web.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("OpenHouse.Core.Web.Areas.Identity.Data.User", null)
+                    b.HasOne("OpenHouse.Core.Web.Areas.Identity.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -235,7 +235,7 @@ namespace OpenHouse.Core.Web.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("OpenHouse.Core.Web.Areas.Identity.Data.User", null)
+                    b.HasOne("OpenHouse.Core.Web.Areas.Identity.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -250,7 +250,7 @@ namespace OpenHouse.Core.Web.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("OpenHouse.Core.Web.Areas.Identity.Data.User", null)
+                    b.HasOne("OpenHouse.Core.Web.Areas.Identity.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -259,7 +259,7 @@ namespace OpenHouse.Core.Web.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("OpenHouse.Core.Web.Areas.Identity.Data.User", null)
+                    b.HasOne("OpenHouse.Core.Web.Areas.Identity.Data.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

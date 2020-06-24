@@ -43,6 +43,7 @@ namespace OpenHouse.Model.Core.Model
         public virtual DbSet<vwalert> vwalert { get; set; }
         public virtual DbSet<vwperson> vwperson { get; set; }
         public virtual DbSet<vwproperty> vwproperty { get; set; }
+        public virtual DbSet<vwrentledger> vwrentledger { get; set; }
         public virtual DbSet<vwtenancy> vwtenancy { get; set; }
         public virtual DbSet<vwtenancyhousehold> vwtenancyhousehold { get; set; }
         public virtual DbSet<vwuser> vwuser { get; set; }
@@ -711,6 +712,23 @@ namespace OpenHouse.Model.Core.Model
                 entity.Property(e => e.tenancyId).HasDefaultValueSql("'0'");
 
                 entity.Property(e => e.updatedByUserID)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+            });
+
+            modelBuilder.Entity<vwrentledger>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vwrentledger");
+
+                entity.Property(e => e.paymentId).HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.paymentProviderReference)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.rentAccount)
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
             });

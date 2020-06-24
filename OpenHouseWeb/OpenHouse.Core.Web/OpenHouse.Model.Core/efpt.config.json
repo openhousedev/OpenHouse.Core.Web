@@ -122,6 +122,10 @@
       },
       {
          "HasPrimaryKey": true,
+         "Name": "vwrentledger"
+      },
+      {
+         "HasPrimaryKey": true,
          "Name": "vwtenancy"
       },
       {

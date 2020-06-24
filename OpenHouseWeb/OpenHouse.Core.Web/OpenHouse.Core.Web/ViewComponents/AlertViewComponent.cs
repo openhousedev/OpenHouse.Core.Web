@@ -11,10 +11,10 @@ namespace GENerate.ViewComponents
     [Authorize]
     public class AlertViewComponent : ViewComponent
     {
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IAlertService _alertSvc;
 
-        public AlertViewComponent(UserManager<User> userManager, IAlertService alertSvc)
+        public AlertViewComponent(UserManager<ApplicationUser> userManager, IAlertService alertSvc)
         {
             _alertSvc = alertSvc;
             _userManager = userManager;

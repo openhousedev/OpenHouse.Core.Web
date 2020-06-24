@@ -154,6 +154,15 @@ namespace OpenHouse.Core.Services
 
             return relationships;
         }
+        /// <summary>
+        /// Checks for tenancy exists
+        /// </summary>
+        /// <param name="id">TenancyId</param>
+        /// <returns>bool</returns>
+        public async Task<bool> TenancyExistsAsync(int id)
+        {
+            return  await _context.tenancy.AnyAsync(e => e.tenancyId == id);
+        }
 
     }
 }

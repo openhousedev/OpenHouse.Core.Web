@@ -36,9 +36,12 @@
 @*Include alert manager view component *@
 @await Component.InvokeAsync("Alert")
 
-<div class="row">
+@*Include property charge manager view component *@
+@await Component.InvokeAsync("PropertyCharge")
+
+<div class="row mt-4">
     <div class="col-md-6">
-        <h4>Property Details</h4>
+        <h4><i class="fa fa-home"></i>&nbsp;Property Details</h4>
     </div>
     <div class="col-md-6">
         <input type="button" class="btn btn-outline-primary float-right ml-1" onClick="window.open('', '_self').close();" value="Done" />
@@ -61,6 +64,9 @@
         <a class="nav-link" id="tenancyhist-tab" data-toggle="tab" href="#tenancyhist" role="tab" aria-controls="tenancyhist" aria-selected="false">Tenancy History</a>
     </li>
     <li class="nav-item">
+        <a class="nav-link" id="charges-tab" data-toggle="tab" href="#charges" role="tab" aria-controls="charges" aria-selected="false">Property Charges</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes" role="tab" aria-controls="notes" aria-selected="false">Notes <span class="badge badge-pill badge-info">@ViewBag.OutstandingActionsCount</span></a>
     </li>
     <li class="nav-item">
@@ -71,7 +77,7 @@
     <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="search-tab">
         <div class="row mt-4">
             <div class="col-md-6">
-                <dl class="row">
+                <dl>
                     <dt class="col-sm-10">
                         @Html.DisplayNameFor(model => model.propertyNum)
                     </dt>
@@ -171,7 +177,7 @@
         </div>
     </div>
     <div class="tab-pane fade" id="tenancyhist" role="tabpanel" aria-labelledby="tenancyhist-tab">
-        <div class="row mt-4">
+        <div class="mt-4">
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
@@ -213,13 +219,67 @@
             </div>
         </div>
     </div>
+    <div class="tab-pane fade" id="charges" role="tabpanel" aria-labelledby="search-tab">
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <a class="btn btn-lg btn-primary text-white float-right mr-2" onclick="createPropertyCharge(@Model.propertyId)"><i class="fa fa-file-invoice"></i>&nbsp;Create Property Charge</a>
+            </div>
+        </div>
+        <div class="mt-4">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                Rent Account
+                            </th>
+                            <th>
+                                Value
+                            </th>
+                            <th>
+                                Start
+                            </th>
+                            <th>
+                                End
+                            </th>
+                            <th>
+
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var charge in Model.propertycharge)
+                        {
+                            <tr>
+                                <td>
+                                    @charge.rentAccount.rentAccount1
+                                </td>
+                                <td>
+                                    @charge.charge
+                                </td>
+                                <td>
+                                    @charge.startDT.ToString("dd/MM/yyyy")
+                                </td>
+                                <td>
+                                    @(charge.endDT.HasValue ? charge.endDT.Value.ToString("dd/MM/yyyy") : " - ")
+                                </td>
+                                <td>
+                                    <a class="btn btn-light" onclick="editPropertyCharge(@charge.propertyChargeId, @charge.propertyId);">Edit</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
     <div class="tab-pane fade" id="notes" role="tabpanel" aria-labelledby="notes-tab">
         <div class="row mt-4">
             <div class="col-md-12">
                 <a class="btn btn-lg btn-primary text-white float-right mr-2" onclick="createNote(@Model.propertyId,'PropertyNote')"><i class="fa fa-sticky-note"></i>&nbsp;Create Note</a>
             </div>
         </div>
-        <div class="row mt-4">
+        <div class="mt-4">
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
@@ -262,7 +322,7 @@
         </div>
     </div>
     <div class="tab-pane fade" id="audit" role="tabpanel" aria-labelledby="audit-tab">
-        <div class="row mt-3 mb-3">
+        <div class="mt-3 mb-3">
             <div class="card w-100">
                 <div class="card-body">
                     <div class="row">

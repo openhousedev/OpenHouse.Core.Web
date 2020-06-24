@@ -1,0 +1,66 @@
+﻿<!--View RentLedger Modal-->
+<div id="modalRentLedger" class="modal fade" aria-hidden="true" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fa fa-tasks"></i>&nbsp;RentLedger</h5>
+                <button type="button" class="close" onclick="clearRentLedgerModal();" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="txtRentLedgerDueDate" class="control-label">Due Date</label>
+                    <input type="date" id="txtRentLedgerDueDate" class="form-control" />
+                    <span id="actionDueDateValidationResult" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">RentLedgerType</label>
+                    <select class="form-control" id="selRentLedgerType" asp-items="ViewBag.actionTypeId"></select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnCancelRentLedger" class="btn btn-secondary" onclick="clearRentLedgerModal();" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Create Payment Modal-->
+<div id="modalPayment" class="modal fade" aria-hidden="true" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fa fa-tasks"></i>&nbsp;Payment</h5>
+                <button type="button" class="close" onclick="clearPaymentModal();" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="control-label">Payment Source</label>
+                        <select class="form-control" id="selPeymentSource" asp-items="ViewBag.paymentSourceId"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txtPaymentDueDate" class="control-label">Payment Amount</label>
+                    <input type="text" id="txtPaymentAmount" class="form-control" />
+                    <span id="actionDueDateValidationResult" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="txtPaymentDueDate" class="control-label">Date Recieved</label>
+                    <input type="date" id="txtPaymentDate" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="txtPaymentDueDate" class="control-label">Payment Provider Ref</label>
+                    <input type="text" id="txtPaymentProviderRef" class="form-control" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnProcessPayment" class="btn btn-primary" onclick="processPayment();" data-dismiss="modal">Save</button>
+                <button type="button" id="btnCancelPayment" class="btn btn-secondary" onclick="clearPaymentModal();" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

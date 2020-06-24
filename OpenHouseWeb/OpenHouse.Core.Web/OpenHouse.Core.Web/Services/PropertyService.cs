@@ -64,6 +64,7 @@ namespace OpenHouse.Core.Services
             var property = await _context.property
                                         .Include(p => p.propertynote)
                                             .ThenInclude(p => p.note)
+                                        .Include(p => p.propertycharge)
                                         .Include(p => p.propertyClass)
                                         .Include(p => p.propertyType)
                                         .FirstOrDefaultAsync(m => m.propertyId == id);

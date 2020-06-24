@@ -39,6 +39,7 @@ C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debu
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.PlatformAbstractions.dll
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.dll
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\Microsoft.OData.Core.dll
@@ -53,8 +54,15 @@ C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debu
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\MySqlConnector.dll
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\Namotion.Reflection.dll
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\NJsonSchema.dll
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\NSwag.Annotations.dll
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\NSwag.AspNetCore.dll
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\NSwag.Core.dll
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\NSwag.Generation.dll
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\NSwag.Generation.AspNetCore.dll
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\NuGet.Frameworks.dll
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\Pomelo.EntityFrameworkCore.MySql.dll
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\Pomelo.EntityFrameworkCore.MySql.Design.dll
@@ -161,11 +169,3 @@ C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\obj\Debu
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\obj\Debug\netcoreapp3.1\OpenHouse.Core.Api.dll
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\obj\Debug\netcoreapp3.1\OpenHouse.Core.Api.pdb
 C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\obj\Debug\netcoreapp3.1\OpenHouse.Core.Api.genruntimeconfig.cache
-C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.PlatformAbstractions.dll
-C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\Namotion.Reflection.dll
-C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\NJsonSchema.dll
-C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\NSwag.Annotations.dll
-C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\NSwag.AspNetCore.dll
-C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\NSwag.Core.dll
-C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\NSwag.Generation.dll
-C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Core.Api\bin\Debug\netcoreapp3.1\NSwag.Generation.AspNetCore.dll

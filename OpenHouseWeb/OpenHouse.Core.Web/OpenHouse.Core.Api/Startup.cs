@@ -34,11 +34,11 @@ namespace OpenHouse.Core.Api
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                                   builder =>
                                   {
-                                    builder.AllowAnyOrigin();
-                                    builder.AllowAnyMethod();
-                                    builder.AllowAnyHeader();
+                                      builder.AllowAnyOrigin();
+                                      builder.AllowAnyMethod();
+                                      builder.AllowAnyHeader();
                                   });
-                            });
+            });
 
             services.AddControllers().AddNewtonsoftJson();
             services.AddDbContext<OpenhouseContext>();
@@ -59,7 +59,27 @@ namespace OpenHouse.Core.Api
             });
 
             // Register the Swagger services
-            services.AddSwaggerDocument();
+            services.AddSwaggerDocument(config =>
+            {
+                config.PostProcess = document =>
+                {
+                    document.Info.Version = "v1";
+                    document.Info.Title = "OpenHouse API";
+                    document.Info.Description = "OpenHouse API Documentation";
+                    document.Info.TermsOfService = "None";
+                    document.Info.Contact = new NSwag.OpenApiContact
+                    {
+                        Name = "Ross Ballantine",
+                        Email = string.Empty,
+                        Url = "https://github.com/openhousedev/OpenHouse.Core.Web"
+                    };
+                    document.Info.License = new NSwag.OpenApiLicense
+                    {
+                        Name = "Apache License 2.0",
+                        Url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+                    };
+                };
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,7 +92,7 @@ namespace OpenHouse.Core.Api
 
             app.UseCors(MyAllowSpecificOrigins);
             app.UseHttpsRedirection();
-            app.UseRouting(); 
+            app.UseRouting();
             app.UseAuthorization();
 
             // Register the Swagger generator and the Swagger UI middlewares

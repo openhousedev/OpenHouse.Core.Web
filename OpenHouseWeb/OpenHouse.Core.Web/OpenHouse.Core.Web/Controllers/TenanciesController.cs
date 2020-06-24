@@ -12,6 +12,7 @@ using OpenHouse.Core.Web.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 using Microsoft.Extensions.Configuration;
+using OpenHouse.Core.Web.Services.Interfaces;
 
 namespace OpenHouse.Core.Web.Controllers
 {
@@ -23,12 +24,12 @@ namespace OpenHouse.Core.Web.Controllers
         private readonly IPropertyService _propertySvc;
         private readonly IActionService _actionSvc;
         private readonly IAlertService _alertSvc;
-        private readonly OpenhouseContext _context;
+        private readonly IRentAccountService _rentAccountSvc;
         private readonly MapperConfiguration _mapperConfig;
         private readonly IMapper _mapper;
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public TenanciesController(IConfiguration config, ITenancyService tenancySvc, IPropertyService propertySvc, IActionService actionSvc, IAlertService alertSvc, UserManager<User> userManager)
+        public TenanciesController(IConfiguration config, ITenancyService tenancySvc, IPropertyService propertySvc, IActionService actionSvc, IAlertService alertSvc, IRentAccountService rentAccountSvc, UserManager<ApplicationUser> userManager)
         {
             _config = config;
             _tenancySvc = tenancySvc;
@@ -36,6 +37,7 @@ namespace OpenHouse.Core.Web.Controllers
             _actionSvc = actionSvc;
             _alertSvc = alertSvc;
             _userManager = userManager;
+            _rentAccountSvc = rentAccountSvc;
 
             //AutoMapper mapping config
             _mapperConfig = new MapperConfiguration(cfg => {
@@ -74,16 +76,17 @@ namespace OpenHouse.Core.Web.Controllers
             tenancyVM = _mapper.Map<TenancyViewModel>(_tenancy); //Map tenancy object to ViewModel
               
             //Get created by & update by username
-            User createByUser = await _userManager.FindByIdAsync(tenancyVM.createdByUserID);
+            ApplicationUser createByUser = await _userManager.FindByIdAsync(tenancyVM.createdByUserID);
             tenancyVM.createdByUsername = createByUser.UserName;
 
-            User updatedByUser = await _userManager.FindByIdAsync(tenancyVM.updatedByUserID);
+            ApplicationUser updatedByUser = await _userManager.FindByIdAsync(tenancyVM.updatedByUserID);
             tenancyVM.updatedByUsername = updatedByUser.UserName;
 
             tenancyVM.tenancyhousehold = await _tenancySvc.GetTenancyHouseholdAsync(tenancyVM.tenancyId); //Get household data for tenancy
             tenancyVM.property = await _propertySvc.GetPropertyViewAsync(tenancyVM.propertyId.Value); //Get property view data for tenancy
             tenancyVM.actions = await _actionSvc.GetActionsForTenancyAsync(tenancyVM.tenancyId); //Get actions data for tenancy
             tenancyVM.alerts = await _alertSvc.GetAlertsForTenancyAsync(tenancyVM.tenancyId); //Get all alerts for tenancy
+            tenancyVM.rentLedger = await _rentAccountSvc.GetRentLedgerForTenancyAsync(tenancyVM.tenancyId); //Get rent ledger records for tenancy
 
             ViewBag.ApiLocation = _config["APILocation"]; //Set API location URL
             ViewBag.LoggedInUserId = user.Id; //Set logged in user Id
@@ -92,6 +95,7 @@ namespace OpenHouse.Core.Web.Controllers
         }
 
         // GET: Tenancies/Create
+        [Authorize(Roles = "Admin,HousingManager,HousingUser")]
         public async Task<IActionResult> Create()
         {
             ViewData["terminationReasonId"] = new SelectList(await _tenancySvc.GetTenancyterminationreasonsAsync(), "tenancyTerminationReasonId", "terminationReason");
@@ -105,6 +109,7 @@ namespace OpenHouse.Core.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,HousingManager,HousingUser")]
         public async Task<IActionResult> Create([Bind("tenancyId,propertyId,leadTenantPersonId,jointTenantPersonId,tenureTypeId,startDate,terminationDate,terminationReasonId,updatedByUserID,updatedDT,createdByUserID,createdDT")] TenancyViewModel tenancyVM)
         {
             if (ModelState.IsValid)
@@ -129,6 +134,7 @@ namespace OpenHouse.Core.Web.Controllers
         }
 
         // GET: Tenancies/Edit/5
+        [Authorize(Roles = "Admin,HousingManager,HousingUser")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -156,6 +162,7 @@ namespace OpenHouse.Core.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,HousingManager,HousingUser")]
         public async Task<IActionResult> Edit(int id, [Bind("tenancyId,propertyId,leadTenantPersonId,jointTenantPersonId,tenureTypeId,startDate,terminationDate,terminationReasonId,updatedByUserID,updatedDT,createdByUserID,createdDT")] TenancyViewModel tenancyVM)
         {
             if (id != tenancyVM.tenancyId)
@@ -179,7 +186,7 @@ namespace OpenHouse.Core.Web.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!tenancyExists(tenancyVM.tenancyId))
+                    if (!await _tenancySvc.TenancyExistsAsync(tenancyVM.tenancyId))
                     {
                         return NotFound();
                     }
@@ -197,37 +204,36 @@ namespace OpenHouse.Core.Web.Controllers
         }
 
         // GET: Tenancies/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //[Authorize(Roles = "Admin,HousingManager")]
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var tenancy = await _tenancySvc.GetTenancyAsync(id.Value);
+        //    var tenancy = await _tenancySvc.GetTenancyAsync(id.Value);
 
-            if (tenancy == null)
-            {
-                return NotFound();
-            }
+        //    if (tenancy == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(tenancy);
-        }
+        //    return View(tenancy);
+        //}
 
-        // POST: Tenancies/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var tenancy = await _context.tenancy.FindAsync(id);
-            _context.tenancy.Remove(tenancy);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+        //// POST: Tenancies/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //[Authorize(Roles = "Admin,HousingManager")]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var tenancy = await _context.tenancy.FindAsync(id);
+        //    _context.tenancy.Remove(tenancy);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
-        private bool tenancyExists(int id)
-        {
-            return _context.tenancy.Any(e => e.tenancyId == id);
-        }
+
     }
 }

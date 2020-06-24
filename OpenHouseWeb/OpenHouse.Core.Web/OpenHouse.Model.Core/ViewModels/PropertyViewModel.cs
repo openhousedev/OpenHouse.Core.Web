@@ -72,6 +72,7 @@ namespace OpenHouse.Model.Core.Model
         public virtual propertyclass propertyClass { get; set; }
         public virtual propertytype propertyType { get; set; }
         public ICollection<propertynote> propertynote { get; set; }
+        public ICollection<propertycharge> propertycharge { get; set; }
         public List<vwtenancy> tenancyHistory { get; set; }
     }
 }

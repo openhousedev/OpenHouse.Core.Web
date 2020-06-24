@@ -23,9 +23,9 @@ namespace OpenHouse.Core.Web.Controllers
         private readonly ITenancyService _tenancySvc;
         private readonly MapperConfiguration _mapperConfig;
         private readonly IMapper _mapper;
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public PropertiesController(IConfiguration config, IPropertyService propertySvc, ITenancyService tenancySvc, UserManager<User> userManager)
+        public PropertiesController(IConfiguration config, IPropertyService propertySvc, ITenancyService tenancySvc, UserManager<ApplicationUser> userManager)
         {
             //Get config instance
             _config = config;
@@ -85,10 +85,10 @@ namespace OpenHouse.Core.Web.Controllers
                 propertyVM.tenancyId = activeTenancy.tenancyId;
 
             //Get created by & update by username
-            User createByUser = await _userManager.FindByIdAsync(propertyVM.createdByUserID);
+            ApplicationUser createByUser = await _userManager.FindByIdAsync(propertyVM.createdByUserID);
             propertyVM.createdByUsername = createByUser.UserName;
 
-            User updatedByUser = await _userManager.FindByIdAsync(propertyVM.updatedByUserID);
+            ApplicationUser updatedByUser = await _userManager.FindByIdAsync(propertyVM.updatedByUserID);
             propertyVM.updatedByUsername = updatedByUser.UserName;
 
             ViewBag.ApiLocation = _config["APILocation"]; //Set API location URL
@@ -110,6 +110,7 @@ namespace OpenHouse.Core.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles ="Admin,HousingManager")]
         public async Task<IActionResult> Create([Bind("propertyId,propertyClassId,propertyTypeId,propertyNum,propertySubNum,address1,address2,address3,address4,postCode,demolitionDate,creationDate,livingRoomQty,singleBedroomQty,doubleBedroomQty,maxOccupants,updatedByUserID,updatedDT,createdByUserID,createdDT")] PropertyViewModel propertyVM)
         {
             if (ModelState.IsValid)
@@ -135,6 +136,7 @@ namespace OpenHouse.Core.Web.Controllers
         }
 
         // GET: Properties/Edit/5
+        [Authorize(Roles = "Admin,HousingManager")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -160,6 +162,7 @@ namespace OpenHouse.Core.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,HousingManager")]
         public async Task<IActionResult> Edit(int id, [Bind("propertyId,propertyClassId,propertyTypeId,propertyNum,propertySubNum,address1,address2,address3,address4,postCode,demolitionDate,creationDate,livingRoomQty,singleBedroomQty,doubleBedroomQty,maxOccupants,updatedByUserID,updatedDT,createdByUserID,createdDT")] PropertyViewModel propertyVM)
         {
             if (id != propertyVM.propertyId)

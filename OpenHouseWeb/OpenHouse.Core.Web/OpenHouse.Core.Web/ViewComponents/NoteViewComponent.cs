@@ -9,9 +9,9 @@ namespace GENerate.ViewComponents
     [Authorize]
     public class NoteViewComponent : ViewComponent
     {
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public NoteViewComponent(UserManager<User> userManager)
+        public NoteViewComponent(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
         }

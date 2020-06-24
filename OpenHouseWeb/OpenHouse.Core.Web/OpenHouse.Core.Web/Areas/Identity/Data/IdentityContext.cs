@@ -9,7 +9,7 @@ using OpenHouse.Core.Web.Areas.Identity.Data;
 
 namespace OpenHouse.Core.Web.Data
 {
-    public class IdentityContext : IdentityDbContext<User>
+    public class IdentityContext : IdentityDbContext<ApplicationUser>
     {
         public IdentityContext(DbContextOptions<IdentityContext> options)
             : base(options)

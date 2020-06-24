@@ -49,5 +49,6 @@ namespace OpenHouse.Model.Core.Model
         public ICollection<vwalert> alerts { get; set; }
         public ICollection<tenancyhousehold> tenancyhousehold { get; set; }
         public ICollection<tenancynote> tenancynote { get; set; }
+        public ICollection<vwrentledger> rentLedger { get; set; }
     }
 }

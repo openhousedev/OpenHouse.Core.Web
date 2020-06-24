@@ -109,3 +109,12 @@ dd {
 .control-label {
     font-weight: bold;
 }
+
+@media (max-width: 768px) {
+
+    [class*="col-"] {
+        margin-bottom: 5px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+}

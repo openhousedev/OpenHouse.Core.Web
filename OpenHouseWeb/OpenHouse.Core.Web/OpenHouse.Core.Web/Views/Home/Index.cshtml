@@ -78,17 +78,35 @@
     </script>
 }
 <div class="col-12">
+    <div class="card mt-4 mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <a class="btn btn-primary w-100" asp-action="Create" asp-controller="Properties"><i class="fa fa-home"></i>&nbsp;Create Property</a>
+                </div>
+                <div class="col-md-4">
+                    <a class="btn btn-primary w-100" asp-action="Create" asp-controller="Tenancies"><i class="fas fa-house-user"></i>&nbsp;Create Tenancy</a>
+                </div>
+                <div class="col-md-4">
+                    <a class="btn btn-primary w-100" asp-action="Create" asp-controller="Persons"><i class="fas fa-user-plus"></i>&nbsp;Create Person</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="search-tab" data-toggle="tab" href="#search" role="tab" aria-controls="search" aria-selected="true">Search</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" id="actions-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="actions" aria-selected="false">My Actions <span class="badge badge-pill badge-danger">@ViewBag.OutstandingActionsCount</span></a>
-        </li>
+        @if (User.IsInRole("Admin") || User.IsInRole("HousingUser") || User.IsInRole("HousingManager"))
+        {
+            <li class="nav-item">
+                <a class="nav-link" id="actions-tab" data-toggle="tab" href="#actions" role="tab" aria-controls="actions" aria-selected="false">My Actions <span class="badge badge-pill badge-danger">@ViewBag.OutstandingActionsCount</span></a>
+            </li>
+        }
     </ul>
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="search" role="tabpanel" aria-labelledby="search-tab">
-            <div class="row mt-3">
+            <div class="mt-3">
                 <div class="card w-100">
                     <div class="card-header">
                         <i class="fa fa-search"></i>&nbsp;Search
@@ -117,48 +135,52 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <div class="row mt-3">
-                <div class="card w-100">
-                    <div class="card-header">
-                        <i class="fa fa-inbox"></i>&nbsp;My Actions
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-borderless">
-                                <thead>
-                                    <tr>
-                                        <th>Tenancy Id</th>
-                                        <th>Address</th>
-                                        <th>Type</th>
-                                        <th>Due Date</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var action in Model)
-                                    {
+        @if (User.IsInRole("Admin") || User.IsInRole("HousingUser") || User.IsInRole("HousingManager"))
+        {
+            <div class="tab-pane fade" id="actions" role="tabpanel" aria-labelledby="action-tab">
+                <div class="mt-3">
+                    <div class="card w-100">
+                        <div class="card-header">
+                            <i class="fa fa-inbox"></i>&nbsp;My Actions
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-borderless">
+                                    <thead>
                                         <tr>
-                                            <td>
-                                                @Html.ActionLink(action.tenancyId.ToString(), "Details", "Tenancies", new { @id = action.tenancyId }, new { @class = "btn btn-link", @target = "_blank" })
-                                            </td>
-                                            <td>
-                                                @Html.ActionLink(action.contactAddress.ToString(), "Details", "Properties", new { @id = action.propertyId }, new { @class = "btn btn-link", @target = "_blank" })
-                                            </td>
-                                            <td>
-                                                @action.actionType
-                                            </td>
-                                            <td>
-                                                @action.actionDueDate.ToString("dd/MM/yyyy")
-                                            </td>
+                                            <th>Tenancy Id</th>
+                                            <th>Address</th>
+                                            <th>Type</th>
+                                            <th>Due Date</th>
+                                            <th></th>
                                         </tr>
-                                    }
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var action in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.ActionLink(action.tenancyId.ToString(), "Details", "Tenancies", new { @id = action.tenancyId }, new { @class = "btn btn-link", @target = "_blank" })
+                                                </td>
+                                                <td>
+                                                    @Html.ActionLink(action.contactAddress.ToString(), "Details", "Properties", new { @id = action.propertyId }, new { @class = "btn btn-link", @target = "_blank" })
+                                                </td>
+                                                <td>
+                                                    @action.actionType
+                                                </td>
+                                                <td>
+                                                    @action.actionDueDate.ToString("dd/MM/yyyy")
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        }
     </div>
 </div>
+

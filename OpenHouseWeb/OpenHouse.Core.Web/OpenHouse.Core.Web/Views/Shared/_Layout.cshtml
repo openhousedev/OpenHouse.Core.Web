@@ -22,40 +22,45 @@
     <script src="~/js/actionManager.js"></script>
     <script src="~/js/householdManager.js"></script>
     <script src="~/js/alertManager.js"></script>
+    <script src="~/js/propertyChargeManager.js"></script>
     @RenderSection("Scripts", required: false)
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-light border-bottom box-shadow navbar-expand-sm bg-faded justify-content-center">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img class="top-logo-sm" src="~/img/logo_top_small.png" /></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img class="top-logo-sm" alt="OpenHouse" src="~/img/logo_top_small.png" /></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+                    <ul class="navbar-nav w-100 justify-content-start">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+                            </li>
+                        }
+                    </ul>
+                    <ul class="nav navbar-nav ml-auto w-100 mr-2 justify-content-end">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item float-right">
-                            <a class="nav-link text-dark" action="post" asp-area="Identity" asp-page="/Account/Logout">Log out</a>
+                            <a class="nav-link text-dark" action="post" asp-area="Identity" asp-page="/Account/Logout"><i class="fa fa-sign-out-alt"></i>&nbsp;Log out</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container mt-2">
         @RenderBody()
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - OpenHouse - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020 - OpenHouse v1.0 - <a href="~/LICENSE.txt">Released under the Apache 2.0 License</a>
         </div>
     </footer>
 

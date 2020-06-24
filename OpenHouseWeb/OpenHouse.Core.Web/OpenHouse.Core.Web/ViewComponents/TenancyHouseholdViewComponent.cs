@@ -11,10 +11,10 @@ namespace GENerate.ViewComponents
     [Authorize]
     public class TenancyHouseholdViewComponent : ViewComponent
     {
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ITenancyService _tenancySvc;
 
-        public TenancyHouseholdViewComponent(UserManager<User> userManager, ITenancyService tenancySvc)
+        public TenancyHouseholdViewComponent(UserManager<ApplicationUser> userManager, ITenancyService tenancySvc)
         {
             _userManager = userManager;
             _tenancySvc = tenancySvc;

@@ -20,9 +20,9 @@ namespace OpenHouse.Core.Web.Controllers
         private readonly MapperConfiguration _mapperConfig;
         private readonly IMapper _mapper;
         private readonly IPersonService _personSvc;
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public PersonsController(IPersonService personSvc, UserManager<User> userManager)
+        public PersonsController(IPersonService personSvc, UserManager<ApplicationUser> userManager)
         {
             //Assign services
             _personSvc = personSvc;
@@ -71,16 +71,17 @@ namespace OpenHouse.Core.Web.Controllers
 
             personVM = _mapper.Map<PersonViewModel>(person);
 
-            User createByUser = await _userManager.FindByIdAsync(personVM.createdByUserID);
+            ApplicationUser createByUser = await _userManager.FindByIdAsync(personVM.createdByUserID);
             personVM.createdByUsername = createByUser.UserName;
 
-            User updatedByUser = await _userManager.FindByIdAsync(personVM.updatedByUserID);
+            ApplicationUser updatedByUser = await _userManager.FindByIdAsync(personVM.updatedByUserID);
             personVM.updatedByUsername = updatedByUser.UserName;
 
             return View(personVM);
         }
 
         // GET: Persons/Create
+        [Authorize(Roles = "Admin,HousingManager,HousingUser")]
         public async Task<IActionResult> Create()
         {
             ViewData["nationalityId"] = new SelectList(await _personSvc.GetNationalitiesAsync(), "nationalityId", "nationality1");
@@ -93,6 +94,7 @@ namespace OpenHouse.Core.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,HousingManager,HousingUser")]
         public async Task<IActionResult> Create([Bind("personId,firstName,middleName,surname,titleId,dateOfBirth,telephone,email,nationalityId,nextOfKinFrstName,nextOfKinSurname,nextOfKinTelephone")] PersonViewModel personVM)
         {
             if (ModelState.IsValid)
@@ -118,6 +120,7 @@ namespace OpenHouse.Core.Web.Controllers
         }
 
         // GET: Persons/Edit/5
+        [Authorize(Roles = "Admin,HousingManager,HousingUser")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -144,6 +147,7 @@ namespace OpenHouse.Core.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,HousingManager,HousingUser")]
         public async Task<IActionResult> Edit(int id, [Bind("personId,firstName,middleName,surname,titleId,dateOfBirth,telephone,email,nationalityId,nextOfKinFrstName,nextOfKinSurname,nextOfKinTelephone,updatedByUserID,updatedDT,createdByUserID,createdDT")] PersonViewModel personVM)
         {
             if (id != personVM.personId)
@@ -185,6 +189,7 @@ namespace OpenHouse.Core.Web.Controllers
         }
 
         // GET: Persons/Delete/5
+        [Authorize(Roles = "Admin,HousingManager")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -205,6 +210,7 @@ namespace OpenHouse.Core.Web.Controllers
         // POST: Persons/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,HousingManager")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _personSvc.DeletePersonAsync(id);

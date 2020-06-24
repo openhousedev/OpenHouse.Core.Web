@@ -10,7 +10,7 @@ namespace OpenHouse.Core.Web.Controllers
 {
     public class NotesController : Controller
     {
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         public NotesController()
         {
         }

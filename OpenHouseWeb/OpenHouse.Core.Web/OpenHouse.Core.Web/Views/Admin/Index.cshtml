@@ -1,0 +1,78 @@
+﻿@model IEnumerable<OpenHouse.Model.Core.ViewModels.AdminViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="row mt-4">
+    <div class="col-md-6">
+        <h4>Manager Users</h4>
+    </div>
+    <div class="col-md-6">
+        <a class="btn btn-outline-primary float-right ml-1" asp-action="Create"><i class="fa fa-user-plus"></i>&nbsp; Create User</a>
+    </div>
+</div>
+<hr />
+<div class="row mt-4">
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.username)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.firstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.surname)
+                    </th>
+                    <th class="d-none d-lg-table-cell d-xl-table-cell">
+                        @Html.DisplayNameFor(model => model.isAdmin)
+                    </th>
+                    <th class="d-none d-lg-table-cell d-xl-table-cell">
+                        @Html.DisplayNameFor(model => model.isReadonly)
+                    </th>
+                    <th class="d-none d-lg-table-cell d-xl-table-cell">
+                        @Html.DisplayNameFor(model => model.isHousingManager)
+                    </th>
+                    <th class="d-none d-lg-table-cell d-xl-table-cell">
+                        @Html.DisplayNameFor(model => model.isHousingUser)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.firstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.surname)
+                    </td>
+                    <td class="d-none d-lg-table-cell d-xl-table-cell">
+                        @Html.DisplayFor(modelItem => item.isAdmin)
+                    </td>
+                    <td class="d-none d-lg-table-cell d-xl-table-cell">
+                        @Html.DisplayFor(modelItem => item.isReadonly)
+                    </td>
+                    <td class="d-none d-lg-table-cell d-xl-table-cell">
+                        @Html.DisplayFor(modelItem => item.isHousingManager)
+                    </td>
+                    <td class="d-none d-lg-table-cell d-xl-table-cell text-center">
+                        @Html.DisplayFor(modelItem => item.isHousingUser)
+                    </td>
+                    <td class="text-center">
+                        <a asp-action="Edit" asp-route-id="@item.userId">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.userId">Delete</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

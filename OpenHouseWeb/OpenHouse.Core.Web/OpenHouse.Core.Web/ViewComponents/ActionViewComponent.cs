@@ -11,10 +11,10 @@ namespace GENerate.ViewComponents
     [Authorize]
     public class ActionViewComponent : ViewComponent
     {
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IActionService _actionSvc;
 
-        public ActionViewComponent(UserManager<User> userManager, IActionService actionSvc)
+        public ActionViewComponent(UserManager<ApplicationUser> userManager, IActionService actionSvc)
         {
             _userManager = userManager;
             _actionSvc = actionSvc;

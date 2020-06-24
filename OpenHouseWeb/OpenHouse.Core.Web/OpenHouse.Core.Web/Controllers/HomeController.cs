@@ -23,9 +23,9 @@ namespace OpenHouse.Core.Web.Controllers
         private readonly ITenancyService _tenancySvc;
         private readonly IPersonService _personSvc;
         private readonly IActionService _actionSvc;
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, IPropertyService propertySvc, ITenancyService tenancySvc, IPersonService personSvc, IActionService actionSvc, UserManager<User> userManager)
+        public HomeController(ILogger<HomeController> logger, IPropertyService propertySvc, ITenancyService tenancySvc, IPersonService personSvc, IActionService actionSvc, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
             _propertySvc = propertySvc;
