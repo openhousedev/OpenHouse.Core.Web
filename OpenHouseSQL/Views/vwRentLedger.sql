@@ -13,7 +13,7 @@ SELECT DISTINCT
 	, p.paymentId
 	, p.amount
 	, p.paymentSourceId
-	, ps.paymentSourceId
+	, ps.`source`
 	, p.paymentProviderReference
 	, p.paymentDT
 FROM 
@@ -26,11 +26,11 @@ INNER JOIN
 	rentaccount ra
 ON
 	pc.rentAccountId = ra.rentAccountId
-INNER JOIN
-	paymentsource ps
-ON
-	p.paymentSourceId = ps.paymentSourceId
 LEFT OUTER JOIN
 	payment p
 ON
-	rl.paymentId = p.paymentId;
+	rl.paymentId = p.paymentId
+LEFT OUTER JOIN
+	paymentsource ps
+ON
+	p.paymentSourceId = ps.paymentSourceId;
