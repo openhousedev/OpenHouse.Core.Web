@@ -78,6 +78,10 @@
       },
       {
          "HasPrimaryKey": true,
+         "Name": "rentledger"
+      },
+      {
+         "HasPrimaryKey": true,
          "Name": "tenancy"
       },
       {

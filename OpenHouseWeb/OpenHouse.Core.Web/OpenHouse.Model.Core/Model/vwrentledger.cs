@@ -28,6 +28,8 @@ namespace OpenHouse.Model.Core.Model
         public float? amount { get; set; }
         [Column(TypeName = "int(11)")]
         public int? paymentSourceId { get; set; }
+        [Column(TypeName = "varchar(100)")]
+        public string source { get; set; }
         [Column(TypeName = "varchar(255)")]
         public string paymentProviderReference { get; set; }
         [Column(TypeName = "datetime")]

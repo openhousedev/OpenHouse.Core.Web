@@ -32,6 +32,7 @@ namespace OpenHouse.Model.Core.Model
         public virtual DbSet<propertytype> propertytype { get; set; }
         public virtual DbSet<relationship> relationship { get; set; }
         public virtual DbSet<rentaccount> rentaccount { get; set; }
+        public virtual DbSet<rentledger> rentledger { get; set; }
         public virtual DbSet<tenancy> tenancy { get; set; }
         public virtual DbSet<tenancyalert> tenancyalert { get; set; }
         public virtual DbSet<tenancyhousehold> tenancyhousehold { get; set; }
@@ -389,6 +390,26 @@ namespace OpenHouse.Model.Core.Model
                     .HasCollation("utf8_general_ci");
             });
 
+            modelBuilder.Entity<rentledger>(entity =>
+            {
+                entity.HasIndex(e => e.paymentId)
+                    .HasName("paymentId");
+
+                entity.HasIndex(e => e.tenancyId)
+                    .HasName("tenancyId");
+
+                entity.HasOne(d => d.payment)
+                    .WithMany(p => p.rentledger)
+                    .HasForeignKey(d => d.paymentId)
+                    .HasConstraintName("rentledger_ibfk_2");
+
+                entity.HasOne(d => d.tenancy)
+                    .WithMany(p => p.rentledger)
+                    .HasForeignKey(d => d.tenancyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("rentledger_ibfk_1");
+            });
+
             modelBuilder.Entity<tenancy>(entity =>
             {
                 entity.HasIndex(e => e.jointTenantPersonId)
@@ -729,6 +750,10 @@ namespace OpenHouse.Model.Core.Model
                     .HasCollation("utf8_general_ci");
 
                 entity.Property(e => e.rentAccount)
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.source)
                     .HasCharSet("utf8")
                     .HasCollation("utf8_general_ci");
             });

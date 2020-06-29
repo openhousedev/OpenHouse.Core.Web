@@ -8,6 +8,11 @@ namespace OpenHouse.Model.Core.Model
 {
     public partial class payment
     {
+        public payment()
+        {
+            rentledger = new HashSet<rentledger>();
+        }
+
         [Key]
         [Column(TypeName = "int(11)")]
         public int paymentId { get; set; }
@@ -42,5 +47,7 @@ namespace OpenHouse.Model.Core.Model
         [ForeignKey(nameof(tenancyId))]
         [InverseProperty("payment")]
         public virtual tenancy tenancy { get; set; }
+        [InverseProperty("payment")]
+        public virtual ICollection<rentledger> rentledger { get; set; }
     }
 }

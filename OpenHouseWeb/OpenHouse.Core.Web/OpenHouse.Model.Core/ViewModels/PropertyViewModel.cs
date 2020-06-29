@@ -68,8 +68,9 @@ namespace OpenHouse.Model.Core.Model
         public string createdByUsername { get; set; }
         public DateTime createdDT { get; set; }
 
-
+        [Display(Name = "Property Class")]
         public virtual propertyclass propertyClass { get; set; }
+        [Display(Name = "Property Type")]
         public virtual propertytype propertyType { get; set; }
         public ICollection<propertynote> propertynote { get; set; }
         public ICollection<propertycharge> propertycharge { get; set; }

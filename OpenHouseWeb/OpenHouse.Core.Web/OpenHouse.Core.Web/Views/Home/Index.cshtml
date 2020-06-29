@@ -148,7 +148,7 @@
                                 <table class="table table-borderless">
                                     <thead>
                                         <tr>
-                                            <th>Tenancy Id</th>
+                                            <th class="text-center d-none d-lg-table-cell d-xl-table-cell">Tenancy Id</th>
                                             <th>Address</th>
                                             <th>Type</th>
                                             <th>Due Date</th>
@@ -159,7 +159,7 @@
                                         @foreach (var action in Model)
                                         {
                                             <tr>
-                                                <td>
+                                                <td class="text-center d-none d-lg-table-cell d-xl-table-cell">
                                                     @Html.ActionLink(action.tenancyId.ToString(), "Details", "Tenancies", new { @id = action.tenancyId }, new { @class = "btn btn-link", @target = "_blank" })
                                                 </td>
                                                 <td>
@@ -170,6 +170,9 @@
                                                 </td>
                                                 <td>
                                                     @action.actionDueDate.ToString("dd/MM/yyyy")
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-light" onauxclick="window.open('@Url.Action("Details", "Tenancies", new { @id = action.tenancyId })');" onclick="window.open('@Url.Action("Details","Tenancies",new { @id = action.tenancyId })');">View</a>
                                                 </td>
                                             </tr>
                                         }

@@ -1,0 +1,9 @@
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Model.Core\bin\Release\netcoreapp3.1\OpenHouse.Model.Core.deps.json
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Model.Core\bin\Release\netcoreapp3.1\OpenHouse.Model.Core.dll
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Model.Core\bin\Release\netcoreapp3.1\OpenHouse.Model.Core.pdb
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Model.Core\obj\Release\netcoreapp3.1\OpenHouse.Model.Core.csprojAssemblyReference.cache
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Model.Core\obj\Release\netcoreapp3.1\OpenHouse.Model.Core.AssemblyInfoInputs.cache
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Model.Core\obj\Release\netcoreapp3.1\OpenHouse.Model.Core.AssemblyInfo.cs
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Model.Core\obj\Release\netcoreapp3.1\OpenHouse.Model.Core.csproj.CoreCompileInputs.cache
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Model.Core\obj\Release\netcoreapp3.1\OpenHouse.Model.Core.dll
+C:\UNIAPPS\OpenHouse\OpenHouseWeb\OpenHouse.Core.Web\OpenHouse.Model.Core\obj\Release\netcoreapp3.1\OpenHouse.Model.Core.pdb

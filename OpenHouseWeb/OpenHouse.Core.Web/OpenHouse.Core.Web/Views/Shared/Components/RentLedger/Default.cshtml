@@ -3,20 +3,43 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><i class="fa fa-tasks"></i>&nbsp;RentLedger</h5>
+                <h5 class="modal-title"><i class="fas file-invoice"></i>&nbsp;RentLedger</h5>
                 <button type="button" class="close" onclick="clearRentLedgerModal();" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="txtRentLedgerDueDate" class="control-label">Due Date</label>
-                    <input type="date" id="txtRentLedgerDueDate" class="form-control" />
-                    <span id="actionDueDateValidationResult" class="text-danger"></span>
+                    <label for="txtRentAccount" class="control-label">Rent Account</label>
+                    <span id="txtRentAccount" class="form-control"></span>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">RentLedgerType</label>
-                    <select class="form-control" id="selRentLedgerType" asp-items="ViewBag.actionTypeId"></select>
+                    <label for="txtRentLedgerPeriodStart" class="control-label">Period Start</label>
+                    <span id="txtRentLedgerPeriodStart" class="form-control"></span>
+                </div>
+                <div class="form-group">
+                    <label for="txtRentLedgerPeriodEnd" class="control-label">Period End</label>
+                    <span id="txtRentLedgerPeriodEnd" class="form-control"></span>
+                </div>
+                <div class="form-group">
+                    <label for="txtAmountDue" class="control-label">Amount Due</label>
+                    <span id="txtAmountDue" class="form-control"></span>
+                </div>
+                <div class="form-group">
+                    <label for="txtAmountPaid" class="control-label">Amount Paid</label>
+                    <span id="txtAmountPaid" class="form-control"></span>
+                </div>
+                <div class="form-group">
+                    <label for="txtPaymentDate" class="control-label">Payment Date</label>
+                    <span id="txtLedgerPaymentDate" class="form-control"></span>
+                </div>
+                <div class="form-group">
+                    <label for="txtPaymentSource" class="control-label">Payment Source</label>
+                    <span id="txtPaymentSource" class="form-control"></span>
+                </div>
+                <div class="form-group">
+                    <label for="txtPaymentRef" class="control-label">Payment Provider Ref</label>
+                    <span id="txtPaymentRef" class="form-control"></span>
                 </div>
             </div>
             <div class="modal-footer">
@@ -31,17 +54,15 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"><i class="fa fa-tasks"></i>&nbsp;Payment</h5>
+                <h5 class="modal-title"><i class="far fa-credit-card"></i>&nbsp;Payment</h5>
                 <button type="button" class="close" onclick="clearPaymentModal();" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="control-label">Payment Source</label>
-                        <select class="form-control" id="selPeymentSource" asp-items="ViewBag.paymentSourceId"></select>
-                    </div>
+                <div class="form-group">
+                    <label class="control-label">Payment Source</label>
+                    <select class="form-control w-100" id="selPeymentSource" asp-items="ViewBag.paymentSourceId"></select>
                 </div>
                 <div class="form-group">
                     <label for="txtPaymentDueDate" class="control-label">Payment Amount</label>
@@ -49,11 +70,11 @@
                     <span id="actionDueDateValidationResult" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label for="txtPaymentDueDate" class="control-label">Date Recieved</label>
+                    <label for="txtPaymentDate" class="control-label">Date Recieved</label>
                     <input type="date" id="txtPaymentDate" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <label for="txtPaymentDueDate" class="control-label">Payment Provider Ref</label>
+                    <label for="txtPaymentProviderRef" class="control-label">Payment Provider Ref</label>
                     <input type="text" id="txtPaymentProviderRef" class="form-control" />
                 </div>
             </div>

@@ -41,6 +41,9 @@
 @*Include alert manager view component*@
 @await Component.InvokeAsync("Alert")
 
+@*Include rent ledger view component*@
+@await Component.InvokeAsync("RentLedger")
+
 @*Include user selector partial view*@
 @await Html.PartialAsync("~/Views/Users/_UserSelector.cshtml")
 
@@ -232,11 +235,11 @@
                                     @(rentRecord.paymentDT.HasValue ? rentRecord.paymentDT.Value.ToString("dd/MM/yyyy") : " - ")
                                 </td>
                                 <td class="text-center">
-                                    <a class="btn btn-light" onclick="viewRentLedger(@rentRecord.rentLedgerId)">Details</a>                                    
-                                    
+                                    <a class="btn btn-light" onclick="viewRentLedger(@rentRecord.rentLedgerId)">Details</a>
+
                                     @if (!User.IsInRole("ReadOnly"))
                                     {
-                                        <a class="btn btn-light" onclick="createPayment(@rentRecord.rentLedgerId)">Add Payment</a>
+                                        <a class="btn btn-light" onclick="showPaymentModal(@rentRecord.rentLedgerId,@rentRecord.charge, @rentRecord.propertyChargeId, @Model.tenancyId)">Add Payment</a>
                                     }
                                 </td>
                             </tr>
@@ -334,16 +337,16 @@
                         @foreach (var action in Model.actions)
                         {
                             <tr>
-                                <td>
+                                <td class="text-center">
                                     @action.actionId
                                 </td>
                                 <td>
                                     @action.actionType
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     @action.assignedUsername
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     @action.actionDueDate.ToString("dd/MM/yyyy")
                                 </td>
                                 <td class="text-center">

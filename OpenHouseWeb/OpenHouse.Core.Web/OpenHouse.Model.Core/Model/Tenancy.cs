@@ -12,6 +12,7 @@ namespace OpenHouse.Model.Core.Model
         {
             action = new HashSet<action>();
             payment = new HashSet<payment>();
+            rentledger = new HashSet<rentledger>();
             tenancyalert = new HashSet<tenancyalert>();
             tenancyhousehold = new HashSet<tenancyhousehold>();
             tenancynote = new HashSet<tenancynote>();
@@ -61,6 +62,8 @@ namespace OpenHouse.Model.Core.Model
         public virtual ICollection<action> action { get; set; }
         [InverseProperty("tenancy")]
         public virtual ICollection<payment> payment { get; set; }
+        [InverseProperty("tenancy")]
+        public virtual ICollection<rentledger> rentledger { get; set; }
         [InverseProperty("tenancy")]
         public virtual ICollection<tenancyalert> tenancyalert { get; set; }
         [InverseProperty("tenancy")]
