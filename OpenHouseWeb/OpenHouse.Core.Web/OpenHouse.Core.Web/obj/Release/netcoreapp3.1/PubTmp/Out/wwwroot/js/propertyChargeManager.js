@@ -27,7 +27,7 @@ function editPropertyCharge(propertyChargeId, propertyId) {
         })
         .catch(error => { //On get propertyCharge error
             $.LoadingOverlay("hide");
-            propertyCharge('Error loading Property Charge');
+            alert('Error loading Property Charge');
         });
 }
 
@@ -51,7 +51,7 @@ function viewPropertyCharge(propertyChargeId, propertyId) {
         })
         .catch(error => { //On get propertyCharge error
             $.LoadingOverlay("hide");
-            propertyCharge('Error loading Property Charge');
+            alert('Error loading Property Charge');
         });
 }
 
@@ -69,7 +69,6 @@ function processPropertyCharge() {
         var endDT = $('#txtPropertyChargeEndDate').val();
 
         if (endDT.length > 0) {
-            endDT.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
             endDT = new moment(endDT).set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).format('YYYY-MM-DD');
         }
         if (isNaN(chargeAmount)) {
@@ -90,7 +89,7 @@ function processPropertyCharge() {
                     .catch(error => { //On post propertyCharge error
                         console.log(error.message);
                         $.LoadingOverlay("hide");
-                        propertyCharge('Error creating propertyCharge');
+                        alert('Error creating propertyCharge');
                     });
             }
             else {
@@ -102,7 +101,7 @@ function processPropertyCharge() {
                     .catch(error => {
                         console.log(error.message); //Update propertyCharge error
                         $.LoadingOverlay("hide");
-                        propertyCharge('Error updating propertyCharge');
+                        alert('Error updating propertyCharge');
                     });
             }
         }

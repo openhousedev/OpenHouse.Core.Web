@@ -1,0 +1,120 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+/* Logo Style */
+.top-logo-sm {
+    height: 96px !important;
+    width: 144px !important;
+}
+
+/* Row Styles */
+/*.row {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}*/
+
+/* Search Result Container */
+#search-result {
+    min-height: 250px;
+    padding: 20px 0 20px 0;
+}
+
+/* Center buttons in table cell */
+.table-btn-cell-center {
+    display: block;
+    margin: auto;
+}
+
+.login-container {
+    margin-top: 100px;
+}
+
+dd {
+    min-height: 25px !important;
+}
+
+.form-control:read-only {
+    background-color: #fff !important;
+}
+
+.control-label {
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+
+    [class*="col-"] {
+        margin-bottom: 5px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+}
